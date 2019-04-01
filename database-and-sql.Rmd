@@ -50,10 +50,11 @@ graphics.off()
 Sys.setlocale("LC_ALL", "Chinese")
 ```
 
-# R连接到数据库设置
+# R连接到数据库设置(勿改)
 
 1. 运行 pgsql
 2. 运行以下代码
+
 ```{r eval=T, echo=TRUE}
 library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
@@ -62,10 +63,15 @@ con <- dbConnect(drv, host='localhost', port='5432',
 summary(con)
 ```
 3. SQL 代码块
-```{sql connection=con, echo=T, output.var="film_result"}
+
+```{sql echo=T, connection=con}
 select title, length from film limit 5;
 ```
-4. 可以在R代码中使用SQL查询结果，上面的 `output.var="film_result"`
+4. 可以在R代码中使用SQL查询结果，增加 `output.var="film_result"`
+
+```{sql echo=F, connection=con, output.var="film_result"}
+select title, length from film limit 10;
+```
 
 ```{r eval=T}
 film_result[,2]

@@ -3,7 +3,7 @@ SELECT first_name FROM customer;
 /*查询customer表中的名字dd*/
 
 SELECT DISTINCT city FROM city;
-/*查询city表中的城市名称（过滤掉重复值）*/
+/*查询city表中的城市名称（过滤重复值）*/
 
 SELECT first_name,last_name FROM customer ORDER BY first_name ASC;
 /*查询customer表中的名字和姓氏，按照名字升序排列*/

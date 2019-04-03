@@ -65,7 +65,19 @@ summary(con)
 3. SQL 代码块
 
 ```{sql echo=T, connection=con}
-select title, length from film limit 5;
+*************第一部分 查询***************
+SELECT first_name FROM customer;
+/*查询customer表中的名字*/
+
+SELECT DISTINCT city FROM city;
+/*查询city表中的城市名称（过滤掉重复值）*/
+
+SELECT first_name,last_name FROM customer ORDER BY first_name ASC;
+/*查询customer表中的名字和姓氏，按照名字升序排列*/
+SELECT first_name,last_name FROM customer ORDER BY first_name ASC,last_name DESC;
+/*查询customer表中的名字和姓氏，按照名字升序排列,当名字相同时，姓氏降序排列*/
+SELECT first_name || ' ' || last_name AS full_name FROM customer ORDER BY full_name;
+/*连接customer表中的名字和姓氏，以空格隔开，并重命名为"full_name"*/
 ```
 4. 可以在R代码中使用SQL查询结果，增加 `output.var="film_result"`
 

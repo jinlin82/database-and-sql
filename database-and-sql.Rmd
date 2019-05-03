@@ -279,12 +279,12 @@ AND a.length = b.length;
 ```
 
 *查询客户ID 2的客户租赁数据（完整外连接）
-```{sql echo=T, connection=con}
+```{sql echo=T, connection=con, eval=F}
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a OUTER JOIN payment b ON a.customer_id = b.customer_id WHERE a.customer_id = 2;
 ```
 
 *查询客户ID 2的客户租赁数据（完全外连接,不包括a,b的交集部分）
-```{sql echo=T, connection=con}
+```{sql echo=T, connection=con, eval=F}
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a OUTER JOIN payment b ON a.customer_id = b.customer_id 
 WHERE a.customer_id = 2 AND (a.customer_id IS NULL OR b.customer_id IS NULL);
 ```
@@ -300,7 +300,7 @@ SELECT * FROM T1 CROSS JOIN T2;
 SELECT * FROM T1, T2;
 两种方式一样
 
-##分组
+## 分组
 在**SELECT**后有计算类的函数时，必须要加 **ORDER BY** ，且后面跟的属性必须包括除函数外的所有属性。
 
 * 按顾客编号分组，计算总金额，并按总金额降序排列
@@ -314,7 +314,7 @@ SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id ORDER BY SUM (
 SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id HAVING SUM (amount) > 200;
 ```
 
-##集合
+## 集合
 * 并集（UNION ALL包括重复值）
 ```{sql echo=T, connection=con}
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron'
@@ -337,7 +337,7 @@ SELECT DISTINCT inventory.film_id,title FROM inventory INNER JOIN film ON film.f
 ORDER BY title;
 ```
 
-##子查询
+## 子查询
 * 查找租金率高于平均租金率的前3部电影
 ```{sql echo=T, connection=con}
 SELECT film,title,rental_rate FROM film WHERE rental_rate > (SELECT AVG(rental_rate) FROM film) LIMIT 3;
@@ -378,7 +378,7 @@ WHERE EXISTS (SELECT 1 FROM payment p WHERE p.customer_id = c.customer_id AND am
 ORDER BY first_name,last_name;
 ```
 
-##修改数据
+## 修改数据
 * 一次向表中添加多行
 
 **INSERT INTO table (column1, column2, …)**

@@ -33,6 +33,22 @@ csl: ./style/chinese-gb7714-2005-numeric.csl
 link-citations: true
 ---
 
+```{r setup, echo=F, purl=F}
+knitr::opts_knit$set(root.dir = getwd())
+knitr::opts_chunk$set(echo = TRUE, results = 'hide')
+knitr::opts_chunk$set(warning = FALSE, message=FALSE)
+knitr::opts_chunk$set(out.height="0.5\\textwidth", fig.width=5, fig.height=3, fig.align="center")
+```
+
+```{r prepare, echo=F, purl=F}
+rm(list=ls())
+options(digits=4)
+options(scipen=100)
+graphics.off()
+Sys.setlocale("LC_ALL", "Chinese")
+```
+
+
 # 绪论
 ## 数据库系统概述
 ### 四个基本概念
@@ -227,5 +243,499 @@ link-citations: true
   * 属性：用椭圆形表示，并用无向边将其与相应的实体连接起来
   * 联系：用菱形表示，菱形框内写明联系名，并用无向边分别与有关实体连接起来，同时在无向边旁标上联系的类型（1:1、1:n或m:n）
 3. 联系的属性：联系本身也是一种实体型，也可以有属性。如果一个联系具有属性，则这些属性也要用无向边与该联系连接起来 
+
+
+# 123
+
+## 1233
+
+### **ORDER BY** 子句
+
+* **ORDER BY** 
+  + 子句可以按一个或多个属性列排序
+  + 升序：**ASC**；降序：**DESC**；默认升序。
+
+* 当排序列含空值时
+  + **ASC** ：排序列为空值的元组最后显示
+  + **DESC** ：排序列为空值的元组最先显示 
+  
+[例24] 查询选修了3号课程的学生的学号及其成绩，查询结果按分数降序排列。
+
+```{sql, eval=F}
+SELECT Sno，Grade
+        FROM  SC
+        WHERE  Cno= ' 3 '
+        ORDER BY Grade DESC;
+```
+
+[例25] 查询全体学生情况，查询结果按所在系的系号升序排列，同一系中的学生按年龄降序排列。
+
+```{sql, eval=F}
+SELECT  *
+        FROM  Student
+        ORDER BY Sdept，Sage DESC;
+```
+
+### 聚集函数
+
+* 聚集函数：
+  + 计数：COUNT（[ DISTINCT | ALL ] *）、COUNT（[ DISTINCT | ALL ] <列名>）
+  + 计算总和：SUM（[ DISTINCT | ALL ] <列名>）
+  + 计算平均值：AVG（[ DISTINCT | ALL ] <列名>）
+  + 最大最小值：MAX（[ DISTINCT | ALL ] <列名>）、MIN（[ DISTINCT | ALL ] <列名>）
+
+[例26] 查询学生总人数。
+
+```{sql, eval=F}
+SELECT COUNT(*) FROM  Student;
+```
+
+[例27] 查询选修了课程的学生人数。
+
+```{sql, eval=F}
+SELECT COUNT(DISTINCT Sno) FROM SC;
+```
+
+[例28] 计算1号课程的学生平均成绩。
+
+```{sql, eval=F}
+SELECT AVG(Grade) FROM SC WHERE Cno= ' 1 ';
+```
+
+[例29] 查询选修1号课程的学生最高分数。
+
+```{sql, eval=F}
+SELECT MAX(Grade) FROM SC WHERE Cno= ‘ 1 ’;
+```
+
+[例30] 查询学生200215012选修课程的总学分数
+
+```{sql, eval=F}
+  SELECT SUM(Ccredit)
+             FROM  SC， Course
+             WHER Sno='200215012' AND SC.Cno=Course.Cno; 
+```
+
+### **GROUP BY** 子句
+
+* 未对查询结果分组，聚集函数将作用于整个查询结果
+* 对查询结果分组后，聚集函数将分别作用于每个组
+* 作用对象是查询的中间结果表
+* 按指定的一列或多列值分组，值相等的为一组
+
+[例31] 求各个课程号及相应的选课人数。
+
+```{sql, eval=F}
+SELECT Cno，COUNT(Sno)
+       FROM    SC
+       GROUP BY Cno;
+```
+
+[例32]  查询选修了3门以上课程的学生学号。
+
+```{sql, eval=F}
+SELECT Sno
+       FROM  SC
+       GROUP BY Sno
+       HAVING  COUNT(*) >3;
+```
+
+**HAVING** 短语和 **WHERE**子句的区别：
+
+* 作用对象不同
+* **WHERE** 子句作用于基表或视图，从中选择满足条件的元组
+* **HAVING** 短语作用于组，从中选择满足条件的组。
+
+通俗的说，**HAVING** 短语放在 **GROUPBY** 子句之后，**WHERE** 子句放在
+**GROUPBY** 子句之前。
+
+## 连接查询
+
+* 连接查询：同时涉及多个表的查询称为连接查询
+* 连接条件：用来连接两个表的条件
+  + 一般格式：
+  [<表名1>.]<列名1>  <比较运算符>  [<表名2>.]<列名2>
+  [<表名1>.]<列名1> BETWEEN [<表名2>.]<列名2> AND [<表名2>.]<列名3>
+* 连接字段：连接谓词中的列名称
+
+在sql92语法是在 **WHERE** 子句中写入连接条件，在表中有相同列时，在列名之前加上表
+名前缀；而sql99则是使用 **ON** 子句创建连接，**ON** 子句使语句具有更高的易读性。
+
+### 等值与非等值连接查询 
+
+* 等值连接：连接运算符为 “=”
+
+[例33] 查询每个学生及其选修课程的情况
+```{sql, eval=F}
+SELECT  Student.*，SC.*
+		        	FROM    Student，SC
+			WHERE  Student.Sno = SC.Sno;
+```
+
+```{sql, eval=F}
+SELECT s.*, c.* 
+      FROM Student s 
+      JOIN SC c 
+      ON s.Sno=sc.Sno;
+```
+
+### 自连接
+
+* 自连接：一个表与其自己进行连接
+* 需要给表起别名以示区别
+* 由于所有属性名都是同名属性，因此必须使用别名前缀
+
+[例35] 查询每一门课的间接先修课（即先修课的先修课）
+```{sql, eval=F}
+SELECT  FIRST.Cno，SECOND.Cpno
+     FROM  Course  FIRST，Course  SECOND
+     WHERE FIRST.Cpno = SECOND.Cno;
+```
+
+```{sql, eval=F}
+SELECT f.Cno, s.Cpno
+      FROM Cno f
+      JOIN Cno s
+      ON f.Cpno = s.Cno;
+```
+
+### 外连接
+
+外连接与普通连接的区别：
+- 普通连接操作只输出满足连接条件的元组
+- 外连接操作以指定表为连接主体，将主体表中不满足连接条件的元组一并输出
+
+[例36] 改写[例33]
+```{sql, eval=F}
+SELECT Student.Sno，Sname，Ssex，Sage，Sdept，Cno，Grade
+    FROM  Student  
+    LEFT OUT JOIN SC 
+    ON (Student.Sno=SC.Sno);
+```
+
+* 左外连接：列出左边关系（如本例Student）中所有的元组
+* 右外连接：列出右边关系中所有的元组 
+
+### 复合条件连接
+
+复合条件连接：**WHERE** 子句中含多个连接条件
+
+[例37] 查询选修2号课程且成绩在90分以上的所有学生(/* 语句 */表示注释)
+```{sql, eval=F}
+SELECT Student.Sno, Sname
+		FROM    Student, SC
+		WHERE Student.Sno = SC.Sno AND   
+               /* 连接谓词*/
+          SC.Cno= ‘2’ AND SC.Grade > 90;       
+					   /* 其他限定条件 */
+```
+
+[例38] 查询每个学生的学号、姓名、选修的课程名及成绩
+```{sql, eval=F}
+SELECT Student.Sno，Sname，Cname，Grade
+   FROM    Student，SC，Course    /*多表连接*/
+   WHERE Student.Sno = SC.Sno 
+                   and SC.Cno = Course.Cno;
+```
+
+## 嵌套查询
+
+嵌套查询概述：
+- 一个**SELECT**-**FROM**-**WHERE**语句称为一个查询块
+- 将一个查询块嵌套在另一个查询块的**WHERE**子句或**HAVING**短语的条件中的查询称为嵌套查询 
+
+```{sql, eval=F}
+SELECT Sname	 /*外层查询/父查询*/
+     FROM Student
+     WHERE Sno IN
+               （SELECT Sno  /*内层查询/子查询*/
+                FROM SC
+                WHERE Cno= ' 2 '）;
+```
+
+* 子查询不能使用**ORDER BY**
+* 层层嵌套方式反映了 SQL语言的结构化
+* 有些嵌套查询可以用连接运算替代
+* 不相关子查询：
+  + 子查询的查询条件不依赖于父查询
+  + 由里向外 逐层处理。即每个子查询在上一级查询处理之前求解，子查询的结果用于建立其父查询的查找条件。
+* 相关子查询：
+  + 子查询的查询条件依赖于父查询
+  + 首先取外层查询中表的第一个元组，根据它与内层查询相关的属性值处理内层查询，若WHERE子句返回值为真，则取此元组放入结果表
+  + 然后再取外层表的下一个元组
+  + 重复这一过程，直至外层表全部检查完为止
+
+### 带有 **IN** 谓词的子查询 
+
+[例39]  查询与“刘晨”在同一个系学习的学生。
+
+* 此查询要求可以分步来完成
+
+1. 确定“刘晨”所在系名             
+```{sql, eval=F}
+SELECT  Sdept  
+      FROM     Student                            
+      WHERE  Sname= ' 刘晨 ';
+```
+2. 查找所有在CS系学习的学生。    
+```{sql, eval=F}
+SELECT Sno，Sname，Sdept     
+      FROM Student                 
+      WHERE Sdept = ' CS ';
+``` 
+3. 将第一步查询嵌入到第二步查询的条件中
+```{sql, eval=F}
+SELECT Sno，Sname，Sdept
+    	FROM Student
+   	WHERE Sdept  IN
+                  (SELECT Sdept
+                   FROM Student
+                   WHERE Sname= ‘ 刘晨 ’);
+``` 
+此查询为不相关子查询
+
+* 用自连接完成[例39]查询要求
+```{sql, eval=F}
+SELECT  S1.Sno，S1.Sname，S1.Sdept
+      FROM Student S1，Student S2
+      WHERE S1.Sdept = S2.Sdept  AND
+                      S2.Sname = '刘晨';
+``` 
+
+### 带有比较运算符的子查询
+
+* 当能确切知道内层查询返回单值时，可用比较运算符（>，<，=，>=，<=，!=或< >）。
+* 与 **ANY** 或**ALL** 谓词配合使用
+
+例：假设一个学生只可能在一个系学习，并且必须属于一个系，则在[例39]可以用 = 代替IN ：
+```{sql, eval=F}
+SELECT Sno，Sname，Sdept
+FROM Student
+WHERE Sdept  =
+              (SELECT Sdept
+               FROM Student
+              WHERE Sname= ‘刘晨’);
+``` 
+子查询一定要跟在比较符之后
+
+**错误**的例子
+```{sql, eval=F}
+SELECT Sno，Sname，Sdept
+     FROM Student
+     WHERE ( SELECT Sdept
+             FROM Student
+             WHERE Sname= ‘ 刘晨 ’ ) 
+             = Sdept;
+```
+
+[例41] 找出每个学生超过他选修课程平均成绩的课程号。
+```{sql, eval=F}
+SELECT Sno， Cno
+FROM  SC  x
+WHERE Grade >= ( SELECT AVG(Grade) 
+		            FROM  SC y
+                WHERE y.Sno=x.Sno ) ;
+```
+此查询为相关子查询
+
+### 带有 **ANY** 或 **ALL** 谓词的子查询
+
+- **ANY** ：任意一个值
+- **ALL**：所有值
+
+**ANY** 和 **ALL** 通常和比较运算符搭配(>，<，>=，<=，=，<>)一起使用，例如> **ANY** 就代表大于子查询结果中的某个值
+，也就是大于最小值，所以**ANY** 和 **ALL** 的子查询通常可以换成聚合函数的普通子查询。
+
+[例42] 查询其他系中比计算机科学某一学生年龄小的学生姓名和年龄
+```{sql, eval=F}
+SELECT Sname，Sage
+FROM    Student
+WHERE Sage < ANY (SELECT  Sage
+                  FROM    Student
+                  WHERE Sdept= ' CS ')
+           AND Sdept <> ‘CS ' ;    /*父查询块中的条件 */
+```
+
+用聚集函数实现[例42] 
+```{sql, eval=F}
+SELECT Sname，Sage
+     FROM   Student
+     WHERE Sage < 
+                (SELECT MAX(Sage)
+                FROM Student
+                WHERE Sdept= ‘CS ')
+           AND Sdept <> ' CS ’ ;
+```
+
+[例43]  查询其他系中比计算机科学系所有学生年龄都小的学生姓名及年龄。
+
+* 方法一：用 **ALL** 谓词
+```{sql, eval=F}
+SELECT Sname，Sage
+    FROM Student
+    WHERE Sage < ALL
+                (SELECT Sage
+                FROM Student
+                WHERE Sdept= ' CS ')
+           AND Sdept <> ' CS ’;
+```
+* 方法二：用聚集函数
+```{sql, eval=F}
+SELECT Sname，Sage
+        FROM Student
+        WHERE Sage < 
+                    (SELECT MIN(Sage)
+                    FROM Student
+                    WHERE Sdept= ' CS ')
+              AND Sdept <>' CS ’;
+```
+ANY（或SOME），ALL谓词与聚集函数、IN谓词的等价转换关系 ：
+
+|     | =  |   <>   |  <   |  <=   |   >  |  >=  |
+| --- | -  |   --   | ---- | ----  | ---- | ---- |
+| ANY | IN |   --   | <MAX | <=MAX | >MIN | >=MIN|
+| ALL | -- | NOT IN | <MIN | <=MIN | >MAX | >=MAX|
+
+### 带有EXISTS谓词的子查询
+
+1. **EXISTS** 谓词
+* 存在量词
+* 带有EXISTS谓词的子查询不返回任何数据，只产生逻辑真值“true”或逻辑假值“false”。
+  + 若内层查询结果非空，则外层的WHERE子句返回真值
+  + 若内层查询结果为空，则外层的WHERE子句返回假值
+* 由EXISTS引出的子查询，其目标列表达式通常都用* ，因为带EXISTS的子查询只返回真值或假值，给出列名无实际意义
+
+2. **NOT EXISTS** 谓词
+* 若内层查询结果非空，则外层的WHERE子句返回假值
+* 若内层查询结果为空，则外层的WHERE子句返回真值
+
+[例44] 查询所有选修了1号课程的学生姓名。
+
+思路分析：
+
+- 本查询涉及Student和SC关系
+- 在Student中依次取每个元组的Sno值，用此值去检查SC关系
+- 若SC中存在这样的元组，其Sno值等于此Student.Sno值，并且其Cno= '1'，则取此Student.Sname送入结果关系
+
+用嵌套查询
+```{sql, eval=F}
+SELECT Sname
+     FROM Student
+     WHERE EXISTS
+          (SELECT *
+           FROM SC
+           WHERE Sno=Student.Sno AND Cno= ' 1 ');
+```
+用连接运算
+```{sql, eval=F}
+SELECT Sname
+FROM Student, SC
+WHERE Student.Sno=SC.Sno AND SC.Cno= '1';
+```
+[例45]  查询没有选修1号课程的学生姓名。
+```{sql, eval=F}
+SELECT Sname
+     FROM Student
+     WHERE NOT EXISTS
+          (SELECT *
+           FROM SC
+           WHERE Sno = Student.Sno AND Cno='1');
+```
+* 不同形式的查询间的替换
+  + 一些带**EXISTS**或**NOT EXISTS**谓词的子查询不能被其他形式的子查询等价替换
+  + 所有带**IN**谓词、比较运算符、**ANY**和**ALL**谓词的子查询都能用带EXISTS谓词的子查询等价替换
+
+[例39] 查询与“刘晨”在同一个系学习的学生
+
+用**EXISTS**谓词代替**IN**谓词
+```{sql, eval=F}
+SELECT Sno，Sname，Sdept
+    FROM Student S1
+    WHERE EXISTS
+          (SELECT *
+          FROM Student S2
+          WHERE S2.Sdept = S1.Sdept AND
+                S2.Sname = ‘刘晨’);
+```
+
+* 用 **EXISTS** / **NOT EXISTS** 实现全称量词(难点)
+  + SQL语言中没有全称量词${\forall}$（For all）
+  + 可以把带有全称量词的谓词转换为等价的带有存在量词的谓词：
+  $$({\forall}x)P\equiv \neg(\exists x(\neg P))$$
+
+[例46] 查询选修了全部课程的学生姓名。
+```{sql, eval=F}
+SELECT Sname
+FROM Student
+WHERE NOT EXISTS
+          （SELECT *
+            FROM Course
+            WHERE NOT EXISTS
+                  (SELECT *
+                   FROM SC
+                   WHERE Sno= Student.Sno
+                   AND Cno= Course.Cno
+                  ）
+          );
+```
+
+* 用 **EXISTS**/ **NOT EXISTS** 实现逻辑蕴函(难点)
+  + SQL语言中没有蕴函(Implication)逻辑运算
+  + 可以利用谓词演算将逻辑蕴函谓词等价转换为:$p\rightarrow q\equiv \neg p\vee q$
+
+[例47] 查询至少选修了学生200215122选修的全部课程的学生号码。
+
+解题思路：
+
+* 用逻辑蕴函表达：查询学号为x的学生，对所有的课程y，只要200215122学生选修了课程y，则x也选修了y。
+* 形式化表示：
+	用P表示谓词 “学生200215122选修了课程y”
+	用q表示谓词 “学生x选修了课程y”
+	则上述查询为: $({\forall} y)p\rightarrow q$
+* 等价变换：
+$$({\forall} y)p\rightarrow q\equiv \neg{\exists}y(p\wedge \neg q)$$
+* 变换后语义：不存在这样的课程y，学生200215122选修了y，而学生x没有选。
+
+用**NOT EXISTS**谓词表示：     
+```{sql, eval=F}
+SELECT DISTINCT Sno
+       FROM SC SCX
+       WHERE NOT EXISTS
+            (SELECT * FROM SC SCY
+             WHERE SCY.Sno = '200215122' AND
+                    NOT EXISTS
+                    (SELECT * FROM SC SCZ
+                      WHERE SCZ.Sno=SCX.Sno AND
+                            SCZ.Cno=SCY.Cno
+                    )
+            );
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -33,20 +33,9 @@ csl: ./style/chinese-gb7714-2005-numeric.csl
 link-citations: true
 ---
 
-```{r setup, echo=F, purl=F}
-knitr::opts_knit$set(root.dir = getwd())
-knitr::opts_chunk$set(echo = TRUE, results = 'hide')
-knitr::opts_chunk$set(warning = FALSE, message=FALSE)
-knitr::opts_chunk$set(out.height="0.5\\textwidth", fig.width=5, fig.height=3, fig.align="center")
-```
 
-```{r prepare, echo=F, purl=F}
-rm(list=ls())
-options(digits=4)
-options(scipen=100)
-graphics.off()
-Sys.setlocale("LC_ALL", "Chinese")
-```
+
+
 
 
 # 绪论
@@ -265,9 +254,10 @@ Sys.setlocale("LC_ALL", "Chinese")
  2. 根以外的其它结点有且只有一个双亲结点
 
 图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
-```{r fig16,eval=T,redsults = 'hide',echo=F,fig.cap="一个层次模型的示例",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-16.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-16.png" alt="一个层次模型的示例" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig16)一个层次模型的示例</p>
+</div>
 层次模型的特点：
  - 结点的双亲是唯一的
  - 只能直接处理一对多的实体联系
@@ -275,12 +265,14 @@ knitr::include_graphics("./results/1-16.png")
  - 任何记录值只有按其路径查看时，才能显出它的全部意义
  - 没有一个子女记录值能够脱离双亲记录值而独立存在
 
-```{r fig17,eval=T,redsults = 'hide',echo=F,fig.cap="教员学生层次数据库模型",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-17.png")
-```
-```{r fig18,eval=T,redsults = 'hide',echo=F,fig.cap="教员学生层次数据库模型",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-18.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-17.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig17)教员学生层次数据库模型</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="./results/1-18.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig18)教员学生层次数据库模型</p>
+</div>
 
 #### 多对多联系在层次模型中的表示
 层次模型中，将多对多联系分解成一对多联系来间接表示多对多联系。分解方法有冗余结点
@@ -298,24 +290,28 @@ knitr::include_graphics("./results/1-18.png")
 1. 邻接法
 
 按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。见图\@ref(fig:fig20)
-```{r fig19,eval=T,redsults = 'hide',echo=F,fig.cap="层次数据库及其实例",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-19.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-19.png" alt="层次数据库及其实例" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig19)层次数据库及其实例</p>
+</div>
 
-```{r fig20,eval=T,redsults = 'hide',echo=F,fig.cap="邻接法",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-20.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-20.png" alt="邻接法" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig20)邻接法</p>
+</div>
 2. 链接法
 
 用指引来反映数据之间的层次联系，有子女－兄弟链接法和层次序列链接法。
 子女-兄弟链接法的每个记录设两类指针，分别指向最左边的子女（每个记录型对应一个）和最近的兄弟），如\@ref(fig:fig21)所示。
-```{r fig21,eval=T,redsults = 'hide',echo=F,fig.cap="子女-兄弟链接法",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-21.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-21.png" alt="子女-兄弟链接法" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig21)子女-兄弟链接法</p>
+</div>
 层次序列链接法按树的前序穿越顺序链接各记录值，如\@ref(fig:fig22)所示。
-```{r fig22,eval=T,redsults = 'hide',echo=F,fig.cap="层次序列链接法",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-22.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-22.png" alt="层次序列链接法" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig22)层次序列链接法</p>
+</div>
 #### 层次模型的优缺点
 优点:
 
@@ -355,9 +351,10 @@ knitr::include_graphics("./results/1-22.png")
   5. 层次模型实际上是网状模型的一个特例
 
 图\@ref(fig:fig23)显示的是网状模型中子女结点与双亲结点的联系不唯一的情况。要为每个联系命名，并指出与该联系有关的双亲记录和子女记录。
-```{r fig23,eval=T,redsults = 'hide',echo=F,fig.cap="网状模型的例子",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-23.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-23.png" alt="网状模型的例子" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig23)网状模型的例子</p>
+</div>
 多对多联系在网状模型中的表示：
 
   - 用网状模型间接表示多对多联系
@@ -365,9 +362,10 @@ knitr::include_graphics("./results/1-23.png")
 
 例如一个学生可以选修若干门课程，某一课程可以被多个学生选修，
 学生与课程之间是多对多联系，引进一个学生课程的联结记录，由三个数据项组成**学号、课程号、成绩**,表示某个学生选修某一门课程及其成绩,如图\@ref(fig:fig24)显示。 
-```{r fig24,eval=T,redsults = 'hide',echo=F,fig.cap="学生/选课/课程的网状数据模型",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-24.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-24.png" alt="学生/选课/课程的网状数据模型" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig24)学生/选课/课程的网状数据模型</p>
+</div>
 #### 网状数据模型的操纵与完整性约束
 网状数据库系统（如DBTG）对数据操纵加入了一些限制，提供了一定的完整性约束。
 
@@ -381,9 +379,10 @@ knitr::include_graphics("./results/1-24.png")
 - 常用方法：单向链接、双向链接、环状链接、向首链接
 
 图\@ref(fig:fig25)显示了网状数据库实例
-```{r fig25,eval=T,redsults = 'hide',echo=F,fig.cap="学生/选课/课程的网状数据库实例 ",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-25.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-25.png" alt="学生/选课/课程的网状数据库实例 " height="0.5\textwidth" />
+<p class="caption">(\#fig:fig25)学生/选课/课程的网状数据库实例 </p>
+</div>
 #### 网状数据模型的优缺点
 优点
 
@@ -405,11 +404,45 @@ knitr::include_graphics("./results/1-25.png")
 #### 关系数据模型的数据结构
 
 在**用户观点**下,关系模型中数据的逻辑结构是一张二维表，他由行和列组成。例如下面的学生登记表。
-```{r tab1,results='markup', cache=F,echo=F}
-library("kableExtra")
-tab1 = read.csv('./results/student.csv')
-knitr::kable(tab1, row.names =F, align = 'c', caption="学生等级表",longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
+<table>
+<caption>(\#tab:tab1)学生等级表</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 锘縮tudentID </th>
+   <th style="text-align:center;"> NAME </th>
+   <th style="text-align:center;"> AGE </th>
+   <th style="text-align:center;"> SEX </th>
+   <th style="text-align:center;"> DEPNAME </th>
+   <th style="text-align:center;"> GRADE </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 2005006 </td>
+   <td style="text-align:center;"> 榛勫ぇ楣<8f>,20 </td>
+   <td style="text-align:center;"> 鐢<b7>,鍟嗗搧瀛<a6>,2005 </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2005008 </td>
+   <td style="text-align:center;"> 寮犳枃鏂<8c>,18 </td>
+   <td style="text-align:center;"> 濂<b3>,娉曞緥 </td>
+   <td style="text-align:center;"> 2005 </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+  </tr>
+</tbody>
+</table>
 
  - 关系(Relation):一个关系对应通常说的一张表
  - 元组(Tuple):表中的一行即为一个元组
@@ -430,17 +463,104 @@ knitr::kable(tab1, row.names =F, align = 'c', caption="学生等级表",longtabl
 
 关系必须是规范化的，满足一定的规范条件，最基本的规范条件是：关系的每一个分量必须
 是一个不可分的数据项，**不允许表中还有表**,如下面的工资表**不符合关系模型要求**。表\@ref(tab:tab2)
-```{r tab2,results='markup', cache=F,echo=F}
-library("kableExtra")
-tab2 = read.csv('./results/salary.csv')
-knitr::kable(tab2, row.names =F, align = 'c', caption="一个工资表（表中有表）实例",longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
+<table>
+<caption>(\#tab:tab2)一个工资表（表中有表）实例</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 锘縝annum </th>
+   <th style="text-align:center;"> classname </th>
+   <th style="text-align:center;"> salary </th>
+   <th style="text-align:center;"> X </th>
+   <th style="text-align:center;"> subtract </th>
+   <th style="text-align:center;"> fact </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> base </td>
+   <td style="text-align:center;"> subside </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 004 </td>
+   <td style="text-align:center;"> 鐢茬粍 </td>
+   <td style="text-align:center;"> 3200 </td>
+   <td style="text-align:center;"> 20 </td>
+   <td style="text-align:center;"> 100 </td>
+   <td style="text-align:center;"> 3120 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 涔欑粍 </td>
+   <td style="text-align:center;"> 1500 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 50 </td>
+   <td style="text-align:center;"> 1450 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 008 </td>
+   <td style="text-align:center;"> 鐢茬粍 </td>
+   <td style="text-align:center;"> 2200 </td>
+   <td style="text-align:center;"> 150 </td>
+   <td style="text-align:center;"> 100 </td>
+   <td style="text-align:center;"> 2250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ... </td>
+   <td style="text-align:center;"> ... </td>
+   <td style="text-align:center;"> ... </td>
+   <td style="text-align:center;"> ... </td>
+   <td style="text-align:center;"> ... </td>
+   <td style="text-align:center;"> ... </td>
+  </tr>
+</tbody>
+</table>
 
-```{r tab3,results='markup', cache=F,echo=F}
-library("kableExtra")
-tab3 = read.csv('./results/compare.csv')
-knitr::kable(tab3, row.names =F, align = 'c', caption="术语对比表",longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
+<table>
+<caption>(\#tab:tab3)术语对比表</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 锘縍elationalterms </th>
+   <th style="text-align:center;"> generaltableterms </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 鍏崇郴鏈 </td>
+   <td style="text-align:center;"> 涓€鑸〃鏍肩殑鏈 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 鍏崇郴鍚㠼㹤,琛ㄥ悕 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 鍏崇郴妯″紡 </td>
+   <td style="text-align:center;"> 琛ㄥご(琛ㄦ牸鐨勬弿杩戼㸰) </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 鍏崇郴 </td>
+   <td style="text-align:center;"> 涓€寮犱簩缁磋〃 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 鍏冪粍 </td>
+   <td style="text-align:center;"> 璁板綍鎴栬 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 灞炴€愼㸷,鍒㤼㸷
+灞炴€у悕 </td>
+   <td style="text-align:center;"> 鍒楀悕 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 灞炴€у€戼㹣,鍒楀€戼㹣
+鍒嗛噺 </td>
+   <td style="text-align:center;"> 涓€鏉¤褰曚腑鐨勪竴涓垪鍊戼㹣
+闈炶鑼冨叧绯戼㹢,琛ㄤ腑鏈夎〃(澶ц〃涓祵鏈夊皬琛愼㸸) </td>
+  </tr>
+</tbody>
+</table>
 
 #### 关系数据模型的操纵与完整性约束
 
@@ -521,12 +641,14 @@ knitr::kable(tab3, row.names =F, align = 'c', caption="术语对比表",longtabl
 
 图\@ref(fig:fig26)显示了数据库系统的三位模式结构，图给出了相应的一个实例。
 
-```{r fig26,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-26.png")
-```
-```{r fig27,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-27.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-26.png" alt="数据库系统的三位模式结构" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig26)数据库系统的三位模式结构</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="./results/1-27.png" alt="数据库系统的三位模式结构的一个实例" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig27)数据库系统的三位模式结构的一个实例</p>
+</div>
 #### 模式(Schema)
 
 -模式（也称逻辑模式）
@@ -578,9 +700,10 @@ knitr::include_graphics("./results/1-27.png")
 插入，如图\@ref(fig:fig28) b所示如果按照学生年龄聚簇存放，假如新插入的S3是16岁，则应插入的位
 置如图\@ref(fig:fig28) c所示 
 
-```{r fig28,eval=T,redsults = 'hide',echo=F,fig.cap="记录不同的存储方式示意图",dev="png",results='markup', cache=F}
-knitr::include_graphics("./results/1-28.png")
-```
+<div class="figure" style="text-align: center">
+<img src="./results/1-28.png" alt="记录不同的存储方式示意图" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig28)记录不同的存储方式示意图</p>
+</div>
 
 ### 数据库的二级映像功能与数据独立性 
 
@@ -660,7 +783,8 @@ SQL的数据定义语句
 ### 模式（数据库）定义
 语句：
 
-```{sql,eval=F}
+
+```sql
 CREATE DATABASE database_name 
   [ ON   <filespec> [ ,...n ] ]  
   [ LOG ON { <filespec> [ ,...n ] } ]
@@ -669,7 +793,8 @@ CREATE DATABASE database_name
 例：定义一个学生-课程模式(数据库)XSCJ
 
 
-```{sql,eval=F}
+
+```sql
 CREATE DATABASE XSCJ
 ON
 (NAME=XSCJ,-- 数据库的逻辑文件名
@@ -689,7 +814,8 @@ LOG ON
 
 举例：创建一个数据库XSCJ,并在其中定义一个dept
 
-```{sql,eval=F}
+
+```sql
 CREATE DATABASE XSCJ
     CREATE TABLE Dept(DNo CHAR(2) NOT NULL ,
                   DName CHAR(20) NOT NULL,
@@ -698,7 +824,8 @@ CREATE DATABASE XSCJ
 ```
 
 ### 删除模式（数据库）
-```{sql,eval=F}
+
+```sql
 DROP DATABASE <数据库名> <CASCADE | RESTRICT>
 ```
 
@@ -706,7 +833,8 @@ DROP DATABASE <数据库名> <CASCADE | RESTRICT>
 - RESTRICT(限制):如果该模式中定义了下属的数据库对象（如表、视图等）,则拒绝该删除语句的执行。
   当该模式中没有任何下属的对象时才能执行。
 
-```{sql,eval=F}
+
+```sql
 DROP DATABASE XSCJ CASCADE;
 ```
 
@@ -714,7 +842,8 @@ DROP DATABASE XSCJ CASCADE;
 
 
 ### 定义基本表
-```{sql,eval=F}
+
+```sql
 CREATE TABLE <表名>
       （<列名> <数据类型>[ <列级完整性约束条件> ]
       [,<列名> <数据类型>[ <列级完整性约束条件>] ] …
@@ -724,7 +853,8 @@ CREATE TABLE <表名>
 
 例：建立“学生”表Student,学号是主码,姓名取值唯一。
 
-```{sql,eval=F}
+
+```sql
     CREATE TABLE Student          
 	      (Sno   CHAR(9) PRIMARY KEY, /* 列级完整性约束条件*/                  
             Sname  CHAR(20) UNIQUE,     /* Sname取唯一值*/
@@ -736,7 +866,8 @@ CREATE TABLE <表名>
 
 例：建立一个“学生选课”表SC:
 
-```{sql,eval=F}
+
+```sql
 CREATE TABLE  SC
        	(Sno  CHAR(9), 
        	Cno  CHAR(4),  
@@ -774,7 +905,8 @@ CREATE TABLE  SC
 显示当前的搜索路径： SHOW search_path; 搜索路径的当前默认值是：$user, PUBLIC 
 
 ### 修改基本表
-```{sql,eval=F}
+
+```sql
 ALTER TABLE <表名>
 [ ADD <新列名> <数据类型> [ 完整性约束 ] ]
 [DROP<列名> [RESTRICT|CASCADE] ]
@@ -787,12 +919,14 @@ ALTER TABLE <表名>
 
 例：向Student表增加“入学时间”列,其数据类型为日期型。
 
-```{sql,eval=F}
+
+```sql
 ALTER TABLE Student ADD S_entrance DATE；
 ```
 
 ### 删除基本表
-```{sql,eval=F}
+
+```sql
 DROP TABLE <表名>［RESTRICT| CASCADE］；
 ```
 
@@ -802,7 +936,8 @@ DROP TABLE <表名>［RESTRICT| CASCADE］；
 - CASCADE：删除该表没有限制。
   - 在删除基本表的同时,相关的依赖对象一起删除 
 
-```{sql,eval=F}
+
+```sql
 DROP TABLE  Student  CASCADE ;
 ```
 
@@ -816,20 +951,23 @@ DROP TABLE  Student  CASCADE ;
 - DBA 或 表的属主（即建立表的人）
 - DBMS一般会自动建立以下列上的索引:PRIMARY  KEY;UNIQUE
 
-```{sql,eval=F}
+
+```sql
 CREATE [UNIQUE] [CLUSTER] INDEX <索引名> 
 ON <表名>(<列名>[<次序>][,<列名>[<次序>] ]…)；
 ```
 
 举例：在Student表的Sname（姓名）列上建立一个聚簇索引
-```{sql,eval=F}
+
+```sql
 CREATE CLUSTER INDEX Stusname 
            ON   Student(Sname)；
 ```
 
 **注**：一个基本表上最多只能建立一个聚簇索引 ,经常更新的列不宜建立聚簇索引 
 
-```{sql,eval=F}
+
+```sql
 CREATE UNIQUE INDEX  Coucno ON Course(Cno)；
 CREATE UNIQUE INDEX  SCno ON SC(Sno ASC,Cno DESC)；
 ```
@@ -838,7 +976,8 @@ Course表按课程号升序建唯一索引
 SC表按学号升序和课程号降序建唯一索引
 
 ### 删除索引
-```{sql,eval=F}
+
+```sql
 DROP INDEX <索引名>;
 ```
 删除索引时,系统会从数据字典中删去有关该索引的
@@ -846,12 +985,14 @@ DROP INDEX <索引名>;
 
 例:删除Student表的Stusname索引
 
-```{sql,eval=F}
+
+```sql
 DROP INDEX Stusname；
 ```
 
 ## 数据查询
-```{sql,eval=F}
+
+```sql
 SELECT [ALL|DISTINCT] <目标列表达式> [,<目标列表达式>] …
 FROM <表名或视图名>[, <表名或视图名> ] …
 [ WHERE <条件表达式> ]
@@ -872,13 +1013,15 @@ FROM <表名或视图名>[, <表名或视图名> ] …
 
 例：查询全体学生的学号与姓名  
 
-```{sql,eval=F}
+
+```sql
 SELECT Sno,Sname FROM Student;
 ```
 
 例：查询全体学生的姓名、学号、所在系。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname,Sno,Sdept FROM Student;
 ```
 
@@ -887,7 +1030,8 @@ SELECT Sname,Sno,Sdept FROM Student;
 - 在SELECT关键字后面列出所有列名 
 - 将<目标列表达式>指定为 *
 
-```{sql,eval=F}
+
+```sql
 SELECT  Sno,Sname,Ssex,Sage,Sdept FROM Student;
 SELECT  *　FROM Student;
 ```
@@ -902,19 +1046,22 @@ SELECT子句的<目标列表达式>可以为：
 
 例：查全体学生的姓名及其出生年份。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname,2010-Sage    /*假定当年的年份为2010年*/ FROM Student;
 ```
 
 例：查询全体学生的姓名、出生年份和所有系,要求用小写字母表示所有系名
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname,‘Year of Birth: ',2010-Sage,LOWER(Sdept)  FROM Student;
 ```
 
 - 查询并改变列名
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname NAME,'Year of Birth: ’ BIRTH,
        2010-Sage BIRTHDAY,LOWER(Sdept)  DEPARTMENT
 	FROM Student;
@@ -927,7 +1074,8 @@ SELECT Sname NAME,'Year of Birth: ’ BIRTH,
  
 例： 查询选修了课程的学生学号。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sno  FROM SC；
 	等价于：
 SELECT ALL  Sno  FROM SC;
@@ -935,7 +1083,8 @@ SELECT ALL  Sno  FROM SC;
 
 - 指定DISTINCT关键词，去掉表中重复的行 
 
-```{sql,eval=F}
+
+```sql
 SELECT DISTINCT Sno FROM SC； 
 ```
 
@@ -953,19 +1102,22 @@ SELECT DISTINCT Sno FROM SC；
 **比较大小**
 
 例： 查询计算机科学系全体学生的名单。
-```{sql,eval=F}
+
+```sql
 SELECT Sname FROM Student WHERE Sdept=‘CS’;
 ```
 
 例：查询所有年龄在20岁以下的学生姓名及其年龄。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Sage FROM   Student  WHERE Sage < 20;
 ```
 
 例：查询考试成绩有不及格的学生的学号。
 
-```{sql,eval=F}
+
+```sql
 SELECT DISTINCT Sno FROM  SC  WHERE Grade<60;
 ```
 
@@ -976,7 +1128,8 @@ SELECT DISTINCT Sno FROM  SC  WHERE Grade<60;
 
 例：查询年龄在20~23岁（包括20岁和23岁）之间的学生的姓名、系别和年龄
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Sdept，Sage
 FROM     Student
 WHERE   Sage BETWEEN 20 AND 23; 
@@ -989,7 +1142,8 @@ IN <值表>,  NOT IN <值表>
 
 例：查询信息系（IS）、数学系（MA）和计算机科学系（CS）学生的姓名和性别。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Ssex
 	FROM  Student
 	WHERE Sdept IN ( 'IS'，'MA'，'CS' );
@@ -997,7 +1151,8 @@ SELECT Sname，Ssex
 
 例：查询既不是信息系、数学系，也不是计算机科学系的学生的姓名和性别。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Ssex
 FROM Student
 	 WHERE Sdept NOT IN ( 'IS'，'MA'，'CS' );
@@ -1011,7 +1166,8 @@ FROM Student
 
 例：查询学号为200215121的学生的详细情况。
 
-```{sql,eval=F}
+
+```sql
 SELECT *    
      FROM  Student  
      WHERE  Sno LIKE ‘200215121';
@@ -1019,7 +1175,8 @@ SELECT *
 
 等价于：
 
-```{sql,eval=F} 
+
+```sql
 SELECT  * 
       FROM  Student 
       WHERE Sno = '200215121';
@@ -1029,7 +1186,8 @@ SELECT  *
 
 例：查询所有姓刘学生的姓名、学号和性别。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Sno，Ssex
       FROM Student
       WHERE  Sname LIKE '刘%';
@@ -1037,19 +1195,22 @@ SELECT Sname，Sno，Ssex
 
 例：查询姓"欧阳"且全名为三个汉字的学生的姓名。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname FROM   Student WHERE  Sname LIKE '欧阳__';
 ```
 
 例：查询名字中第2个字为"阳"字的学生的姓名和学号。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Sno FROM Student WHERE Sname LIKE ‘__阳%’;
 ```
 
 例：查询所有不姓刘的学生姓名。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Sno，Ssex FROM Student WHERE Sname NOT LIKE '刘%'；
 ```
 
@@ -1057,13 +1218,15 @@ SELECT Sname，Sno，Ssex FROM Student WHERE Sname NOT LIKE '刘%'；
 
 例：查询DB_Design课程的课程号和学分。
 
-```{sql,eval=F}
+
+```sql
 SELECT Cno，Ccredit FROM Course WHERE Cname LIKE 'DB\_Design 'ESCAPE'\';
 ```
 
 例：查询以"DB_"开头，且倒数第3个字符为 i的课程的详细情况。
 
-```{sql,eval=F}
+
+```sql
 SELECT  * FROM   Course WHERE  Cname LIKE  'DB\_%i_ _' ESCAPE ' \ '；
 ```
 
@@ -1076,13 +1239,15 @@ ESCAPE '＼' 表示“ ＼” 为换码字符
 
 例：查询缺少成绩的学生的学号和相应的课程号。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sno，Cno FROM  SC WHERE  Grade IS NULL
 ```
 
 例：查所有有成绩的学生学号和课程号。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sno，Cno FROM  SC WHERE  Grade IS NOT NULL；
 ```
 
@@ -1097,13 +1262,15 @@ SELECT Sno，Cno FROM  SC WHERE  Grade IS NOT NULL；
 
 例： 查询计算机系年龄在20岁以下的学生姓名。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname FROM  Student WHERE Sdept= 'CS' AND Sage<20;
 ```
 
 例：查询信息系（IS）、数学系（MA）和计算机科学系（CS）学生的姓名和性别。
 
-```{sql,eval=F}
+
+```sql
 SELECT Sname，Ssex FROM Student WHERE Sdept IN ( 'IS'，'MA'，'CS' )
 SELECT Sname，Ssex FROM   Student WHERE  Sdept= ' IS ' OR Sdept= ' MA' OR Sdept= ' CS ';
 ```
@@ -1120,7 +1287,8 @@ SELECT Sname，Ssex FROM   Student WHERE  Sdept= ' IS ' OR Sdept= ' MA' OR Sdept
   
 [例24] 查询选修了3号课程的学生的学号及其成绩，查询结果按分数降序排列。
 
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Grade
         FROM  SC
         WHERE  Cno= ' 3 '
@@ -1129,7 +1297,8 @@ SELECT Sno，Grade
 
 [例25] 查询全体学生情况，查询结果按所在系的系号升序排列，同一系中的学生按年龄降序排列。
 
-```{sql, eval=F}
+
+```sql
 SELECT  *
         FROM  Student
         ORDER BY Sdept，Sage DESC;
@@ -1145,31 +1314,36 @@ SELECT  *
 
 [例26] 查询学生总人数。
 
-```{sql, eval=F}
+
+```sql
 SELECT COUNT(*) FROM  Student;
 ```
 
 [例27] 查询选修了课程的学生人数。
 
-```{sql, eval=F}
+
+```sql
 SELECT COUNT(DISTINCT Sno) FROM SC;
 ```
 
 [例28] 计算1号课程的学生平均成绩。
 
-```{sql, eval=F}
+
+```sql
 SELECT AVG(Grade) FROM SC WHERE Cno= ' 1 ';
 ```
 
 [例29] 查询选修1号课程的学生最高分数。
 
-```{sql, eval=F}
+
+```sql
 SELECT MAX(Grade) FROM SC WHERE Cno= ‘ 1 ’;
 ```
 
 [例30] 查询学生200215012选修课程的总学分数
 
-```{sql, eval=F}
+
+```sql
   SELECT SUM(Ccredit)
              FROM  SC， Course
              WHER Sno='200215012' AND SC.Cno=Course.Cno; 
@@ -1184,7 +1358,8 @@ SELECT MAX(Grade) FROM SC WHERE Cno= ‘ 1 ’;
 
 [例31] 求各个课程号及相应的选课人数。
 
-```{sql, eval=F}
+
+```sql
 SELECT Cno，COUNT(Sno)
        FROM    SC
        GROUP BY Cno;
@@ -1192,7 +1367,8 @@ SELECT Cno，COUNT(Sno)
 
 [例32]  查询选修了3门以上课程的学生学号。
 
-```{sql, eval=F}
+
+```sql
 SELECT Sno
        FROM  SC
        GROUP BY Sno
@@ -1225,13 +1401,15 @@ SELECT Sno
 * 等值连接：连接运算符为 “=”
 
 [例33] 查询每个学生及其选修课程的情况
-```{sql, eval=F}
+
+```sql
 SELECT  Student.*，SC.*
 		        	FROM    Student，SC
 			WHERE  Student.Sno = SC.Sno;
 ```
 
-```{sql, eval=F}
+
+```sql
 SELECT s.*, c.* 
       FROM Student s 
       JOIN SC c 
@@ -1245,13 +1423,15 @@ SELECT s.*, c.*
 * 由于所有属性名都是同名属性，因此必须使用别名前缀
 
 [例35] 查询每一门课的间接先修课（即先修课的先修课）
-```{sql, eval=F}
+
+```sql
 SELECT  FIRST.Cno，SECOND.Cpno
      FROM  Course  FIRST，Course  SECOND
      WHERE FIRST.Cpno = SECOND.Cno;
 ```
 
-```{sql, eval=F}
+
+```sql
 SELECT f.Cno, s.Cpno
       FROM Cno f
       JOIN Cno s
@@ -1265,7 +1445,8 @@ SELECT f.Cno, s.Cpno
 - 外连接操作以指定表为连接主体，将主体表中不满足连接条件的元组一并输出
 
 [例36] 改写[例33]
-```{sql, eval=F}
+
+```sql
 SELECT Student.Sno，Sname，Ssex，Sage，Sdept，Cno，Grade
     FROM  Student  
     LEFT OUT JOIN SC 
@@ -1280,7 +1461,8 @@ SELECT Student.Sno，Sname，Ssex，Sage，Sdept，Cno，Grade
 复合条件连接：**WHERE** 子句中含多个连接条件
 
 [例37] 查询选修2号课程且成绩在90分以上的所有学生(/* 语句 */表示注释)
-```{sql, eval=F}
+
+```sql
 SELECT Student.Sno, Sname
 		FROM    Student, SC
 		WHERE Student.Sno = SC.Sno AND   
@@ -1290,7 +1472,8 @@ SELECT Student.Sno, Sname
 ```
 
 [例38] 查询每个学生的学号、姓名、选修的课程名及成绩
-```{sql, eval=F}
+
+```sql
 SELECT Student.Sno，Sname，Cname，Grade
    FROM    Student，SC，Course    /*多表连接*/
    WHERE Student.Sno = SC.Sno 
@@ -1303,7 +1486,8 @@ SELECT Student.Sno，Sname，Cname，Grade
 - 一个**SELECT**-**FROM**-**WHERE**语句称为一个查询块
 - 将一个查询块嵌套在另一个查询块的**WHERE**子句或**HAVING**短语的条件中的查询称为嵌套查询 
 
-```{sql, eval=F}
+
+```sql
 SELECT Sname	 /*外层查询/父查询*/
      FROM Student
      WHERE Sno IN
@@ -1331,35 +1515,39 @@ SELECT Sname	 /*外层查询/父查询*/
 * 此查询要求可以分步来完成
 
 1. 确定“刘晨”所在系名             
-```{sql, eval=F}
+
+```sql
 SELECT  Sdept  
       FROM     Student                            
       WHERE  Sname= ' 刘晨 ';
 ```
 2. 查找所有在CS系学习的学生。    
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Sname，Sdept     
       FROM Student                 
       WHERE Sdept = ' CS ';
-``` 
+```
 3. 将第一步查询嵌入到第二步查询的条件中
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Sname，Sdept
     	FROM Student
    	WHERE Sdept  IN
                   (SELECT Sdept
                    FROM Student
                    WHERE Sname= ‘ 刘晨 ’);
-``` 
+```
 此查询为不相关子查询
 
 * 用自连接完成[例39]查询要求
-```{sql, eval=F}
+
+```sql
 SELECT  S1.Sno，S1.Sname，S1.Sdept
       FROM Student S1，Student S2
       WHERE S1.Sdept = S2.Sdept  AND
                       S2.Sname = '刘晨';
-``` 
+```
 
 #### 带有比较运算符的子查询
 
@@ -1367,18 +1555,20 @@ SELECT  S1.Sno，S1.Sname，S1.Sdept
 * 与 **ANY** 或**ALL** 谓词配合使用
 
 例：假设一个学生只可能在一个系学习，并且必须属于一个系，则在[例39]可以用 = 代替IN ：
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Sname，Sdept
 FROM Student
 WHERE Sdept  =
               (SELECT Sdept
                FROM Student
               WHERE Sname= ‘刘晨’);
-``` 
+```
 子查询一定要跟在比较符之后
 
 **错误**的例子
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Sname，Sdept
      FROM Student
      WHERE ( SELECT Sdept
@@ -1388,7 +1578,8 @@ SELECT Sno，Sname，Sdept
 ```
 
 [例41] 找出每个学生超过他选修课程平均成绩的课程号。
-```{sql, eval=F}
+
+```sql
 SELECT Sno， Cno
 FROM  SC  x
 WHERE Grade >= ( SELECT AVG(Grade) 
@@ -1406,7 +1597,8 @@ WHERE Grade >= ( SELECT AVG(Grade)
 ，也就是大于最小值，所以**ANY** 和 **ALL** 的子查询通常可以换成聚合函数的普通子查询。
 
 [例42] 查询其他系中比计算机科学某一学生年龄小的学生姓名和年龄
-```{sql, eval=F}
+
+```sql
 SELECT Sname，Sage
 FROM    Student
 WHERE Sage < ANY (SELECT  Sage
@@ -1416,7 +1608,8 @@ WHERE Sage < ANY (SELECT  Sage
 ```
 
 用聚集函数实现[例42] 
-```{sql, eval=F}
+
+```sql
 SELECT Sname，Sage
      FROM   Student
      WHERE Sage < 
@@ -1429,7 +1622,8 @@ SELECT Sname，Sage
 [例43]  查询其他系中比计算机科学系所有学生年龄都小的学生姓名及年龄。
 
 * 方法一：用 **ALL** 谓词
-```{sql, eval=F}
+
+```sql
 SELECT Sname，Sage
     FROM Student
     WHERE Sage < ALL
@@ -1439,7 +1633,8 @@ SELECT Sname，Sage
            AND Sdept <> ' CS ’;
 ```
 * 方法二：用聚集函数
-```{sql, eval=F}
+
+```sql
 SELECT Sname，Sage
         FROM Student
         WHERE Sage < 
@@ -1477,7 +1672,8 @@ ANY（或SOME），ALL谓词与聚集函数、IN谓词的等价转换关系 ：
 - 若SC中存在这样的元组，其Sno值等于此Student.Sno值，并且其Cno= '1'，则取此Student.Sname送入结果关系
 
 用嵌套查询
-```{sql, eval=F}
+
+```sql
 SELECT Sname
      FROM Student
      WHERE EXISTS
@@ -1486,13 +1682,15 @@ SELECT Sname
            WHERE Sno=Student.Sno AND Cno= ' 1 ');
 ```
 用连接运算
-```{sql, eval=F}
+
+```sql
 SELECT Sname
 FROM Student, SC
 WHERE Student.Sno=SC.Sno AND SC.Cno= '1';
 ```
 [例45]  查询没有选修1号课程的学生姓名。
-```{sql, eval=F}
+
+```sql
 SELECT Sname
      FROM Student
      WHERE NOT EXISTS
@@ -1507,7 +1705,8 @@ SELECT Sname
 [例39] 查询与“刘晨”在同一个系学习的学生
 
 用**EXISTS**谓词代替**IN**谓词
-```{sql, eval=F}
+
+```sql
 SELECT Sno，Sname，Sdept
     FROM Student S1
     WHERE EXISTS
@@ -1523,7 +1722,8 @@ SELECT Sno，Sname，Sdept
   $$({\forall}x)P\equiv \neg(\exists x(\neg P))$$
 
 [例46] 查询选修了全部课程的学生姓名。
-```{sql, eval=F}
+
+```sql
 SELECT Sname
 FROM Student
 WHERE NOT EXISTS
@@ -1556,7 +1756,8 @@ $$({\forall} y)p\rightarrow q\equiv \neg{\exists}y(p\wedge \neg q)$$
 * 变换后语义：不存在这样的课程y，学生200215122选修了y，而学生x没有选。
 
 用**NOT EXISTS**谓词表示：     
-```{sql, eval=F}
+
+```sql
 SELECT DISTINCT Sno
        FROM SC SCX
        WHERE NOT EXISTS
@@ -1584,19 +1785,22 @@ SELECT DISTINCT Sno
 - 方法一：
     - UNION：将多个查询结果合并起来时，系统自动去掉重复元组。
     - UNION ALL：将多个查询结果合并起来时，保留重复元组 
-```{sql, eval=F}
+
+```sql
 SELECT * FROM Student  WHERE Sdept= 'CS'
     UNION  SELECT * FROM Student
                        WHERE Sage<=19;
 ```
 - 方法二：
-```{sql, eval=F}
+
+```sql
        SELECT  DISTINCT  *  FROM Student
               WHERE Sdept= 'CS'  OR  Sage<=19;
 ```
 
 [例49]  查询选修了课程1或者选修了课程2的学生。
-```{sql, eval=F}
+
+```sql
         SELECT Sno
         FROM SC
         WHERE Cno=' 1 '
@@ -1607,27 +1811,31 @@ SELECT * FROM Student  WHERE Sdept= 'CS'
 ```
 
 [例50]  查询计算机科学系的学生与年龄不大于19岁的学生的交集
-```{sql, eval=F}
+
+```sql
 SELECT * FROM Student WHERE Sdept='CS' 
     INTERSECT SELECT * FROM Student
                                    WHERE Sage<=19;
 ```
 
 实际上就是查询计算机科学系中年龄不大于19岁的学生
-```{sql, eval=F}
+
+```sql
 		SELECT * FROM Student
         	    WHERE Sdept= 'CS' AND  Sage<=19;
 ```
 
 [例51]  查询选修课程1的学生集合与选修课程2的学生集合的交集
-```{sql, eval=F}
+
+```sql
 SELECT Sno FROM SC WHERE Cno=' 1 ' 
 INTERSECT  SELECT Sno  FROM SC
                              WHERE Cno='2 ';
 ```
 
 实际上是查询既选修了课程1又选修了课程2的学生
-```{sql, eval=F}
+
+```sql
   SELECT Sno FROM SC
        WHERE Cno=' 1 ' AND
             Sno IN  (SELECT Sno FROM SC
@@ -1635,14 +1843,16 @@ INTERSECT  SELECT Sno  FROM SC
 ```
 
 [例52]  查询计算机科学系的学生与年龄不大于19岁的学生的差集。
-```{sql, eval=F}
+
+```sql
 SELECT * FROM Student  WHERE Sdept='CS'
      EXCEPT SELECT  * FROM Student
                       WHERE Sage <=19;
 ```
 
 实际上是查询计算机科学系中年龄大于19岁的学生
-```{sql, eval=F}
+
+```sql
        SELECT * FROM Student
             WHERE Sdept= 'CS' AND  Sage>19;
 ```
@@ -1726,28 +1936,32 @@ SELECT * FROM Student  WHERE Sdept='CS'
         - 值的类型
 
 ［例1］  将一个新学生元组（学号：200215128；姓名：陈冬；性别：男；所在系：IS；年龄：18岁）插入到Student表中。
-```{sql, eval=F}
+
+```sql
 INSERT
 INTO  Student (Sno,Sname,Ssex,Sdept,Sage)
 VALUES ('200215128','陈冬','男','IS',18);
 ```
 
 ［例2］  将学生张成民的信息插入到Student表中。
-```{sql, eval=F}
+
+```sql
 INSERT
 INTO  Student
 VALUES ('200215126','张成民','男',18,'CS'); 
 ```
 
 ［例3］  插入一条选课记录( '200215128','1 ')。
-```{sql, eval=F}
+
+```sql
 INSERT
 INTO SC(Sno,Cno)
 VALUES ('200215128','1');
 ```
 
 RDBMS将在新插入记录的Grade列上自动地赋空值。或者：
-```{sql, eval=F}
+
+```sql
     INSERT
     INTO SC
     VALUES (' 200215128 ',' 1 ',NULL);
@@ -1768,14 +1982,16 @@ RDBMS将在新插入记录的Grade列上自动地赋空值。或者：
 
 [例4]  对每一个系，求学生的平均年龄，并把结果存入数据库。
 第一步：建表
-```{sql, eval=F}
+
+```sql
 CREATE  TABLE  Dept_age
   (Sdept  CHAR(15)           	/* 系名*/
   Avg_age SMALLINT);   	/*学生平均年龄*/
 ```
 
 第二步：插入数据
-```{sql, eval=F}
+
+```sql
         INSERT
          INTO  Dept_age(Sdept,Avg_age)
               SELECT  Sdept,AVG(Sage)
@@ -1811,20 +2027,23 @@ RDBMS在执行插入语句时会检查所插元组是否破坏表上已定义的
     3. 带子查询的修改语句
 
 [例5]  将学生200215121的年龄改为22岁
-```{sql, eval=F}
+
+```sql
          UPDATE  Student
          SET Sage=22
          WHERE  Sno=' 200215121 ';
 ```
 
 [例6]  将所有学生的年龄增加1岁
-```{sql, eval=F}
+
+```sql
          UPDATE Student
          SET Sage= Sage+1;
 ```
 
 [例7]  将计算机科学系全体学生的成绩置零。
-```{sql, eval=F}
+
+```sql
         UPDATE SC
         SET  Grade=0
         WHERE  'CS'=
@@ -1858,20 +2077,23 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
     3. 带子查询的删除语句
 
 [例8]  删除学号为200215128的学生记录。
-```{sql, eval=F}
+
+```sql
         DELETE
          FROM Student
          WHERE Sno= '200215128';
 ```
 
 [例9]  删除所有的学生选课记录。
-```{sql, eval=F}
+
+```sql
         DELETE
         FROM SC;
 ```
 
 [例10]  删除计算机科学系所有学生的选课记录。
-```{sql, eval=F}
+
+```sql
         DELETE
         FROM SC
         WHERE  'CS'=
@@ -1907,7 +2129,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
     - 在对视图查询时，按视图的定义从基本表中将数据查出。
 
 [例1]  建立信息系学生的视图。
-```{sql, eval=F}
+
+```sql
         CREATE VIEW IS_Student
         AS 
         SELECT Sno,Sname,Sage
@@ -1916,7 +2139,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 ```
 
 [例2]建立信息系学生的视图，并要求进行修改和插入操作时仍需保证该视图只有信息系的学生 。
-```{sql, eval=F}
+
+```sql
         CREATE VIEW IS_Student
         AS 
         SELECT Sno,Sname,Sage
@@ -1934,7 +2158,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 - 基于多个基表的视图
 [例3]  建立信息系选修了1号课程的学生视图。
-```{sql, eval=F}
+
+```sql
         CREATE VIEW IS_S1(Sno,Sname,Grade)
         AS 
         SELECT Student.Sno,Sname,Grade
@@ -1946,7 +2171,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 - 基于视图的视图
 [例4]  建立信息系选修了1号课程且成绩在90分以上的学生的视图。
-```{sql, eval=F}
+
+```sql
         CREATE VIEW IS_S2
         AS
         SELECT Sno,Sname,Grade
@@ -1957,7 +2183,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 - 带表达式的视图
 [例5]  定义一个反映学生出生年份的视图。
-```{sql, eval=F}
+
+```sql
         CREATE  VIEW BT_S(Sno,Sname,Sbirth)
         AS 
         SELECT Sno,Sname,2007-Sage
@@ -1966,7 +2193,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 - 分组视图
 [例6]  将学生的学号及他的平均成绩定义为一个视图,假设SC表中“成绩”列Grade为数字型
-```{sql, eval=F}
+
+```sql
              CREAT  VIEW S_G(Sno,Gavg)
              AS  
              SELECT Sno,AVG(Grade)
@@ -1976,7 +2204,8 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 - 不指定属性列
 [例7]将Student表中所有女生记录定义为一个视图
-```{sql, eval=F}
+
+```sql
       CREATE VIEW F_Student(F_Sno,name,sex,age,dept)
       AS
       SELECT *
@@ -1995,19 +2224,22 @@ RDBMS在执行修改语句时会检查修改操作是否破坏表上已定义的
 
 ［例8］
 删除视图BT_S： 
-```{sql, eval=F}
+
+```sql
 DROP VIEW BT_S;
 ```
 
 删除视图IS_S1：
-```{sql, eval=F}
+
+```sql
 DROP VIEW IS_S1;
 ```
 - 拒绝执行
 - 级联删除：
-```{sql, eval=F}
+
+```sql
 DROP VIEW IS_S1 CASCADE;
-```             
+```
 
 ### 查询视图
 - 用户角度：查询视图与查询基本表相同
@@ -2018,21 +2250,24 @@ DROP VIEW IS_S1 CASCADE;
         - 执行修正后的查询
 
 [例9]  在信息系学生的视图中找出年龄小于20岁的学生。
-```{sql, eval=F}
+
+```sql
              SELECT   Sno,Sage
         FROM      IS_Student
         WHERE   Sage<20;
 ```
 IS_Student视图的定义 (参见视图定义例1)
 视图消解转换后的查询语句为：
-```{sql, eval=F}
+
+```sql
      SELECT  Sno,Sage       
      FROM  Student
      WHERE  Sdept= 'IS'  AND  Sage<20;
 ```
 
 [例10]  查询选修了1号课程的信息系学生
-```{sql, eval=F}
+
+```sql
 SELECT  IS_Student.Sno,Sname
 FROM     IS_Student,SC
 WHERE  IS_Student.Sno =SC.Sno AND SC.Cno= '1';
@@ -2042,14 +2277,16 @@ WHERE  IS_Student.Sno =SC.Sno AND SC.Cno= '1';
     - 有些情况下，视图消解法不能生成正确查询。
 
 [例11]在S_G视图中查询平均成绩在90分以上的学生学号和平均成绩
-```{sql, eval=F}
+
+```sql
 SELECT *
 FROM   S_G
 WHERE  Gavg>=90;
 ```
 
 S_G视图的子查询定义： 
-```{sql, eval=F}
+
+```sql
 SELECT  Sno,AVG(Grade)
 FROM  SC
 GROUP BY Sno;
@@ -2062,7 +2299,8 @@ GROUP BY Sno;
     WHERE  AVG(Grade)>=90
     GROUP BY Sno；
     - 正确：
-    ```{sql, eval=F}
+    
+    ```sql
     SELECT  Sno,AVG(Grade)
     FROM  SC
     GROUP BY Sno  HAVING AVG(Grade)>=90;
@@ -2070,42 +2308,48 @@ GROUP BY Sno;
 
 ### 更新视图
 [例12]  将信息系学生视图IS_Student中学号200215122的学生姓名改为“刘辰”。
-```{sql, eval=F}
+
+```sql
 UPDATE  IS_Student
 SET  Sname= '刘辰'
 WHERE  Sno= ' 200215122 ';
 ```
 
 转换后的语句：
-```{sql, eval=F}
+
+```sql
 UPDATE  Student
 SET Sname= '刘辰'
 WHERE Sno= ' 200215122 ' AND Sdept= 'IS';
 ```
 
 [例13]  向信息系学生视图IS_S中插入一个新的学生记录：200215129，赵新，20岁
-```{sql, eval=F}
+
+```sql
 INSERT
 INTO IS_Student
 VALUES ('95029','赵新',20);
 ```
 
 转换为对基本表的更新：
-```{sql, eval=F}
+
+```sql
 INSERT
 INTO   Student(Sno,Sname,Sage,Sdept)
 VALUES (‘200215129 ','赵新',20,'IS' );
 ```
 
 [例14]删除信息系学生视图IS_Student中学号为200215129的记录 
-```{sql, eval=F}
+
+```sql
 DELETE
 FROM IS_Student
 WHERE Sno= ' 200215129 ';
 ```
 
 转换为对基本表的更新：
-```{sql, eval=F}
+
+```sql
 DELETE
 FROM Student
 WHERE Sno= ' 200215129 ' AND Sdept= 'IS';
@@ -2115,7 +2359,8 @@ WHERE Sno= ' 200215129 ' AND Sdept= 'IS';
   一些视图是不可更新的，因为对这些视图的更新不能唯一地有意义地转换成对相应基本表的更新
 
 例：视图S_G为不可更新视图。
-```{sql, eval=F}
+
+```sql
 UPDATE  S_G
 SET          Gavg=90
 WHERE  Sno= '200215121';

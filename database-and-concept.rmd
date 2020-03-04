@@ -245,11 +245,531 @@ Sys.setlocale("LC_ALL", "Chinese")
 3. 联系的属性：联系本身也是一种实体型，也可以有属性。如果一个联系具有属性，则这些属性也要用无向边与该联系连接起来 
 
 
-# 123
+# 关系数据库标准语言SQL
+## SQL概述：
+* SQL（Structured Query Language):**结构化查询**语言,是关系数据库的标准语言
+* SQL是一个通用的、功能极强的关系数据库语言
 
-## 1233
+## SQL特点
+1. **综合统一**
+   - 集数据定义语言（DDL）,数据操纵语言（DML）,数据控制语言（DCL）功能于一体。
+   - 可以独立完成数据库生命周期中的全部活动：
+        - 定义关系模式,插入数据,建立数据库；
+        - 对数据库中的数据进行查询和更新；
+        - 数据库重构和维护
+        - 数据库安全性、完整性控制等
+   - 用户数据库投入运行后,可根据需要随时逐步修改模式,不影响数据的运行
+   - 数据操作符统一
+2. **高度非过程化**
 
-### **ORDER BY** 子句
+   SQL只要提出“做什么”,无须了解存取路径,存取路径的选择以及SQL的操作过程由系统自动完成。
+   
+3. **面向集合的操作方式**
+   
+   SQL采用集合操作方式,操作对象、查找结果可以是元组的集合,一次插入、删除、更新操作的对象
+   可以是元组的集合。（类似一张表）
+
+4. **以同一种语法结构提供多种使用方式**
+   - SQL是独立的语言,能够独立地用于联机交互的使用方式
+   - SQL又是嵌入式语言,能够嵌入到高级语言（例如C,C++,Java）程序中,供程序员设计程序时使用
+5. **语言简洁,易学易用**
+   
+| SQL功能 |  动词                  |
+|-------|-------------------------|
+| 数据查询  | SELECT               |
+| 数据定义  | CREATE,DROP,ALTER    |
+| 数据操纵  | INSERT,UPDATE,DELETE |
+| 数据控制  | GRANT,REVOKE         |
+
+## SQL基本概念
+SQL支持关系数据库三级模式结构：视图（外模式）——基本表（模式）——存储文件（内模式）
+
+- 视图
+    - 从一个或几个基本表导出的表
+    - 数据库中只存放视图的定义而不存放视图对应的数据
+    - 视图是一个虚表
+    - 用户可以在视图上再定义视图
+- 基本表
+    - 本身独立存在的表
+    - SQL中一个关系就对应一个基本表
+    - 一个(或多个)基本表对应一个存储文件
+    - 一个表可以带若干索引
+- 存储文件
+    - 逻辑结构组成了关系数据库的内模式
+    - 物理结构是任意的,对用户透明
+
+## 学生-课程数据库
+学生-课程模式 S-T : 
+
+- 学生表：Student(Sno,Sname,Ssex,Sage,Sdept)
+- 课程表：Course(Cno,Cname,Cpno,Ccredit)
+- 学生选课表：SC(Sno,Cno,Grade)
+
+## 数据定义
+SQL的数据定义功能: 模式(数据库)定义、表定义、视图和索引的定义 
+
+SQL的数据定义语句 
+
+| 操作对象 | 创建              | 删除            | 修改          |
+|------|-----------------|---------------|-------------|
+| 模式   | CREATE SCHEMA   | DROP SCHEMA   |             |
+| 表    | CREATE TABLE    | DROP TABLE    | ALTER TABLE |
+| 视图   | CREATE VIEW     | DROP VIEW     |             |
+| 索引   | CREATE INDEX    | DROP INDEX    |             |
+| 数据库  | CREATE DATABASE | DROP DATABASE |             |
+
+### 模式（数据库）定义
+语句：
+
+```{sql,eval=F}
+CREATE DATABASE database_name 
+  [ ON   <filespec> [ ,...n ] ]  
+  [ LOG ON { <filespec> [ ,...n ] } ]
+```
+
+例：定义一个学生-课程模式(数据库)XSCJ
+
+
+```{sql,eval=F}
+CREATE DATABASE XSCJ
+ON
+(NAME=XSCJ,-- 数据库的逻辑文件名
+   FILENAME='e:\sql\XSCJ.mdf',-- 数据库的物理文件位置和名称
+   SIZE=10MB,-- 数据库XSCJ初始大小为10MB
+   MAXSIZE=50MB,-- 最大大小为50MB
+   FILEGROWTH=5%)--数据库自动增长,增长方式是按5%比例增长
+LOG ON
+(NAME=XSCJ_LOG,-- 事务日志的逻辑文件名
+   FILENAME='e:\sql\XSCJ_Log.ldf',-- 事务日志的逻辑文件名
+   SIZE=2MB,-- 日志文件初始大小为2MB
+   MAXSIZE=5MB,-- 日志文件最大可增长到5MB
+   FILEGROWTH=1MB)-- 日志文件大小按1MB增长 
+```
+定义模式实际上定义了一个命名空间,在这个空间中可以定义该模式包含的数据库对象,例如基本表、
+视图、索引等。在CREATE DATABASE中可以接受CREATE TABLE,CREATE VIEW和GRANT子句。
+
+举例：创建一个数据库XSCJ,并在其中定义一个dept
+
+```{sql,eval=F}
+CREATE DATABASE XSCJ
+    CREATE TABLE Dept(DNo CHAR(2) NOT NULL ,
+                  DName CHAR(20) NOT NULL,
+                  Dean CHAR(8),
+                  PRIMARY KEY (DNo)); 
+```
+
+### 删除模式（数据库）
+```{sql,eval=F}
+DROP DATABASE <数据库名> <CASCADE | RESTRICT>
+```
+
+- CASCADE(级联):删除模式的同时把该模式中所有的数据库对象全部删除
+- RESTRICT(限制):如果该模式中定义了下属的数据库对象（如表、视图等）,则拒绝该删除语句的执行。
+  当该模式中没有任何下属的对象时才能执行。
+
+```{sql,eval=F}
+DROP DATABASE XSCJ CASCADE;
+```
+
+删除数据库XSCJ同时该模式中定义的表Dept也被删除
+
+
+### 定义基本表
+```{sql,eval=F}
+CREATE TABLE <表名>
+      （<列名> <数据类型>[ <列级完整性约束条件> ]
+      [,<列名> <数据类型>[ <列级完整性约束条件>] ] …
+      [,<表级完整性约束条件> ] ）；
+```
+如果完整性约束条件涉及到该表的多个属性列,则必须定义在表级上,否则既可以定义在列级也可以定义在表级。 
+
+例：建立“学生”表Student,学号是主码,姓名取值唯一。
+
+```{sql,eval=F}
+    CREATE TABLE Student          
+	      (Sno   CHAR(9) PRIMARY KEY, /* 列级完整性约束条件*/                  
+            Sname  CHAR(20) UNIQUE,     /* Sname取唯一值*/
+            Ssex    CHAR(2),
+            Sage   SMALLINT,
+            Sdept  CHAR(20)
+           )； 
+```
+
+例：建立一个“学生选课”表SC:
+
+```{sql,eval=F}
+CREATE TABLE  SC
+       	(Sno  CHAR(9), 
+       	Cno  CHAR(4),  
+       	Grade    SMALLINT,
+       	PRIMARY KEY (Sno,Cno),  
+                     /* 主码由两个属性构成,必须作为表级完整性进行定义*/
+       	FOREIGN KEY (Sno) REFERENCES Student(Sno),
+                    /* 表级完整性约束条件,Sno是外码,被参照表是Student */
+       	FOREIGN KEY (Cno) REFERENCES Course(Cno)
+                   /* 表级完整性约束条件, Cno是外码,被参照表是Course*/
+		); 
+```
+
+### 数据类型
+| 数据类型             | 含义                               |
+|------------------|----------------------------------|
+| CHAR(n)        | 长度为n的定长字符串                       |
+| VARCHAR(n)     | 最大长度为n的变长字符串                     |
+| INT              | 长整数（也可以写作INTEGER）                |
+| SMALLINT         | 短整数                              |
+| NUMERIC(p,d)   | 定点数,由p位数字（不包括符号和小数点）组成,小数后面有d位数字 |
+| REAL             | 取决于机器精度的浮点数                      |
+| Double Precision | 取决于机器精度的双精度浮点数                   |
+| FLOAT(n)       | 浮点数,精度至少为n位数字                    |
+| DATE             | 日期,包含年、月、日,格式为YYYY\-MM\-DD       |
+| TIME             | 时间,包含一日的时、分、秒,格式为HH:MM:SS        |
+
+
+### 模式与表
+每一个基本表都属于某一个模式,一个模式包含多个基本表。
+
+创建基本表（其他数据库对象也一样）时,若没有指定模式,系统根据搜索路径来确定该对象所属的模式,RDBMS会使
+用模式列表中第一个存在的模式作为数据库对象的模式名 ,若搜索路径中的模式名都不存在,系统将给出错误 
+
+显示当前的搜索路径： SHOW search_path; 搜索路径的当前默认值是：$user, PUBLIC 
+
+### 修改基本表
+```{sql,eval=F}
+ALTER TABLE <表名>
+[ ADD <新列名> <数据类型> [ 完整性约束 ] ]
+[DROP<列名> [RESTRICT|CASCADE] ]
+[RENAME <列名> TO <新列名>]
+[RENAME TO <新表名>]
+[ADD <完整型约束>]
+[ DROP <完整性约束名> ]
+[ ALTER COLUMN<列名> <数据类型> ]；
+```
+
+例：向Student表增加“入学时间”列,其数据类型为日期型。
+
+```{sql,eval=F}
+ALTER TABLE Student ADD S_entrance DATE；
+```
+
+### 删除基本表
+```{sql,eval=F}
+DROP TABLE <表名>［RESTRICT| CASCADE］；
+```
+
+- RESTRICT：删除表是有限制的。
+  - 欲删除的基本表不能被其他表的约束所引用
+  - 如果存在依赖该表的对象,则此表不能被删除
+- CASCADE：删除该表没有限制。
+  - 在删除基本表的同时,相关的依赖对象一起删除 
+
+```{sql,eval=F}
+DROP TABLE  Student  CASCADE ;
+```
+
+基本表定义被删除,数据被删除
+表上建立的索引、视图、触发器等一般也将被删除 
+
+
+### 索引的建立与删除
+谁可以建立索引:
+
+- DBA 或 表的属主（即建立表的人）
+- DBMS一般会自动建立以下列上的索引:PRIMARY  KEY;UNIQUE
+
+```{sql,eval=F}
+CREATE [UNIQUE] [CLUSTER] INDEX <索引名> 
+ON <表名>(<列名>[<次序>][,<列名>[<次序>] ]…)；
+```
+
+举例：在Student表的Sname（姓名）列上建立一个聚簇索引
+```{sql,eval=F}
+CREATE CLUSTER INDEX Stusname 
+           ON   Student(Sname)；
+```
+
+**注**：一个基本表上最多只能建立一个聚簇索引 ,经常更新的列不宜建立聚簇索引 
+
+```{sql,eval=F}
+CREATE UNIQUE INDEX  Coucno ON Course(Cno)；
+CREATE UNIQUE INDEX  SCno ON SC(Sno ASC,Cno DESC)；
+```
+Course表按课程号升序建唯一索引
+
+SC表按学号升序和课程号降序建唯一索引
+
+### 删除索引
+```{sql,eval=F}
+DROP INDEX <索引名>;
+```
+删除索引时,系统会从数据字典中删去有关该索引的
+描述。
+
+例:删除Student表的Stusname索引
+
+```{sql,eval=F}
+DROP INDEX Stusname；
+```
+
+## 数据查询
+```{sql,eval=F}
+SELECT [ALL|DISTINCT] <目标列表达式> [,<目标列表达式>] …
+FROM <表名或视图名>[, <表名或视图名> ] …
+[ WHERE <条件表达式> ]
+[ GROUP BY <列名1> [ HAVING <条件表达式> ] ]
+[ ORDER BY <列名2> [ ASC|DESC ] ]；
+```
+
+### 单表查询
+查询仅涉及一个表：
+1. 选择表中的若干列
+2. 选择表中的若干元组
+3. ORDER BY子句
+4. 聚集函数
+5. GROUP BY子句
+
+#### 选择表中的若干列
+1. 查询指定列
+
+例：查询全体学生的学号与姓名  
+
+```{sql,eval=F}
+SELECT Sno,Sname FROM Student;
+```
+
+例：查询全体学生的姓名、学号、所在系。
+
+```{sql,eval=F}
+SELECT Sname,Sno,Sdept FROM Student;
+```
+
+2. 查询全部列
+
+- 在SELECT关键字后面列出所有列名 
+- 将<目标列表达式>指定为 *
+
+```{sql,eval=F}
+SELECT  Sno,Sname,Ssex,Sage,Sdept FROM Student;
+SELECT  *　FROM Student;
+```
+
+1. 查询经过计算的值 
+
+SELECT子句的<目标列表达式>可以为：
+- 算术表达式
+- 字符串常量
+- 函数
+- 列别名 
+
+例：查全体学生的姓名及其出生年份。
+
+```{sql,eval=F}
+SELECT Sname,2010-Sage    /*假定当年的年份为2010年*/ FROM Student;
+```
+
+例：查询全体学生的姓名、出生年份和所有系,要求用小写字母表示所有系名
+
+```{sql,eval=F}
+SELECT Sname,‘Year of Birth: ',2010-Sage,LOWER(Sdept)  FROM Student;
+```
+
+- 查询并改变列名
+
+```{sql,eval=F}
+SELECT Sname NAME,'Year of Birth: ’ BIRTH,
+       2010-Sage BIRTHDAY,LOWER(Sdept)  DEPARTMENT
+	FROM Student;
+```
+
+#### 选择表中的若干元组
+1. 消除取值重复的行
+
+- 如果没有指定DISTINCT关键词，则缺省为ALL
+ 
+例： 查询选修了课程的学生学号。
+
+```{sql,eval=F}
+SELECT Sno  FROM SC；
+	等价于：
+SELECT ALL  Sno  FROM SC;
+```
+
+- 指定DISTINCT关键词，去掉表中重复的行 
+
+```{sql,eval=F}
+SELECT DISTINCT Sno FROM SC； 
+```
+
+2. 查询满足条件的元组
+
+| 查 询 条 件    | 谓    词                                  |
+|------------|-----------------------------------------|
+| 比    较     | =，>，<，>=，<=，\!=，<>，\!>，\!<；NOT\+上述比较运算符 |
+| 确定范围       | BETWEEN AND，NOT BETWEEN AND             |
+| 确定集合       | IN，NOT IN                               |
+| 字符匹配       | LIKE，NOT LIKE                           |
+| 空    值     | IS NULL，IS NOT NULL                     |
+| 多重条件（逻辑运算） | AND，OR，NOT                              |
+
+**比较大小**
+
+例： 查询计算机科学系全体学生的名单。
+```{sql,eval=F}
+SELECT Sname FROM Student WHERE Sdept=‘CS’;
+```
+
+例：查询所有年龄在20岁以下的学生姓名及其年龄。
+
+```{sql,eval=F}
+SELECT Sname，Sage FROM   Student  WHERE Sage < 20;
+```
+
+例：查询考试成绩有不及格的学生的学号。
+
+```{sql,eval=F}
+SELECT DISTINCT Sno FROM  SC  WHERE Grade<60;
+```
+
+**确定范围**
+
+* BETWEEN …  AND  …
+* NOT BETWEEN  …  AND  …
+
+例：查询年龄在20~23岁（包括20岁和23岁）之间的学生的姓名、系别和年龄
+
+```{sql,eval=F}
+SELECT Sname，Sdept，Sage
+FROM     Student
+WHERE   Sage BETWEEN 20 AND 23; 
+```
+
+**确定集合**
+
+IN <值表>,  NOT IN <值表> 
+
+
+例：查询信息系（IS）、数学系（MA）和计算机科学系（CS）学生的姓名和性别。
+
+```{sql,eval=F}
+SELECT Sname，Ssex
+	FROM  Student
+	WHERE Sdept IN ( 'IS'，'MA'，'CS' );
+```
+
+例：查询既不是信息系、数学系，也不是计算机科学系的学生的姓名和性别。
+
+```{sql,eval=F}
+SELECT Sname，Ssex
+FROM Student
+	 WHERE Sdept NOT IN ( 'IS'，'MA'，'CS' );
+```
+
+**字符匹配**
+
+[NOT] LIKE  ‘<匹配串>’  [ESCAPE ‘ <换码字符>’]
+
+* 匹配串为固定字符串
+
+例：查询学号为200215121的学生的详细情况。
+
+```{sql,eval=F}
+SELECT *    
+     FROM  Student  
+     WHERE  Sno LIKE ‘200215121';
+```
+
+等价于：
+
+```{sql,eval=F} 
+SELECT  * 
+      FROM  Student 
+      WHERE Sno = '200215121';
+```
+
+* 匹配串为含通配符的字符串
+
+例：查询所有姓刘学生的姓名、学号和性别。
+
+```{sql,eval=F}
+SELECT Sname，Sno，Ssex
+      FROM Student
+      WHERE  Sname LIKE '刘%';
+```
+
+例：查询姓"欧阳"且全名为三个汉字的学生的姓名。
+
+```{sql,eval=F}
+SELECT Sname FROM   Student WHERE  Sname LIKE '欧阳__';
+```
+
+例：查询名字中第2个字为"阳"字的学生的姓名和学号。
+
+```{sql,eval=F}
+SELECT Sname，Sno FROM Student WHERE Sname LIKE ‘__阳%’;
+```
+
+例：查询所有不姓刘的学生姓名。
+
+```{sql,eval=F}
+SELECT Sname，Sno，Ssex FROM Student WHERE Sname NOT LIKE '刘%'；
+```
+
+* 使用换码字符将通配符转义为普通字符
+
+例：查询DB_Design课程的课程号和学分。
+
+```{sql,eval=F}
+SELECT Cno，Ccredit FROM Course WHERE Cname LIKE 'DB\_Design 'ESCAPE'\';
+```
+
+例：查询以"DB_"开头，且倒数第3个字符为 i的课程的详细情况。
+
+```{sql,eval=F}
+SELECT  * FROM   Course WHERE  Cname LIKE  'DB\_%i_ _' ESCAPE ' \ '；
+```
+
+ESCAPE '＼' 表示“ ＼” 为换码字符 
+
+**涉及空值的查询**
+
+* IS NULL 或 IS NOT NULL
+*  “IS” 不能用 “=” 代替
+
+例：查询缺少成绩的学生的学号和相应的课程号。
+
+```{sql,eval=F}
+SELECT Sno，Cno FROM  SC WHERE  Grade IS NULL
+```
+
+例：查所有有成绩的学生学号和课程号。
+
+```{sql,eval=F}
+SELECT Sno，Cno FROM  SC WHERE  Grade IS NOT NULL；
+```
+
+**多重条件查询**
+
+- 逻辑运算符：AND和 OR来联结多个查询条件
+    - AND的优先级高于OR
+    - 可以用括号改变优先级
+- 可用来实现多种其他谓词
+    - [NOT] IN
+    - [NOT] BETWEEN …   AND  …
+
+例： 查询计算机系年龄在20岁以下的学生姓名。
+
+```{sql,eval=F}
+SELECT Sname FROM  Student WHERE Sdept= 'CS' AND Sage<20;
+```
+
+例：查询信息系（IS）、数学系（MA）和计算机科学系（CS）学生的姓名和性别。
+
+```{sql,eval=F}
+SELECT Sname，Ssex FROM Student WHERE Sdept IN ( 'IS'，'MA'，'CS' )
+SELECT Sname，Ssex FROM   Student WHERE  Sdept= ' IS ' OR Sdept= ' MA' OR Sdept= ' CS ';
+```
+
+**ORDER BY** 子句
 
 * **ORDER BY** 
   + 子句可以按一个或多个属性列排序
@@ -276,7 +796,7 @@ SELECT  *
         ORDER BY Sdept，Sage DESC;
 ```
 
-### 聚集函数
+**聚集函数**
 
 * 聚集函数：
   + 计数：COUNT（[ DISTINCT | ALL ] *）、COUNT（[ DISTINCT | ALL ] <列名>）
@@ -316,7 +836,7 @@ SELECT MAX(Grade) FROM SC WHERE Cno= ‘ 1 ’;
              WHER Sno='200215012' AND SC.Cno=Course.Cno; 
 ```
 
-### **GROUP BY** 子句
+**GROUP BY** 子句
 
 * 未对查询结果分组，聚集函数将作用于整个查询结果
 * 对查询结果分组后，聚集函数将分别作用于每个组
@@ -349,7 +869,7 @@ SELECT Sno
 通俗的说，**HAVING** 短语放在 **GROUPBY** 子句之后，**WHERE** 子句放在
 **GROUPBY** 子句之前。
 
-## 连接查询
+### 连接查询
 
 * 连接查询：同时涉及多个表的查询称为连接查询
 * 连接条件：用来连接两个表的条件
@@ -361,7 +881,7 @@ SELECT Sno
 在sql92语法是在 **WHERE** 子句中写入连接条件，在表中有相同列时，在列名之前加上表
 名前缀；而sql99则是使用 **ON** 子句创建连接，**ON** 子句使语句具有更高的易读性。
 
-### 等值与非等值连接查询 
+#### 等值与非等值连接查询 
 
 * 等值连接：连接运算符为 “=”
 
@@ -379,7 +899,7 @@ SELECT s.*, c.*
       ON s.Sno=sc.Sno;
 ```
 
-### 自连接
+#### 自连接
 
 * 自连接：一个表与其自己进行连接
 * 需要给表起别名以示区别
@@ -399,7 +919,7 @@ SELECT f.Cno, s.Cpno
       ON f.Cpno = s.Cno;
 ```
 
-### 外连接
+#### 外连接
 
 外连接与普通连接的区别：
 - 普通连接操作只输出满足连接条件的元组
@@ -416,7 +936,7 @@ SELECT Student.Sno，Sname，Ssex，Sage，Sdept，Cno，Grade
 * 左外连接：列出左边关系（如本例Student）中所有的元组
 * 右外连接：列出右边关系中所有的元组 
 
-### 复合条件连接
+#### 复合条件连接
 
 复合条件连接：**WHERE** 子句中含多个连接条件
 
@@ -438,7 +958,7 @@ SELECT Student.Sno，Sname，Cname，Grade
                    and SC.Cno = Course.Cno;
 ```
 
-## 嵌套查询
+### 嵌套查询
 
 嵌套查询概述：
 - 一个**SELECT**-**FROM**-**WHERE**语句称为一个查询块
@@ -465,7 +985,7 @@ SELECT Sname	 /*外层查询/父查询*/
   + 然后再取外层表的下一个元组
   + 重复这一过程，直至外层表全部检查完为止
 
-### 带有 **IN** 谓词的子查询 
+#### 带有 **IN** 谓词的子查询 
 
 [例39]  查询与“刘晨”在同一个系学习的学生。
 
@@ -502,7 +1022,7 @@ SELECT  S1.Sno，S1.Sname，S1.Sdept
                       S2.Sname = '刘晨';
 ``` 
 
-### 带有比较运算符的子查询
+#### 带有比较运算符的子查询
 
 * 当能确切知道内层查询返回单值时，可用比较运算符（>，<，=，>=，<=，!=或< >）。
 * 与 **ANY** 或**ALL** 谓词配合使用
@@ -538,7 +1058,7 @@ WHERE Grade >= ( SELECT AVG(Grade)
 ```
 此查询为相关子查询
 
-### 带有 **ANY** 或 **ALL** 谓词的子查询
+#### 带有 **ANY** 或 **ALL** 谓词的子查询
 
 - **ANY** ：任意一个值
 - **ALL**：所有值
@@ -596,7 +1116,7 @@ ANY（或SOME），ALL谓词与聚集函数、IN谓词的等价转换关系 ：
 | ANY | IN |   --   | <MAX | <=MAX | >MIN | >=MIN|
 | ALL | -- | NOT IN | <MIN | <=MIN | >MAX | >=MAX|
 
-### 带有EXISTS谓词的子查询
+#### 带有EXISTS谓词的子查询
 
 1. **EXISTS** 谓词
 * 存在量词

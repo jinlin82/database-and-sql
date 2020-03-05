@@ -11,7 +11,7 @@ output:
     theme: null
     md_extensions: +east_asian_line_breaks
     keep_md: true
-    toc: false
+    toc: true
     pandoc_args: ["--filter", "pandoc-crossref", "-M", "eqnPrefix="]
   bookdown::word_document2:
     fig_caption: true
@@ -42,20 +42,25 @@ link-citations: true
 ## 数据库系统概述
 ### 四个基本概念
 #### 数据（Data）
+
 1. 数据（Data）是数据库中存储的基本对象
 2. 数据的定义：描述事物的符号记录
 3. 数据的种类：文本、图形、图像、音频、视频等
 4. 数据的特点：数据与其语义是不可分的
+   
 #### 数据库（Database）
+
 1. 数据库的定义：
 数据库（Database，简称DB）是长期存储在计算机内、有组织的、可共享的大量数据的集合。
 2. 数据库的基本特征
-     * 数据按一定的数据模型组织、描述和储存
+    * 数据按一定的数据模型组织、描述和储存
     * 可为各种用户共享
     * 冗余度较小
     * 数据独立性较高
     * 易扩展
+  
 #### 数据库管理系统（DBMS）
+
 1. 概念
     * 位于用户与操作系统之间的一层数据管理软件
     * 是基础软件，是一个大型复杂的软件系统
@@ -89,6 +94,7 @@ link-citations: true
     * 异构数据库之间的互访和互操作
 
 #### 数据库系统（DBS）
+
 1. 概念
 在计算机系统中引入数据库后的系统构成
 2. 数据库系统的构成
@@ -96,7 +102,9 @@ link-citations: true
     * 数据库管理系统（及其开发工具）
     * 应用系统
     * 数据库管理员
+  
 ### 数据管理技术的产生和发展
+
 1. 数据管理的概念
     * 对数据进行分类、组织、编码、存储、检索和维护
     * 数据处理的中心问题
@@ -111,7 +119,9 @@ link-citations: true
       * 硬件背景 —— 大容量磁盘、磁盘阵列
       * 软件背景 —— 有数据库管理系统
       * 处理方式 —— 联机实时处理，分布处理，批处理
+  
 ### 数据库系统的特点
+
 1. 数据结构化
   * **整体数据的结构化**是数据库的主要特征之一
   * 整体结构化
@@ -146,15 +156,19 @@ link-citations: true
 5. 客观对象的抽象过程——**两步抽象**
     * 现实世界中的客观对象抽象为概念模型
     * 把概念模型转换为某一DBMS支持的数据模型
+  
 ### 数据模型的组成要素
 #### 数据结构
+
 1. 数据结构的概念
 描述数据库的组成对象，以及对象之间的联系
 2. 描述的内容
   * 与数据烈性、内容、性质有关的对象
   * 与数据之间联系有关的对象
 3. 数据结构是对系统静态特性的描述
+
 #### 数据操作
+
 1. 数据操作
 对数据库中各种对象(型)的实例(值)允许执行的**操作**及有关的**操作规则**
 2. 数据操作的类型
@@ -162,7 +176,9 @@ link-citations: true
   * 更新（包括插入、删除、修改）
 3. 数据模型对操作的定义
 4. 数据操作是对系统动态特性的描述
+
 #### 完整性约束条件
+
 1. 数据的完整性约束条件
   * 一组完整性规则的集合。
   * 完整性规则：给定的数据模型中数据及其联系所具有的制约和储存规则
@@ -170,13 +186,17 @@ link-citations: true
 2. 数据模型对完整性约束条件的定义
   * 反映和规定本**数据模型**必须遵守的**基本的通用的**完整性约束条件。例如在关系模型中，任何关系必须满足实体完整性和参照完整性两个条件。
   * 提供定义完整性约束条件的机制，以反映**具体应用**所涉及的数据必须遵守的特定的语义约束条件。
+
 ### 概念模型
+
 1. 概念模型的用途
   * 概念模型用于信息世界的建模
   * 是现实世界到机器世界的一个中间层次
   * 是数据库设计的有力工具
   * 数据库设计人员和用户之间进行交流的语言
+
 #### 信息世界中的基本概念
+
 1. 实体（Entity）
 客观存在并可相互区别的事物称为实体。
 可以是具体的人、事、物或抽象的概念。
@@ -195,7 +215,9 @@ link-citations: true
   * 现实世界中事物内部以及事物之间的联系在信息世界中反映为实体内部的联系和实体之间的联系。
   * **实体内部**的联系通常是指组成实体的各属性之间的联系
   * **实体之间**的联系通常是指不同实体集之间的联系
+  
 #### 两个实体型之间的联系
+
 1. 一对一联系（1：1）
   * 实例：一个班级只有一个正班长
   * 定义：如果对于实体集A中的每一个实体，实体集B中至多一个（也可以没有）实体与之联系，反之亦然，**则称实体集A与实体集B具有一对一联系**，记为1：1
@@ -208,6 +230,7 @@ link-citations: true
 体（m≥0）与之联系，则称实体集A与实体B具有多对多联系，记为m:n
 
 #### 两个以上实体型之间的联系
+
 1. 两个以上实体型之间一对多联系
   * 定义:实体型E1，E2，...，Ek，(1)对于实体型Ej（j=1，2，...，i-1，i+1，...，n）中的给定实体，最多只和Ei中的一个实体相联系；(2)对于Ei中的一个实体, 和Ej中的n(n>=0)个实体相联系；则我们说Ei与E1，E2，...，Ei-1，Ei+1，...，Ek之间的联系是一对多的
   * 实例：课程、教师与参考书三个实体型。一门课程可以有若干个教师讲授，使用若干本参考书;每一个教师只讲授一门课程;每一本参考书只供一门课程使用
@@ -219,11 +242,14 @@ link-citations: true
   * 实例：供应商、项目、零件三个实体型。一个供应商可以供给多个项目多种零件；每个项目可以使用多个供应商供应的零件；每种零件可由不同供应商供给。
 
 #### 单个实体型内的联系
+
 1. 同一实体集内的各实体之间的关系
   * 一对多联系；例如职工实体型内部具有领导与被领导的联系。
   * 一对一联系；职工实体型内部具有配偶的联系。
   * 多对多联系；零件实体型内部具有构成的联系。
+  
 #### 概念模型的一种表示方法
+
 1. 实体——联系方法（E-R方法）
   * 用E-R图来描述现实世界的概念模型
   * E-R方法也称为E-R模型
@@ -243,34 +269,37 @@ link-citations: true
 3. 面向对象模型(Object Oriented Model）
 4. 对象关系模型(Object Relational Model)
 
+### 层次模型
+
+
+层次模型是数据库系统中最早出现的数据模型,用**树形结构**来表示各类实体以及实体间的联系。
+
 #### 层次数据模型的数据结构
 
-层次模型是数据库系统中最早出现的数据模型,用**树形结构**来表示各类实体以及实体间
-的联系。
-
 满足下面两个条件的基本层次联系的集合为层次模型：
-
  1. 有且只有一个结点没有双亲结点，这个结点称为根结点
  2. 根以外的其它结点有且只有一个双亲结点
 
 图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
 <div class="figure" style="text-align: center">
-<img src="./results/1-16.png" alt="一个层次模型的示例" height="0.5\textwidth" />
+<img src="./results/16.png" alt="一个层次模型的示例" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig16)一个层次模型的示例</p>
 </div>
-层次模型的特点：
- - 结点的双亲是唯一的
- - 只能直接处理一对多的实体联系
- - 每个记录类型可以定义一个排序字段，也称为码字段
- - 任何记录值只有按其路径查看时，才能显出它的全部意义
- - 没有一个子女记录值能够脱离双亲记录值而独立存在
+层次模型的特点
+
+ * 结点的双亲是唯一的
+ * 只能直接处理一对多的实体联系
+ * 每个记录类型可以定义一个排序字段，也称为码字段
+ * 任何记录值只有按其路径查看时，才能显出它的全部意义
+ * 没有一个子女记录值能够脱离双亲记录值而独立存在
+
 
 <div class="figure" style="text-align: center">
-<img src="./results/1-17.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<img src="./results/17.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig17)教员学生层次数据库模型</p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="./results/1-18.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<img src="./results/18.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig18)教员学生层次数据库模型</p>
 </div>
 
@@ -281,6 +310,7 @@ link-citations: true
 #### 层次模型的数据操纵与完整性约束 
 层次模型的数据操纵：查询、插入、删除、更新
 层次模型的完整性约束条件：
+
  - 无相应的双亲结点值就不能插入子女节点值
  - 如果删除双亲结点值，则相应的子女节点值也被同时删除
  - 更新操作时，应更新所有相应记录，以保证数据的一致性
@@ -291,25 +321,25 @@ link-citations: true
 
 按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。见图\@ref(fig:fig20)
 <div class="figure" style="text-align: center">
-<img src="./results/1-19.png" alt="层次数据库及其实例" height="0.5\textwidth" />
+<img src="./results/19.png" alt="层次数据库及其实例" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig19)层次数据库及其实例</p>
 </div>
 
 <div class="figure" style="text-align: center">
-<img src="./results/1-20.png" alt="邻接法" height="0.5\textwidth" />
+<img src="./results/20.png" alt="邻接法" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig20)邻接法</p>
 </div>
-2. 链接法
+1. 链接法
 
 用指引来反映数据之间的层次联系，有子女－兄弟链接法和层次序列链接法。
 子女-兄弟链接法的每个记录设两类指针，分别指向最左边的子女（每个记录型对应一个）和最近的兄弟），如\@ref(fig:fig21)所示。
 <div class="figure" style="text-align: center">
-<img src="./results/1-21.png" alt="子女-兄弟链接法" height="0.5\textwidth" />
+<img src="./results/21.png" alt="子女-兄弟链接法" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig21)子女-兄弟链接法</p>
 </div>
 层次序列链接法按树的前序穿越顺序链接各记录值，如\@ref(fig:fig22)所示。
 <div class="figure" style="text-align: center">
-<img src="./results/1-22.png" alt="层次序列链接法" height="0.5\textwidth" />
+<img src="./results/22.png" alt="层次序列链接法" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig22)层次序列链接法</p>
 </div>
 #### 层次模型的优缺点
@@ -352,7 +382,7 @@ link-citations: true
 
 图\@ref(fig:fig23)显示的是网状模型中子女结点与双亲结点的联系不唯一的情况。要为每个联系命名，并指出与该联系有关的双亲记录和子女记录。
 <div class="figure" style="text-align: center">
-<img src="./results/1-23.png" alt="网状模型的例子" height="0.5\textwidth" />
+<img src="./results/23.png" alt="网状模型的例子" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig23)网状模型的例子</p>
 </div>
 多对多联系在网状模型中的表示：
@@ -363,7 +393,7 @@ link-citations: true
 例如一个学生可以选修若干门课程，某一课程可以被多个学生选修，
 学生与课程之间是多对多联系，引进一个学生课程的联结记录，由三个数据项组成**学号、课程号、成绩**,表示某个学生选修某一门课程及其成绩,如图\@ref(fig:fig24)显示。 
 <div class="figure" style="text-align: center">
-<img src="./results/1-24.png" alt="学生/选课/课程的网状数据模型" height="0.5\textwidth" />
+<img src="./results/24.png" alt="学生/选课/课程的网状数据模型" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig24)学生/选课/课程的网状数据模型</p>
 </div>
 #### 网状数据模型的操纵与完整性约束
@@ -380,7 +410,7 @@ link-citations: true
 
 图\@ref(fig:fig25)显示了网状数据库实例
 <div class="figure" style="text-align: center">
-<img src="./results/1-25.png" alt="学生/选课/课程的网状数据库实例 " height="0.5\textwidth" />
+<img src="./results/25.png" alt="学生/选课/课程的网状数据库实例 " height="0.5\textwidth" />
 <p class="caption">(\#fig:fig25)学生/选课/课程的网状数据库实例 </p>
 </div>
 #### 网状数据模型的优缺点
@@ -408,7 +438,7 @@ link-citations: true
 <caption>(\#tab:tab1)学生等级表</caption>
  <thead>
   <tr>
-   <th style="text-align:center;"> 锘縮tudentID </th>
+   <th style="text-align:center;"> studentID </th>
    <th style="text-align:center;"> NAME </th>
    <th style="text-align:center;"> AGE </th>
    <th style="text-align:center;"> SEX </th>
@@ -418,28 +448,36 @@ link-citations: true
  </thead>
 <tbody>
   <tr>
+   <td style="text-align:center;"> 2005004 </td>
+   <td style="text-align:center;"> 王小明 </td>
+   <td style="text-align:center;"> 19 </td>
+   <td style="text-align:center;"> 女 </td>
+   <td style="text-align:center;"> 社会学 </td>
+   <td style="text-align:center;"> 2005 </td>
+  </tr>
+  <tr>
    <td style="text-align:center;"> 2005006 </td>
-   <td style="text-align:center;"> 榛勫ぇ楣<8f>,20 </td>
-   <td style="text-align:center;"> 鐢<b7>,鍟嗗搧瀛<a6>,2005 </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> 黄大鹏 </td>
+   <td style="text-align:center;"> 20 </td>
+   <td style="text-align:center;"> 男 </td>
+   <td style="text-align:center;"> 商品学 </td>
+   <td style="text-align:center;"> 2005 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> 2005008 </td>
-   <td style="text-align:center;"> 寮犳枃鏂<8c>,18 </td>
-   <td style="text-align:center;"> 濂<b3>,娉曞緥 </td>
+   <td style="text-align:center;"> 张文斌 </td>
+   <td style="text-align:center;"> 18 </td>
+   <td style="text-align:center;"> 女 </td>
+   <td style="text-align:center;"> 法律 </td>
    <td style="text-align:center;"> 2005 </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:center;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶,鈥愼㸶 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> … </td>
+   <td style="text-align:center;"> … </td>
+   <td style="text-align:center;"> … </td>
+   <td style="text-align:center;"> … </td>
+   <td style="text-align:center;"> … </td>
+   <td style="text-align:center;"> … </td>
   </tr>
 </tbody>
 </table>
@@ -455,10 +493,13 @@ link-citations: true
 如关系名（属性1，属性2，…，属性n）,学生（学号，姓名，年龄，性别，系，年级）
 
  - 例1
+
 学生、系、系与学生之间的一对多联系：学生（学号，姓名，年龄，性别，系号，年级）系 (系号，系名，办公地点)
  - 例2
+
 系、系主任、系与系主任间的一对一联系
  - 例3
+
 学生、课程、学生与课程之间的多对多联系：学生（学号，姓名，年龄，性别，系号，年级）课程（课程号，课程名，学分）选修（学号，课程号，成绩）
 
 关系必须是规范化的，满足一定的规范条件，最基本的规范条件是：关系的每一个分量必须
@@ -467,7 +508,7 @@ link-citations: true
 <caption>(\#tab:tab2)一个工资表（表中有表）实例</caption>
  <thead>
   <tr>
-   <th style="text-align:center;"> 锘縝annum </th>
+   <th style="text-align:center;"> bannum </th>
    <th style="text-align:center;"> classname </th>
    <th style="text-align:center;"> salary </th>
    <th style="text-align:center;"> X </th>
@@ -485,8 +526,8 @@ link-citations: true
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 004 </td>
-   <td style="text-align:center;"> 鐢茬粍 </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 甲组 </td>
    <td style="text-align:center;"> 3200 </td>
    <td style="text-align:center;"> 20 </td>
    <td style="text-align:center;"> 100 </td>
@@ -494,15 +535,15 @@ link-citations: true
   </tr>
   <tr>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 涔欑粍 </td>
+   <td style="text-align:center;"> 乙组 </td>
    <td style="text-align:center;"> 1500 </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 50 </td>
    <td style="text-align:center;"> 1450 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 008 </td>
-   <td style="text-align:center;"> 鐢茬粍 </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 甲组 </td>
    <td style="text-align:center;"> 2200 </td>
    <td style="text-align:center;"> 150 </td>
    <td style="text-align:center;"> 100 </td>
@@ -523,41 +564,50 @@ link-citations: true
 <caption>(\#tab:tab3)术语对比表</caption>
  <thead>
   <tr>
-   <th style="text-align:center;"> 锘縍elationalterms </th>
+   <th style="text-align:center;"> Relationalterms </th>
    <th style="text-align:center;"> generaltableterms </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:center;"> 鍏崇郴鏈 </td>
-   <td style="text-align:center;"> 涓€鑸〃鏍肩殑鏈 </td>
+   <td style="text-align:center;"> 关系术语 </td>
+   <td style="text-align:center;"> 一般表格的术语 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 鍏崇郴鍚㠼㹤,琛ㄥ悕 </td>
-   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 关系名 </td>
+   <td style="text-align:center;"> 表名 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 鍏崇郴妯″紡 </td>
-   <td style="text-align:center;"> 琛ㄥご(琛ㄦ牸鐨勬弿杩戼㸰) </td>
+   <td style="text-align:center;"> 关系模式 </td>
+   <td style="text-align:center;"> 表头(表格的描述) </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 鍏崇郴 </td>
-   <td style="text-align:center;"> 涓€寮犱簩缁磋〃 </td>
+   <td style="text-align:center;"> 关系 </td>
+   <td style="text-align:center;"> 一张二维表 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 鍏冪粍 </td>
-   <td style="text-align:center;"> 璁板綍鎴栬 </td>
+   <td style="text-align:center;"> 元组 </td>
+   <td style="text-align:center;"> 记录或行 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 灞炴€愼㸷,鍒㤼㸷
-灞炴€у悕 </td>
-   <td style="text-align:center;"> 鍒楀悕 </td>
+   <td style="text-align:center;"> 属性 </td>
+   <td style="text-align:center;"> 列 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> 灞炴€у€戼㹣,鍒楀€戼㹣
-鍒嗛噺 </td>
-   <td style="text-align:center;"> 涓€鏉¤褰曚腑鐨勪竴涓垪鍊戼㹣
-闈炶鑼冨叧绯戼㹢,琛ㄤ腑鏈夎〃(澶ц〃涓祵鏈夊皬琛愼㸸) </td>
+   <td style="text-align:center;"> 属性名 </td>
+   <td style="text-align:center;"> 列名 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 属性值 </td>
+   <td style="text-align:center;"> 列值 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 分量 </td>
+   <td style="text-align:center;"> 一条记录中的一个列值 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 非规范关系 </td>
+   <td style="text-align:center;"> 表中有表(大表中嵌有小表) </td>
   </tr>
 </tbody>
 </table>
@@ -576,28 +626,31 @@ link-citations: true
 #### 关系数据模型的优缺点
 
 优点
+
  - 建立在严格的数学概念的基础上
  - 概念单一
-   - 实体和各类联系都用关系来表示
-   - 对数据的检索结果也是关系
+   * 实体和各类联系都用关系来表示
+   * 对数据的检索结果也是关系
  - 关系模型的存取路径对用户透明
-   - 具有更高的数据独立性，更好的安全保密性
-   - 简化了程序员的工作和数据库开发建立的工作
+   * 具有更高的数据独立性，更好的安全保密性
+   * 简化了程序员的工作和数据库开发建立的工作
+
 缺点
+
  - 存取路径对用户透明导致查询效率往往不如非关系数据模型
  - 为提高性能，必须对用户的查询请求进行优化增加了DBMS的难度 
 
 ## 数据库系统结构
 
-- 从数据库管理系统角度看
+1. 从数据库管理系统角度看
 数据库系统通常采用级模型结构，是数据库系统内部的系统结构。
-- 从数据库最终用户角度看（数据库系统外部的体系结构）
+2. 从数据库最终用户角度看（数据库系统外部的体系结构）
 数据库系统的结构分为:
- - 单用户结构
- - 主从式结构
- - 分布式结构
- - 客户／服务器
- - 浏览器／应用服务器／数据库服务器多层结构等
+ * 单用户结构
+ * 主从式结构
+ * 分布式结构
+ * 客户／服务器
+ * 浏览器／应用服务器／数据库服务器多层结构等
 
 ### 数据库系统模式的概念
 
@@ -612,25 +665,25 @@ link-citations: true
 一个记录值：
 
   （900201，李明，男，计算机，22，江苏）
-  - 模式(Schema)
-   - 数据库逻辑结构和特征的描述
-   - 是型的描述
-   - 反映的是数据的结构及其联系
-   - 模式是相对稳定的
-  - 实例(Instance)
-   - 模式的一个具体值
-   - 反映数据库某一时刻的状态
-   - 同一个模式可以有很多实例
-   - 实例随数据库中的数据的更新而变动
+
+- 模式(Schema)
+   * 数据库逻辑结构和特征的描述
+   * 是型的描述
+   * 反映的是数据的结构及其联系
+   * 模式是相对稳定的
+- 实例(Instance)
+   * 模式的一个具体值
+   * 反映数据库某一时刻的状态
+   * 同一个模式可以有很多实例
+   * 实例随数据库中的数据的更新而变动
 
 例如：在学生选课数据库模式中，包含学生记录、课程记录和学生选课记录
 
- - 2003年的一个学生数据库实例，包含：
+- 2003年的一个学生数据库实例，包含：
   - 2003年学校中所有学生的记录
   - 学校开设的所有课程的记录
   - 所有学生选课的记录 
- - 2002年度学生数据库模式对应的实例与
-  - 2003年度学生数据库模式对应的实例是不同的
+- 2002年度学生数据库模式对应的实例与2003年度学生数据库模式对应的实例是不同的
 
 
 ### 数据库系统的三级模式结构 
@@ -642,57 +695,56 @@ link-citations: true
 图\@ref(fig:fig26)显示了数据库系统的三位模式结构，图给出了相应的一个实例。
 
 <div class="figure" style="text-align: center">
-<img src="./results/1-26.png" alt="数据库系统的三位模式结构" height="0.5\textwidth" />
+<img src="./results/26.png" alt="数据库系统的三位模式结构" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig26)数据库系统的三位模式结构</p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="./results/1-27.png" alt="数据库系统的三位模式结构的一个实例" height="0.5\textwidth" />
+<img src="./results/27.png" alt="数据库系统的三位模式结构的一个实例" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig27)数据库系统的三位模式结构的一个实例</p>
 </div>
 #### 模式(Schema)
 
--模式（也称逻辑模式）
-
- - 数据库中全体数据的逻辑结构和特征的描述
- - 所有用户的公一个数据库只有一个模式
+- 模式（也称逻辑模式）
+  * 数据库中全体数据的逻辑结构和特征的描述
+  * 所有用户的公一个数据库只有一个模式
 
 - 一个数据库只有一个模式
 - 模式的地位：是数据库系统模式结构的中间层
- - 与数据的物理存储细节和硬件环境无关
- - 与具体的应用程序、开发工具及高级程序设计语言无关
+  * 与数据的物理存储细节和硬件环境无关
+  * 与具体的应用程序、开发工具及高级程序设计语言无关
 - 模式的定义
- - 数据的逻辑结构（数据项的名字、类型、取值范围等）
- - 数据之间的联系
- - 数据有关的安全性、完整性要求
+  * 数据的逻辑结构（数据项的名字、类型、取值范围等）
+  * 数据之间的联系
+  * 数据有关的安全性、完整性要求
 
 #### 外模式(External Schema)
 
 - 外模式（也称子模式或用户模式）
- - 数据库用户（包括应用程序员和最终用户）使用的局部数据的逻辑结构和特征的描述
- - 数据库用户的数据视图，是与某一应用有关的数据的逻辑表示
+  - 数据库用户（包括应用程序员和最终用户）使用的局部数据的逻辑结构和特征的描述
+  - 数据库用户的数据视图，是与某一应用有关的数据的逻辑表示
 - 外模式的地位：介于模式与应用之间
- - 模式与外模式的关系：一对多
-  - 外模式通常是模式的子集
-  - 一个数据库可以有多个外模式。反映了不同的用户的应用需求、看待数据的方式、对数据保密的要求
-  - 对模式中同一数据，在外模式中的结构、类型、长度、保密级别等都可以不同
- - 外模式与应用的关系：一对多
-  - 同一外模式也可以为某一用户的多个应用系统所使用
-  - 但一个应用程序只能使用一个外模式
+  - 模式与外模式的关系：一对多
+    - 外模式通常是模式的子集
+    - 一个数据库可以有多个外模式。反映了不同的用户的应用需求、看待数据的方式、对数据保密的要求
+    - 对模式中同一数据，在外模式中的结构、类型、长度、保密级别等都可以不同
+  - 外模式与应用的关系：一对多
+    - 同一外模式也可以为某一用户的多个应用系统所使用
+    - 但一个应用程序只能使用一个外模式
 - 外模式的用途
- - 保证数据库安全性的一个有力措施
- - 每个用户只能看见和访问所对应的外模式中的数据
+  - 保证数据库安全性的一个有力措施
+  - 每个用户只能看见和访问所对应的外模式中的数据
 
 #### 内模式
 
 - 内模式（也称存储模式）
   - 是数据物理结构和存储方式的描述
   - 是数据在数据库内部的表示方式
-   - 记录的存储方式（顺序存储，按照B树结构存储，
+    - 记录的存储方式（顺序存储，按照B树结构存储，
    按hash方法存储）
-   - 索引的组织方式
-   - 数据是否压缩存储
-   - 数据是否加密
-   - 数据存储记录结构的规定
+    - 索引的组织方式
+    - 数据是否压缩存储
+    - 数据是否加密
+    - 数据存储记录结构的规定
 - 一个数据库只有一个内模式
 
 例如学生记录，如果按堆存储，则插入一条新记录总是放在学生记录存储的最后，如图
@@ -701,11 +753,170 @@ link-citations: true
 置如图\@ref(fig:fig28) c所示 
 
 <div class="figure" style="text-align: center">
-<img src="./results/1-28.png" alt="记录不同的存储方式示意图" height="0.5\textwidth" />
+<img src="./results/28.png" alt="记录不同的存储方式示意图" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig28)记录不同的存储方式示意图</p>
 </div>
 
 ### 数据库的二级映像功能与数据独立性 
+三级模式是对数据的三个抽象级别。二级映象在DBMS内部实现这三个抽象层次的联系和转
+换。如图\@ref(fig:fig29)所示。
+
+ - 外模式/模式映像
+ - 模式/内模式映像
+
+<div class="figure" style="text-align: center">
+<img src="./results/29.png" alt="二级映象" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig29)二级映象</p>
+</div>
+#### 外模式/模式映象
+
+- 模式：描述的是数据的全局逻辑结构
+- 外模式：描述的是数据的局部逻辑结构
+- 同一模式可以有任意多个外模式
+- 每一个外模式。数据库系统都有一个外模式/模式映象，定义外模式与模式之间的对应关系
+- 映像定义通常包含在各自外模式的描述中
+
+保证数据的逻辑独立性
+
+ - 当模式改变时，数据库管理员修改有关的外模式/模式映像，使外模式保持不变
+ - 应用程序是依据数据的外模式编写的，从而应用程序不必修改，保证了数据与程序的逻辑独立性，简称数据的逻辑独立性。
+
+#### 模式/内模式映像
+
+- 模式/内模式映像定义了数据全局逻辑结构与存储结构之间的对应关系。
+  - 例如，说明逻辑记录和字段在内部是如何表示的
+- 数据库中模式/内模式映像是唯一的
+- 该映像定义通常包含在模式描述中 
+
+保证数据的物理独立性
+
+ - 当数据库的存储结构改变了（例如选用了另一种存储结构），数据库管理员修改模式/内模式映像，使模式保持不变。
+ - 应用程序不受影响。保证了数据与程序的物理独立性，简称数据的物理独立性。
+ 
+数据库模式
+- 即全局逻辑结构是数据库的中心与关键
+- 独立于数据库的其他层次
+- 设计数据库模式结构时应首先确定数据库的逻辑模式
+
+1. 数据库的内模式
+   - 依赖于他的全局逻辑结构
+   - 独立于数据库的用户试图，即外模式
+   - 独立于具体的存储设备
+   - 将全局逻辑结构中所定义的数据结构及其联系按照一定的物理储存策略进行组织，以达到较好的时间与空间效率。
+ 2. 数据库的外模式
+   - 面向具体的应用程序
+   - 定义在逻辑模式上
+   - 独立于存储模式和存储设备
+   - 当应用需求发生较大变化，相应外模式不能满足其视图要求时，该外模式就得做相应改动
+   - 设计外模式时应充分考虑到应用的扩展性
+3. 特定的应用程序
+   - 在外模式描述的数据结构上编制的
+   - 依赖于特点的外模式
+   - 与数据库的模式和存储结构独立
+   - 不同的应用程序有时可以共用一个外模式
+4. 数据库的二级映像
+   - 保证了数据库外模式的稳定性
+   - 从底层保证了应用程序的稳定性，除非应用需求本身发生变化，否则应用程序一般不需要修改
+5. 数据与程序之间的独立性，使得数据的定义和描述可以从应用程序中分离出去
+6. 数据的存取由DBMS管理
+   - 用户不必考虑存取路径等细节
+   - 简化了应用程序的编制
+   - 大大减少了应用程序的维护和修改
+
+## 数据库系统的组成
+
+- 数据库
+- 数据库管理系统（及其开发工具）
+- 应用系统
+- 数据库管理员
+- 硬件平台及数据库
+- 软件
+- 人员
+
+硬件平台及数据库
+
+ - 数据库系统对硬件资源的要求
+  * 足够大的内存
+   (1) 操作系统
+  （2) DBMS的核心模块
+   (3) 数据缓冲区
+   (4) 应用程序
+  * 足够大的外存
+   (1) 磁盘或磁盘阵列
+      - 数据库
+   (2) 光盘、磁带
+      - 数据备份
+  * 较高的通道能力，提高数据传送率
+
+软件
+
+ - DBMS
+ - 支持DBMS运行的操作系统
+ - 与数据库接口的高级语言及其编译系统
+ - 以DBMS为核心的应用开发工具
+ - 为特定应用环境开发的数据库应用系统
+
+人员
+
+ - 数据库管理员
+ - 系统分析员和数据库涉及人员
+ - 应用程序员
+ - 用户
+
+不同的人员涉及不同的数据抽象级别，具有不同的数据视图，如下图所示。
+<div class="figure" style="text-align: center">
+<img src="./results/30.png" alt="各种人员的数据视图" height="0.5\textwidth" />
+<p class="caption">(\#fig:fig30)各种人员的数据视图</p>
+</div>
+
+数据库管理员(DMA)
+
+具体职责：
+
+1. 决定数据中的信息内容和结构
+2. 决定数据库的存储结构和存取策略
+3. 定义数据的安全性要求和完整性约束条件
+4. 监控数据库的使用和运行
+  - 周期性转储数据库
+    - 数据文件
+    - 日志文件
+  - 系统故障恢复
+  - 介质故障恢复
+  - 监视审计文件
+5. 数据库的改进和重组
+  - 性能监控和调优
+  - 定期对数据库进行重组织，以提高系统的性能 
+  - 需求增加和改变时，数据库须需要重构造
+
+系统分析员
+  - 负责应用系统的需求分析和规范说明
+  - 与用户及DBA协商，确定系统的硬软件配置
+  - 参与数据库系统的概要设计
+
+数据库设计人员
+  - 参加用户需求调查和系统分析
+  - 确定数据库中的数据
+  - 设计数据库各级模式
+
+应用程序员
+ - 设计和编写应用系统的程序模块
+ - 进行调试和安装
+
+用户
+
+## 小结
+
+1. 数据库系统概述
+    - 数据库的基本概念
+    - 数据管理的发展过程
+2. 数据模型
+    - 数据模型的三要素
+    - 概念模型，E-R模型
+    - 三种主要数据库模型
+3. 数据库系统的结构
+    - 数据库系统三级模式结构
+    - 数据库系统两层映像系统
+4. 数据库系统的组成
 
 # 关系数据库标准语言SQL
 ## SQL概述：

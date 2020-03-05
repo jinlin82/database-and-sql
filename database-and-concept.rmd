@@ -20,7 +20,7 @@ output:
     pandoc_args: ["--filter", "pandoc-crossref"]
   bookdown::pdf_document2:
     keep_tex: yes
-    toc: false
+    toc: true
     latex_engine: xelatex
     md_extensions: +east_asian_line_breaks
     pandoc_args: ["--listing", "--filter", "pandoc-crossref"]
@@ -327,12 +327,12 @@ knitr::include_graphics("./results/18.png")
 
 1. 邻接法
 
-按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。见图\@ref(fig:fig20)
+按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。
 ```{r fig19,eval=T,redsults = 'hide',echo=F,fig.cap="层次数据库及其实例",dev="png",results='markup', cache=F}
 knitr::include_graphics("./results/19.png")
 ```
 
-```{r fig20,eval=T,redsults = 'hide',echo=F,fig.cap="邻接法",dev="png",results='markup', cache=F}
+```{r fig20,eval=F,redsults = 'hide',echo=F,fig.cap="邻接法",dev="png",results='markup', cache=F,fig.width=5, fig.height=0.5}
 knitr::include_graphics("./results/20.png")
 ```
 1. 链接法

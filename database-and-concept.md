@@ -20,7 +20,7 @@ output:
     pandoc_args: ["--filter", "pandoc-crossref"]
   bookdown::pdf_document2:
     keep_tex: yes
-    toc: false
+    toc: true
     latex_engine: xelatex
     md_extensions: +east_asian_line_breaks
     pandoc_args: ["--listing", "--filter", "pandoc-crossref"]
@@ -319,16 +319,13 @@ link-citations: true
 
 1. 邻接法
 
-按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。见图\@ref(fig:fig20)
+按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。
 <div class="figure" style="text-align: center">
 <img src="./results/19.png" alt="层次数据库及其实例" height="0.5\textwidth" />
 <p class="caption">(\#fig:fig19)层次数据库及其实例</p>
 </div>
 
-<div class="figure" style="text-align: center">
-<img src="./results/20.png" alt="邻接法" height="0.5\textwidth" />
-<p class="caption">(\#fig:fig20)邻接法</p>
-</div>
+
 1. 链接法
 
 用指引来反映数据之间的层次联系，有子女－兄弟链接法和层次序列链接法。

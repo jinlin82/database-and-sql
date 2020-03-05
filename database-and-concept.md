@@ -280,9 +280,11 @@ link-citations: true
  1. 有且只有一个结点没有双亲结点，这个结点称为根结点
  2. 根以外的其它结点有且只有一个双亲结点
 
-图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
+图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模
+型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
+
 <div class="figure" style="text-align: center">
-<img src="./results/16.png" alt="一个层次模型的示例" height="0.5\textwidth" />
+<img src="./results/16.png" alt="一个层次模型的示例" width="60%" />
 <p class="caption">(\#fig:fig16)一个层次模型的示例</p>
 </div>
 层次模型的特点
@@ -295,11 +297,11 @@ link-citations: true
 
 
 <div class="figure" style="text-align: center">
-<img src="./results/17.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<img src="./results/17.png" alt="教员学生层次数据库模型" width="60%" />
 <p class="caption">(\#fig:fig17)教员学生层次数据库模型</p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="./results/18.png" alt="教员学生层次数据库模型" height="0.5\textwidth" />
+<img src="./results/18.png" alt="教员学生层次数据库模型" width="60%" />
 <p class="caption">(\#fig:fig18)教员学生层次数据库模型</p>
 </div>
 
@@ -321,7 +323,7 @@ link-citations: true
 
 按照层次树前序遍历的顺序把所有记录值依次邻接存放，即通过物理空间的位置相邻来实现层次顺序。
 <div class="figure" style="text-align: center">
-<img src="./results/19.png" alt="层次数据库及其实例" height="0.5\textwidth" />
+<img src="./results/19.png" alt="层次数据库及其实例" width="60%" />
 <p class="caption">(\#fig:fig19)层次数据库及其实例</p>
 </div>
 
@@ -331,12 +333,12 @@ link-citations: true
 用指引来反映数据之间的层次联系，有子女－兄弟链接法和层次序列链接法。
 子女-兄弟链接法的每个记录设两类指针，分别指向最左边的子女（每个记录型对应一个）和最近的兄弟），如\@ref(fig:fig21)所示。
 <div class="figure" style="text-align: center">
-<img src="./results/21.png" alt="子女-兄弟链接法" height="0.5\textwidth" />
+<img src="./results/21.png" alt="子女-兄弟链接法" width="60%" />
 <p class="caption">(\#fig:fig21)子女-兄弟链接法</p>
 </div>
 层次序列链接法按树的前序穿越顺序链接各记录值，如\@ref(fig:fig22)所示。
 <div class="figure" style="text-align: center">
-<img src="./results/22.png" alt="层次序列链接法" height="0.5\textwidth" />
+<img src="./results/22.png" alt="层次序列链接法" width="60%" />
 <p class="caption">(\#fig:fig22)层次序列链接法</p>
 </div>
 #### 层次模型的优缺点
@@ -379,7 +381,7 @@ link-citations: true
 
 图\@ref(fig:fig23)显示的是网状模型中子女结点与双亲结点的联系不唯一的情况。要为每个联系命名，并指出与该联系有关的双亲记录和子女记录。
 <div class="figure" style="text-align: center">
-<img src="./results/23.png" alt="网状模型的例子" height="0.5\textwidth" />
+<img src="./results/23.png" alt="网状模型的例子" width="60%" />
 <p class="caption">(\#fig:fig23)网状模型的例子</p>
 </div>
 多对多联系在网状模型中的表示：
@@ -390,7 +392,7 @@ link-citations: true
 例如一个学生可以选修若干门课程，某一课程可以被多个学生选修，
 学生与课程之间是多对多联系，引进一个学生课程的联结记录，由三个数据项组成**学号、课程号、成绩**,表示某个学生选修某一门课程及其成绩,如图\@ref(fig:fig24)显示。 
 <div class="figure" style="text-align: center">
-<img src="./results/24.png" alt="学生/选课/课程的网状数据模型" height="0.5\textwidth" />
+<img src="./results/24.png" alt="学生/选课/课程的网状数据模型" width="60%" />
 <p class="caption">(\#fig:fig24)学生/选课/课程的网状数据模型</p>
 </div>
 #### 网状数据模型的操纵与完整性约束
@@ -407,7 +409,7 @@ link-citations: true
 
 图\@ref(fig:fig25)显示了网状数据库实例
 <div class="figure" style="text-align: center">
-<img src="./results/25.png" alt="学生/选课/课程的网状数据库实例 " height="0.5\textwidth" />
+<img src="./results/25.png" alt="学生/选课/课程的网状数据库实例 " width="60%" />
 <p class="caption">(\#fig:fig25)学生/选课/课程的网状数据库实例 </p>
 </div>
 #### 网状数据模型的优缺点
@@ -692,11 +694,11 @@ link-citations: true
 图\@ref(fig:fig26)显示了数据库系统的三位模式结构，图给出了相应的一个实例。
 
 <div class="figure" style="text-align: center">
-<img src="./results/26.png" alt="数据库系统的三位模式结构" height="0.5\textwidth" />
+<img src="./results/26.png" alt="数据库系统的三位模式结构" width="60%" />
 <p class="caption">(\#fig:fig26)数据库系统的三位模式结构</p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="./results/27.png" alt="数据库系统的三位模式结构的一个实例" height="0.5\textwidth" />
+<img src="./results/27.png" alt="数据库系统的三位模式结构的一个实例" width="60%" />
 <p class="caption">(\#fig:fig27)数据库系统的三位模式结构的一个实例</p>
 </div>
 #### 模式(Schema)
@@ -750,7 +752,7 @@ link-citations: true
 置如图\@ref(fig:fig28) c所示 
 
 <div class="figure" style="text-align: center">
-<img src="./results/28.png" alt="记录不同的存储方式示意图" height="0.5\textwidth" />
+<img src="./results/28.png" alt="记录不同的存储方式示意图" width="60%" />
 <p class="caption">(\#fig:fig28)记录不同的存储方式示意图</p>
 </div>
 
@@ -762,7 +764,7 @@ link-citations: true
  - 模式/内模式映像
 
 <div class="figure" style="text-align: center">
-<img src="./results/29.png" alt="二级映象" height="0.5\textwidth" />
+<img src="./results/29.png" alt="二级映象" width="60%" />
 <p class="caption">(\#fig:fig29)二级映象</p>
 </div>
 #### 外模式/模式映象
@@ -862,7 +864,7 @@ link-citations: true
 
 不同的人员涉及不同的数据抽象级别，具有不同的数据视图，如下图所示。
 <div class="figure" style="text-align: center">
-<img src="./results/30.png" alt="各种人员的数据视图" height="0.5\textwidth" />
+<img src="./results/30.png" alt="各种人员的数据视图" width="60%" />
 <p class="caption">(\#fig:fig30)各种人员的数据视图</p>
 </div>
 
@@ -2595,32 +2597,6 @@ WHERE  Sno= '200215121';
 4. 视图能够对机密数据提供安全保护
     - 有了视图机制，就可以在设计数据库应用系统时，对不同的用户定义不同的视图，使机密数据不出现在不应看到这些数据的用户视图上，这样就由视图的机制自动提供了对机密数据的安全保护功能。 
 5. 适当的利用视图可以更清晰的表达查询
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

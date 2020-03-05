@@ -37,7 +37,11 @@ link-citations: true
 knitr::opts_knit$set(root.dir = getwd())
 knitr::opts_chunk$set(echo = TRUE, results = 'hide')
 knitr::opts_chunk$set(warning = FALSE, message=FALSE)
-knitr::opts_chunk$set(out.height="0.5\\textwidth", fig.width=5, fig.height=3, fig.align="center")
+knitr::opts_chunk$set(fig.align="center"
+                      ## ,out.width="0.9\\textwidth" # latex
+                      ,out.width="60%" # for both latex and html
+                      ,fig.width=5, fig.height=3
+                      )
 ```
 
 ```{r prepare, echo=F, purl=F}
@@ -291,8 +295,10 @@ Sys.setlocale("LC_ALL", "Chinese")
  1. 有且只有一个结点没有双亲结点，这个结点称为根结点
  2. 根以外的其它结点有且只有一个双亲结点
 
-图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
-```{r fig16,eval=T,redsults = 'hide',echo=F,fig.cap="一个层次模型的示例",dev="png",results='markup', cache=F}
+图\@ref(fig:fig16)是一个层次模型的实例。图\@ref(fig:fig17)是教员学生层次数据库模
+型。图\@ref(fig:fig18)是教员学生层次数据库的一个值 。
+
+```{r fig16, eval=T,echo=F, fig.cap="一个层次模型的示例",dev="png",results='markup', cache=F}
 knitr::include_graphics("./results/16.png")
 ```
 层次模型的特点
@@ -2334,32 +2340,6 @@ WHERE  Sno= '200215121';
 4. 视图能够对机密数据提供安全保护
     - 有了视图机制，就可以在设计数据库应用系统时，对不同的用户定义不同的视图，使机密数据不出现在不应看到这些数据的用户视图上，这样就由视图的机制自动提供了对机密数据的安全保护功能。 
 5. 适当的利用视图可以更清晰的表达查询
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

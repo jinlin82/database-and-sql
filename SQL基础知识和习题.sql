@@ -1,4 +1,4 @@
-*************第一部分 查询***************
+-- *************第一部分 查询***************
 SELECT first_name FROM customer;
 /*查询customer表中的名字dd*/
 
@@ -13,7 +13,7 @@ SELECT first_name || ' ' || last_name AS full_name FROM customer ORDER BY full_n
 /*连接customer表中的名字和姓氏，以空格隔开，并重命名为"full_name"*/
 
 
-*************第二部分 筛选***************
+-- *************第二部分 筛选***************
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron';
 /*查询customer表中名字为Aaron的名字和姓氏*/
 SELECT email FROM customer WHERE store_id != 1;
@@ -52,7 +52,7 @@ SELECT film_id,title FROM film ORDER BY title OFFSET 3 ROWS FETCH FIRST 4 ROW ON
 /*查询film表中从第3行之后（即第4行）开始的4行数据*/
 
 
-*************第三部分 连接***************
+-- *************第三部分 连接***************
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a INNER JOIN payment b ON a.customer_id = b.customer_id WHERE a.customer_id = 2;
 /*查询客户ID 2的客户租赁数据（两表内连接）*/
 SELECT a.customer_id,a.first_name customer_first_name,a.last_name customer_last_name,a.email,b.first_name staff_first_name,b.last_name staff_last_name,c.amount,c.payment_date
@@ -92,14 +92,14 @@ SELECT * FROM T1, T2;
 /*等同于以上形式*/
 
 
-*************第四部分 分组***************
+-- *************第四部分 分组***************
 SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id ORDER BY SUM (amount) DESC;
 /*按顾客编号分组，计算总金额，并按总金额降序排列*/
 SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id HAVING SUM (amount) > 200;
 /*按顾客编号分组,查询总金额超过200的顾客编号*/
 
 
-*************第五部分 集合***************
+-- *************第五部分 集合***************
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron'
 UNION
 SELECT first_name,last_name FROM customer WHERE first_name = 'Rene';
@@ -117,7 +117,7 @@ ORDER BY title;
 /*差集（查询不在库存中的影片）*/
 
 
-*************第六部分 子查询*************
+-- *************第六部分 子查询*************
 SELECT film,title,rental_rate FROM film WHERE rental_rate > (SELECT AVG(rental_rate) FROM film) LIMIT 3;
 /*查找租金率高于平均租金率的前3部电影*/
 
@@ -148,7 +148,7 @@ ORDER BY first_name,last_name;
 EXISTS运算符来测试子查询中是否存在行*/
 
 
-*************第七部分 修改数据*************
+-- *************第七部分 修改数据*************
 INSERT INTO table (column1, column2, …)
 VALUES (value1, value2, …),(value1, value2, …) ,...;
 /*一次向表中添加多行*/
@@ -172,7 +172,7 @@ WHERE table.id = (SELECT id FROM another_table);
 /*检查引用另一个表中的一个或多个列的条件来删除数据*/
 
 
-*************第八部分 管理表*************
+-- *************第八部分 管理表*************
 CREATE TABLE role(
  role_id serial PRIMARY KEY,
  role_name VARCHAR (255) UNIQUE NOT NULL
@@ -208,7 +208,7 @@ TRUNCATE TABLE table_name;
 /*删除表中所有数据*/
 
 
-*************第九部分 约束*************
+-- *************第九部分 约束*************
 CREATE TABLE TABLE (
  column_1 data_type PRIMARY KEY,
  column_2 data_type,
@@ -268,7 +268,7 @@ CREATE TABLE employees (
 第三，薪水必须大于零*/
 
 
-*************第十部分 条件表达式和运算符*************
+-- *************第十部分 条件表达式和运算符*************
 SELECT SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END ) AS "Mass",
  SUM ( CASE WHEN rental_rate = 2.99 THEN 1 ELSE 0 END ) AS "Economic",
  SUM ( CASE WHEN rental_rate = 4.99 THEN 1 ELSE 0 END ) AS "Luxury"
@@ -282,7 +282,7 @@ SELECT CAST ('100' AS INTEGER);
 /*将字符串常量转换为整数*/
 
 
-*************第十一部分 习题*************
+-- *************第十一部分 习题*************
 /*1.将姓中含有“oo”的演员参演的电影的租赁期增加三天
 Al Garland参演的电影的租赁期增加一天，
 其他姓“Garland”的演员参演的电影的租赁期减两天，

@@ -1862,42 +1862,21 @@ SELECT * FROM Student  WHERE Sdept='CS'
     4. [<表名>.]<属性列名表达式>[，[<表名>.]<属性列名表达式>] …
    其中<属性列名表达式>可以是由属性列、作用于属性列的集函数和常量的任意算术运算（+，-，*，/）组成的运算公式。
 
-- 聚集函数的一般格式为：
-    $\left\{\begin{array}{l}
-    \text { COUNT } \\ \text { SUM } \\ \text { AVG } \\ \text { MAX } \\ \text {MIN }
-    \end{array}\right\}$ ([DISTINCT |ALL] <列名>
-
-- WHERE子句的条件表达式有以下可选格式：
+- 聚集函数的一般格式如图\@ref(fig:fig31)：
     
-    1.  $ <\text{属性列名}>\theta\left\{\begin{array}{l}
-    <\text{属性列名}> \\ 
-    <\text{常量}> \\ 
-    [\mathrm{ANY} | \mathrm{ALL}]\left(\text{SELECT语句}\right)\end{array}\right\}$ 
-    
-    2. $ <\text{属性列名}> [NOT]BETWEEN\left\{\begin{array}{l}
-    <\text{属性列名}> \\ 
-    <\text{常量}> \\ 
-    \left(\text{SELECT语句}\right)\end{array}\right\}
-    AND\left\{\begin{array}{l}
-    <\text{属性列名}> \\ 
-    <\text{常量}> \\ 
-    \left(\text{SELECT语句}\right)\end{array}\right\}$
+```{r fig31,eval=T,redsults = 'hide',echo=F,fig.cap="聚集函数的一般格式",dev="png",results='markup', cache=F}
+knitr::include_graphics("./results/31.png")
+```
 
-    3. $ <\text{属性列名}>[NOT] IN\left\{\begin{array}{l}
-    \left(\text{<值1>[,<值2>...]}\right) \\ 
-    \left(\text{SELECT语句}\right)\end{array}\right\}$ 
+- WHERE子句的条件表达式的可选格式如图\@ref(fig:fig32)和\@ref(fig:fig33)：
 
-    4. <属性列名>[NOT]LIKE<匹配串>
+```{r fig32,eval=T,redsults = 'hide',echo=F,fig.cap="可选格式",dev="png",results='markup', cache=F}
+knitr::include_graphics("./results/32.png")
+```
 
-    5. <属性列名> IS [NOT] NULL
-
-    6. [NOT] EXISTS (SELECT语句)
-
-    7. $ <\text{条件表达式}>\left\{\begin{array}{l}
-    AND \\ 
-    OR\end{array}\right\}<\text{条件表达式}>\left(\left\{\begin{array}{l}
-    AND \\ 
-    OR\end{array}\right\}<\text{条件表达式}>\right)...$
+```{r fig33,eval=T,redsults = 'hide',echo=F,fig.cap="可选格式",dev="png",results='markup', cache=F}
+knitr::include_graphics("./results/33.png")
+```
 
 ## 数据更新
 

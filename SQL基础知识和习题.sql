@@ -1,231 +1,231 @@
--- *************µÚÒ»²¿·Ö ²éÑ¯***************
+-- *************ç¬¬ä¸€éƒ¨åˆ† æŸ¥è¯¢***************
 SELECT first_name FROM customer;
-/*²éÑ¯customer±íÖĞµÄÃû×Ödd*/
+/*æŸ¥è¯¢customerè¡¨ä¸­çš„åå­—dd*/
 
 SELECT DISTINCT city FROM city;
-/*²éÑ¯city±íÖĞµÄ³ÇÊĞÃû³Æ£¨¹ıÂËÖØ¸´Öµ£©*/
+/*æŸ¥è¯¢cityè¡¨ä¸­çš„åŸå¸‚åç§°ï¼ˆè¿‡æ»¤é‡å¤å€¼ï¼‰*/
 
 SELECT first_name,last_name FROM customer ORDER BY first_name ASC;
-/*²éÑ¯customer±íÖĞµÄÃû×ÖºÍĞÕÊÏ£¬°´ÕÕÃû×ÖÉıĞòÅÅÁĞ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­çš„åå­—å’Œå§“æ°ï¼ŒæŒ‰ç…§åå­—å‡åºæ’åˆ—*/
 SELECT first_name,last_name FROM customer ORDER BY first_name ASC,last_name DESC;
-/*²éÑ¯customer±íÖĞµÄÃû×ÖºÍĞÕÊÏ£¬°´ÕÕÃû×ÖÉıĞòÅÅÁĞ,µ±Ãû×ÖÏàÍ¬Ê±£¬ĞÕÊÏ½µĞòÅÅÁĞ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­çš„åå­—å’Œå§“æ°ï¼ŒæŒ‰ç…§åå­—å‡åºæ’åˆ—,å½“åå­—ç›¸åŒæ—¶ï¼Œå§“æ°é™åºæ’åˆ—*/
 SELECT first_name || ' ' || last_name AS full_name FROM customer ORDER BY full_name;
-/*Á¬½Ócustomer±íÖĞµÄÃû×ÖºÍĞÕÊÏ£¬ÒÔ¿Õ¸ñ¸ô¿ª£¬²¢ÖØÃüÃûÎª"full_name"*/
+/*è¿æ¥customerè¡¨ä¸­çš„åå­—å’Œå§“æ°ï¼Œä»¥ç©ºæ ¼éš”å¼€ï¼Œå¹¶é‡å‘½åä¸º"full_name"*/
 
 
--- *************µÚ¶ş²¿·Ö É¸Ñ¡***************
+-- *************ç¬¬äºŒéƒ¨åˆ† ç­›é€‰***************
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron';
-/*²éÑ¯customer±íÖĞÃû×ÖÎªAaronµÄÃû×ÖºÍĞÕÊÏ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—ä¸ºAaronçš„åå­—å’Œå§“æ°*/
 SELECT email FROM customer WHERE store_id != 1;
-/*²éÑ¯customer±íÖĞÃ»ÓĞÈ¥1ºÅµêµÄ¹Ë¿ÍµÄÓÊÏä*/
+/*æŸ¥è¯¢customerè¡¨ä¸­æ²¡æœ‰å»1å·åº—çš„é¡¾å®¢çš„é‚®ç®±*/
 SELECT customer_id,amount,payment_date FROM payment WHERE amount <= 1 OR amount >= 8;
-/*²éÑ¯Ö§¸¶×â½ğµÄ½ğ¶îĞ¡ÓÚ1ÃÀÔª»ò´óÓÚ8ÃÀÔªµÄ¹Ë¿Í±àºÅ£¬½ğ¶îÒÔ¼°¸¶¿îÈÕÆÚ*/
+/*æŸ¥è¯¢æ”¯ä»˜ç§Ÿé‡‘çš„é‡‘é¢å°äº1ç¾å…ƒæˆ–å¤§äº8ç¾å…ƒçš„é¡¾å®¢ç¼–å·ï¼Œé‡‘é¢ä»¥åŠä»˜æ¬¾æ—¥æœŸ*/
 SELECT film_id,title,rental_duration,length FROM film WHERE (rental_duration<>5 AND length <100) OR (rental_duration=5 AND length>100);
-/*²éÑ¯µçÓ°µÄ×âÁŞÊ±³¤²»µÈÓÚ5²¢ÇÒµçÓ°Ê±³¤ÉÙÓÚ100»òÕß×âÁŞÊ±³¤µÈÓÚ5²¢ÇÒµçÓ°Ê±³¤´óÓÚ100µÄµçÓ°±àºÅºÍÃû³Æ*/
+/*æŸ¥è¯¢ç”µå½±çš„ç§Ÿèµæ—¶é•¿ä¸ç­‰äº5å¹¶ä¸”ç”µå½±æ—¶é•¿å°‘äº100æˆ–è€…ç§Ÿèµæ—¶é•¿ç­‰äº5å¹¶ä¸”ç”µå½±æ—¶é•¿å¤§äº100çš„ç”µå½±ç¼–å·å’Œåç§°*/
 
 SELECT first_name,last_name,email FROM customer WHERE first_name IN ('Alan','Alex');
-/*²éÑ¯customer±íÖĞÃû×ÖÎªAlan»òAlexµÄÃû×ÖºÍĞÕÊÏºÍÓÊÏä*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—ä¸ºAlanæˆ–Alexçš„åå­—å’Œå§“æ°å’Œé‚®ç®±*/
 SELECT customer_id FROM payment WHERE payment_date BETWEEN '2007-02-20' AND '2007-02-21';
-/*²éÑ¯payment±íÖĞ¸¶¿îÈÕÆÚÔÚ2007-02-20-2007-02-21Ö®¼äµÄ¹Ë¿Í±àºÅ*/
+/*æŸ¥è¯¢paymentè¡¨ä¸­ä»˜æ¬¾æ—¥æœŸåœ¨2007-02-20-2007-02-21ä¹‹é—´çš„é¡¾å®¢ç¼–å·*/
 SELECT district FROM address WHERE district LIKE 'Man%';
-/*²éÑ¯address±íÖĞÒÔMan¿ªÍ·µÄ½ÖÇøÃû³Æ*/
+/*æŸ¥è¯¢addressè¡¨ä¸­ä»¥Manå¼€å¤´çš„è¡—åŒºåç§°*/
 SELECT first_name,last_name FROM customer WHERE first_name LIKE '%er%';
-/*²éÑ¯customer±íÖĞÃû×Öº¬ÓĞ"er"µÄÃû×ÖºÍĞÕÊÏ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—å«æœ‰"er"çš„åå­—å’Œå§“æ°*/
 SELECT first_name,last_name FROM customer WHERE first_name LIKE '_her%';
-/*²éÑ¯customer±íÖĞÃû×ÖÒÔÈÎÒ»×Ö·û¿ªÍ·£¬ÖĞ¼äÎª"her"µÄÃû×ÖºÍĞÕÊÏ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—ä»¥ä»»ä¸€å­—ç¬¦å¼€å¤´ï¼Œä¸­é—´ä¸º"her"çš„åå­—å’Œå§“æ°*/
 SELECT first_name,last_name FROM customer WHERE first_name NOT LIKE 'Jen%';
-/*²éÑ¯customer±íÖĞÃû×Ö²»ÒÔ"Jen"¿ªÍ·µÄÃû×ÖºÍĞÕÊÏ*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—ä¸ä»¥"Jen"å¼€å¤´çš„åå­—å’Œå§“æ°*/
 SELECT first_name,last_name FROM customer WHERE first_name ILIKE 'BAR%';
-/*²éÑ¯customer±íÖĞÃû×ÖÒÔ"BAR"»òÕß"Bar"»òÕß¡°BaR"¿ªÍ·µÄÃû×ÖºÍĞÕÊÏ£¨ILIKEÔËËã·û²»Çø·Ö´óĞ¡Ğ´µÄÖµ£©*/
+/*æŸ¥è¯¢customerè¡¨ä¸­åå­—ä»¥"BAR"æˆ–è€…"Bar"æˆ–è€…â€œBaR"å¼€å¤´çš„åå­—å’Œå§“æ°ï¼ˆILIKEè¿ç®—ç¬¦ä¸åŒºåˆ†å¤§å°å†™çš„å€¼ï¼‰*/
 
 SELECT address_id,phone FROM address WHERE phone IS NULL;
-/*²éÑ¯address±íÖĞµç»°ºÅÂë²»Îª¿ÕµÄ½ÖÇøÃû³Æ*/
+/*æŸ¥è¯¢addressè¡¨ä¸­ç”µè¯å·ç ä¸ä¸ºç©ºçš„è¡—åŒºåç§°*/
 
 SELECT film_id,title,release_year FROM film ORDER BY film_id LIMIT 5;
-/*²éÑ¯film±íÖĞ°´±êÌâÅÅĞòµÄÇ°Îå²¿µçÓ°*/
+/*æŸ¥è¯¢filmè¡¨ä¸­æŒ‰æ ‡é¢˜æ’åºçš„å‰äº”éƒ¨ç”µå½±*/
 SELECT film_id,title,release_year FROM film ORDER BY film_id LIMIT 4 OFFSET 3;
-/*²éÑ¯film±íÖĞ´ÓµÚ3ĞĞÖ®ºó£¨¼´µÚ4ĞĞ£©¿ªÊ¼µÄ4ĞĞÊı¾İ*/
+/*æŸ¥è¯¢filmè¡¨ä¸­ä»ç¬¬3è¡Œä¹‹åï¼ˆå³ç¬¬4è¡Œï¼‰å¼€å§‹çš„4è¡Œæ•°æ®*/
 
 SELECT film_id,title FROM film ORDER BY title FETCH FIRST 5 ROW ONLY;
-/*²éÑ¯film±íÖĞ°´±êÌâÅÅĞòµÄÇ°Îå²¿µçÓ°*/
+/*æŸ¥è¯¢filmè¡¨ä¸­æŒ‰æ ‡é¢˜æ’åºçš„å‰äº”éƒ¨ç”µå½±*/
 SELECT film_id,title FROM film ORDER BY title OFFSET 3 ROWS FETCH FIRST 4 ROW ONLY; ;
-/*²éÑ¯film±íÖĞ´ÓµÚ3ĞĞÖ®ºó£¨¼´µÚ4ĞĞ£©¿ªÊ¼µÄ4ĞĞÊı¾İ*/
+/*æŸ¥è¯¢filmè¡¨ä¸­ä»ç¬¬3è¡Œä¹‹åï¼ˆå³ç¬¬4è¡Œï¼‰å¼€å§‹çš„4è¡Œæ•°æ®*/
 
 
--- *************µÚÈı²¿·Ö Á¬½Ó***************
+-- *************ç¬¬ä¸‰éƒ¨åˆ† è¿æ¥***************
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a INNER JOIN payment b ON a.customer_id = b.customer_id WHERE a.customer_id = 2;
-/*²éÑ¯¿Í»§ID 2µÄ¿Í»§×âÁŞÊı¾İ£¨Á½±íÄÚÁ¬½Ó£©*/
+/*æŸ¥è¯¢å®¢æˆ·ID 2çš„å®¢æˆ·ç§Ÿèµæ•°æ®ï¼ˆä¸¤è¡¨å†…è¿æ¥ï¼‰*/
 SELECT a.customer_id,a.first_name customer_first_name,a.last_name customer_last_name,a.email,b.first_name staff_first_name,b.last_name staff_last_name,c.amount,c.payment_date
 FROM payment c INNER JOIN customer a ON c.customer_id = a.customer_id
                INNER JOIN staff b ON c.staff_id = b.staff_id
 WHERE a.customer_id = 2;
-/*²éÑ¯¿Í»§ID 2µÄ¿Í»§×âÁŞÊı¾İ£¨Èı±íÄÚÁ¬½Ó£©*/
+/*æŸ¥è¯¢å®¢æˆ·ID 2çš„å®¢æˆ·ç§Ÿèµæ•°æ®ï¼ˆä¸‰è¡¨å†…è¿æ¥ï¼‰*/
 
 SELECT a.film_id,a.title,b.inventory_id
 FROM film a LEFT JOIN inventory b ON a.film_id = b.film_id;
-/*film±íÖĞµÄÄ³Ğ©ĞĞÔÚ±íÖĞÃ»ÓĞ¶ÔÓ¦µÄĞĞinventory£¬Òò´Ë¿â´æIDµÄÖµÎªNULL£¬ÌáÈ¡³öÀ´£¨×óÍâÁ¬½Ó£¬ÒÔfilmÎªÖ÷±í*/
+/*filmè¡¨ä¸­çš„æŸäº›è¡Œåœ¨è¡¨ä¸­æ²¡æœ‰å¯¹åº”çš„è¡Œinventoryï¼Œå› æ­¤åº“å­˜IDçš„å€¼ä¸ºNULLï¼Œæå–å‡ºæ¥ï¼ˆå·¦å¤–è¿æ¥ï¼Œä»¥filmä¸ºä¸»è¡¨*/
 SELECT a.film_id,a.title,b.inventory_id
 FROM film a LEFT JOIN inventory b ON a.film_id = b.film_id
 WHERE b.film_id IS NULL;
-/*film±íÖĞµÄÄ³Ğ©ĞĞÔÚ±íÖĞÃ»ÓĞ¶ÔÓ¦µÄĞĞinventory£¬Òò´Ë¿â´æIDµÄÖµÎªNULL£¬ÌáÈ¡³öÀ´£¨×óÁ¬½Ó£¬ÒÔfilmÎªÖ÷±í*/
+/*filmè¡¨ä¸­çš„æŸäº›è¡Œåœ¨è¡¨ä¸­æ²¡æœ‰å¯¹åº”çš„è¡Œinventoryï¼Œå› æ­¤åº“å­˜IDçš„å€¼ä¸ºNULLï¼Œæå–å‡ºæ¥ï¼ˆå·¦è¿æ¥ï¼Œä»¥filmä¸ºä¸»è¡¨*/
 
 SELECT a.title,b.title,a.length
 FROM film a INNER JOIN film b ON a.film_id <> b.film_id
 AND a.length = b.length;
-/*²éÕÒ¾ßÓĞÏàÍ¬³¤¶ÈµÄËùÓĞµçÓ°¶Ô£¨×ÔÁ¬½Ó£©
-×ÔÁª½Ó¶ÔÓÚ±È½ÏÍ¬Ò»±íÖĞµÄÒ»ÁĞĞĞÖĞµÄÖµºÜÓĞÓÃ¡£
-ÒªĞÎ³É×ÔÁ¬½Ó£¬ÇëÊ¹ÓÃ²»Í¬µÄ±ğÃûÖ¸¶¨Í¬Ò»¸ö±íÁ½´Î£¬ÉèÖÃ±È½Ï£¬²¢Ïû³ıÖµµÈÓÚ×ÔÉíµÄÇé¿ö¡£*/
+/*æŸ¥æ‰¾å…·æœ‰ç›¸åŒé•¿åº¦çš„æ‰€æœ‰ç”µå½±å¯¹ï¼ˆè‡ªè¿æ¥ï¼‰
+è‡ªè”æ¥å¯¹äºæ¯”è¾ƒåŒä¸€è¡¨ä¸­çš„ä¸€åˆ—è¡Œä¸­çš„å€¼å¾ˆæœ‰ç”¨ã€‚
+è¦å½¢æˆè‡ªè¿æ¥ï¼Œè¯·ä½¿ç”¨ä¸åŒçš„åˆ«åæŒ‡å®šåŒä¸€ä¸ªè¡¨ä¸¤æ¬¡ï¼Œè®¾ç½®æ¯”è¾ƒï¼Œå¹¶æ¶ˆé™¤å€¼ç­‰äºè‡ªèº«çš„æƒ…å†µã€‚*/
 
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a FULL JOIN payment b ON a.customer_id = b.customer_id WHERE a.customer_id = 2;
-/*²éÑ¯¿Í»§ID 2µÄ¿Í»§×âÁŞÊı¾İ£¨ÍêÕûÍâÁ¬½Ó£©*/
+/*æŸ¥è¯¢å®¢æˆ·ID 2çš„å®¢æˆ·ç§Ÿèµæ•°æ®ï¼ˆå®Œæ•´å¤–è¿æ¥ï¼‰*/
 SELECT a.customer_id, a.email, b.amount, b.payment_date FROM customer a FULL JOIN payment b ON a.customer_id = b.customer_id 
 WHERE a.customer_id = 2 AND (a.customer_id IS NULL OR b.customer_id IS NULL);
-/*²éÑ¯¿Í»§ID 2µÄ¿Í»§×âÁŞÊı¾İ£¨ÍêÈ«ÍâÁ¬½Ó,,²»°üÀ¨a,bµÄ½»¼¯²¿·Ö£©*/
+/*æŸ¥è¯¢å®¢æˆ·ID 2çš„å®¢æˆ·ç§Ÿèµæ•°æ®ï¼ˆå®Œå…¨å¤–è¿æ¥,,ä¸åŒ…æ‹¬a,bçš„äº¤é›†éƒ¨åˆ†ï¼‰*/
 
 CREATE TABLE T1 (label CHAR(1) PRIMARY KEY);
 CREATE TABLE T2 (score INT PRIMARY KEY);
 INSERT INTO T1 (label) VALUES ('A'),('B');
 INSERT INTO T2 (score) VALUES (1),(2),(3);
 SELECT * FROM T1 CROSS JOIN T2;
-/*µÑ¿¨¶û»ı£¨½»²æÁ¬½Ó£¬2±í¶ÔÓ¦×éºÏ£©*/
+/*ç¬›å¡å°”ç§¯ï¼ˆäº¤å‰è¿æ¥ï¼Œ2è¡¨å¯¹åº”ç»„åˆï¼‰*/
 SELECT * FROM T1, T2;
-/*µÈÍ¬ÓÚÒÔÉÏĞÎÊ½*/
+/*ç­‰åŒäºä»¥ä¸Šå½¢å¼*/
 
 
--- *************µÚËÄ²¿·Ö ·Ö×é***************
+-- *************ç¬¬å››éƒ¨åˆ† åˆ†ç»„***************
 SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id ORDER BY SUM (amount) DESC;
-/*°´¹Ë¿Í±àºÅ·Ö×é£¬¼ÆËã×Ü½ğ¶î£¬²¢°´×Ü½ğ¶î½µĞòÅÅÁĞ*/
+/*æŒ‰é¡¾å®¢ç¼–å·åˆ†ç»„ï¼Œè®¡ç®—æ€»é‡‘é¢ï¼Œå¹¶æŒ‰æ€»é‡‘é¢é™åºæ’åˆ—*/
 SELECT customer_id,SUM (amount) FROM payment GROUP BY customer_id HAVING SUM (amount) > 200;
-/*°´¹Ë¿Í±àºÅ·Ö×é,²éÑ¯×Ü½ğ¶î³¬¹ı200µÄ¹Ë¿Í±àºÅ*/
+/*æŒ‰é¡¾å®¢ç¼–å·åˆ†ç»„,æŸ¥è¯¢æ€»é‡‘é¢è¶…è¿‡200çš„é¡¾å®¢ç¼–å·*/
 
 
--- *************µÚÎå²¿·Ö ¼¯ºÏ***************
+-- *************ç¬¬äº”éƒ¨åˆ† é›†åˆ***************
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron'
 UNION
 SELECT first_name,last_name FROM customer WHERE first_name = 'Rene';
-/*²¢¼¯£¨UNION ALL°üÀ¨ÖØ¸´Öµ£©*/
+/*å¹¶é›†ï¼ˆUNION ALLåŒ…æ‹¬é‡å¤å€¼ï¼‰*/
 
 SELECT first_name,last_name FROM customer WHERE first_name = 'Aaron'
 INTERSECT
 SELECT first_name,last_name FROM customer WHERE first_name = 'Rene';
-/*½»¼¯*/
+/*äº¤é›†*/
 
 SELECT film_id,title FROM film
 EXCEPT
 SELECT DISTINCT inventory.film_id,title FROM inventory INNER JOIN film ON film.film_id = inventory.film_id
 ORDER BY title;
-/*²î¼¯£¨²éÑ¯²»ÔÚ¿â´æÖĞµÄÓ°Æ¬£©*/
+/*å·®é›†ï¼ˆæŸ¥è¯¢ä¸åœ¨åº“å­˜ä¸­çš„å½±ç‰‡ï¼‰*/
 
 
--- *************µÚÁù²¿·Ö ×Ó²éÑ¯*************
+-- *************ç¬¬å…­éƒ¨åˆ† å­æŸ¥è¯¢*************
 SELECT film,title,rental_rate FROM film WHERE rental_rate > (SELECT AVG(rental_rate) FROM film) LIMIT 3;
-/*²éÕÒ×â½ğÂÊ¸ßÓÚÆ½¾ù×â½ğÂÊµÄÇ°3²¿µçÓ°*/
+/*æŸ¥æ‰¾ç§Ÿé‡‘ç‡é«˜äºå¹³å‡ç§Ÿé‡‘ç‡çš„å‰3éƒ¨ç”µå½±*/
 
 SELECT MAX(length) FROM film INNER JOIN film_category USING(film_id) GROUP BY category_id;
-/*²éÑ¯°´µçÓ°Àà±ğ·Ö×éµÄËùÓĞµçÓ°µÄ×î´ó³¤¶È
-×îĞ¡ÖµÎª178*/
+/*æŸ¥è¯¢æŒ‰ç”µå½±ç±»åˆ«åˆ†ç»„çš„æ‰€æœ‰ç”µå½±çš„æœ€å¤§é•¿åº¦
+æœ€å°å€¼ä¸º178*/
 SELECT title,length FROM film 
 WHERE length >= ANY(SELECT MAX(length) FROM film INNER JOIN film_category USING(film_id) GROUP BY category_id);
-/*¶ÔÓÚÃ¿¸öµçÓ°Àà±ğ£¬×Ó²éÑ¯ÕÒµ½×î´ó³¤¶È¡£Íâ²¿²éÑ¯²é¿´ËùÓĞÕâĞ©Öµ²¢È·¶¨ÄÄ¸ö½ºÆ¬µÄ³¤¶È´óÓÚ»òµÈÓÚÈÎºÎ½ºÆ¬Àà±ğµÄ×î´ó³¤¶È¡£
-ANY±íÊ¾ÓĞÈÎºÎÒ»¸öÂú×ã¾Í·µ»ØTRUE£¬´ËÊ±´óÓÚ178¼´¿É
-'SOME'Ïàµ±ÓÚ'ANY'
-'= ANY'Ïàµ±ÓÚ'IN','<> ANY'²»Í¬ÓÚ'NOT IN'
-USINGÓÃ·¨£ºON table1.column_name = table2.column_name µÈ¼ÛÓÚ USING(column_name)*/
+/*å¯¹äºæ¯ä¸ªç”µå½±ç±»åˆ«ï¼Œå­æŸ¥è¯¢æ‰¾åˆ°æœ€å¤§é•¿åº¦ã€‚å¤–éƒ¨æŸ¥è¯¢æŸ¥çœ‹æ‰€æœ‰è¿™äº›å€¼å¹¶ç¡®å®šå“ªä¸ªèƒ¶ç‰‡çš„é•¿åº¦å¤§äºæˆ–ç­‰äºä»»ä½•èƒ¶ç‰‡ç±»åˆ«çš„æœ€å¤§é•¿åº¦ã€‚
+ANYè¡¨ç¤ºæœ‰ä»»ä½•ä¸€ä¸ªæ»¡è¶³å°±è¿”å›TRUEï¼Œæ­¤æ—¶å¤§äº178å³å¯
+'SOME'ç›¸å½“äº'ANY'
+'= ANY'ç›¸å½“äº'IN','<> ANY'ä¸åŒäº'NOT IN'
+USINGç”¨æ³•ï¼šON table1.column_name = table2.column_name ç­‰ä»·äº USING(column_name)*/
 
 SELECT ROUND(AVG (length),2) FROM film GROUP BY rating;
-/*²éÑ¯°´µçÓ°ÆÀ¼¶·Ö×éµÄËùÓĞµçÓ°µÄÆ½¾ù³¤¶È
-×î´óÖµÎª120.44*/
+/*æŸ¥è¯¢æŒ‰ç”µå½±è¯„çº§åˆ†ç»„çš„æ‰€æœ‰ç”µå½±çš„å¹³å‡é•¿åº¦
+æœ€å¤§å€¼ä¸º120.44*/
 SELECT film_id,title,length FROM film
 WHERE length > ALL (SELECT ROUND(AVG (length),2) FROM film GROUP BY rating)
 ORDER BY length;
-/*²éÑ¯·µ»ØËùÓĞ³¤¶È´óÓÚ×Ó²éÑ¯·µ»ØµÄÆ½¾ù³¤¶ÈÁĞ±íÖĞ×î´óÖµµÄÓ°Æ¬
-ALL±íÊ¾È«²¿¶¼Âú×ã²Å·µ»ØTRUE,¼´´óÓÚÆ½¾ù³¤¶ÈµÄ×î´óÖµ120.44²Å¿É*/
+/*æŸ¥è¯¢è¿”å›æ‰€æœ‰é•¿åº¦å¤§äºå­æŸ¥è¯¢è¿”å›çš„å¹³å‡é•¿åº¦åˆ—è¡¨ä¸­æœ€å¤§å€¼çš„å½±ç‰‡
+ALLè¡¨ç¤ºå…¨éƒ¨éƒ½æ»¡è¶³æ‰è¿”å›TRUE,å³å¤§äºå¹³å‡é•¿åº¦çš„æœ€å¤§å€¼120.44æ‰å¯*/
 
 SELECT first_name,last_name FROM customer c
 WHERE EXISTS (SELECT 1 FROM payment p WHERE p.customer_id = c.customer_id AND amount > 11 )
 ORDER BY first_name,last_name;
-/*²éÕÒÖÁÉÙÓĞÒ»±Ê½ğ¶î´óÓÚ11µÄ¸¶¿îµÄ¿Í»§
-EXISTSÔËËã·ûÀ´²âÊÔ×Ó²éÑ¯ÖĞÊÇ·ñ´æÔÚĞĞ*/
+/*æŸ¥æ‰¾è‡³å°‘æœ‰ä¸€ç¬”é‡‘é¢å¤§äº11çš„ä»˜æ¬¾çš„å®¢æˆ·
+EXISTSè¿ç®—ç¬¦æ¥æµ‹è¯•å­æŸ¥è¯¢ä¸­æ˜¯å¦å­˜åœ¨è¡Œ*/
 
 
--- *************µÚÆß²¿·Ö ĞŞ¸ÄÊı¾İ*************
-INSERT INTO table (column1, column2, ¡­)
-VALUES (value1, value2, ¡­),(value1, value2, ¡­) ,...;
-/*Ò»´ÎÏò±íÖĞÌí¼Ó¶àĞĞ*/
+-- *************ç¬¬ä¸ƒéƒ¨åˆ† ä¿®æ”¹æ•°æ®*************
+INSERT INTO table (column1, column2, â€¦)
+VALUES (value1, value2, â€¦),(value1, value2, â€¦) ,...;
+/*ä¸€æ¬¡å‘è¡¨ä¸­æ·»åŠ å¤šè¡Œ*/
 INSERT INTO table(column1,column2,...)
 SELECT column1,column2,..FROM another_table WHERE condition;
-/*²åÈëÀ´×ÔÁíÒ»¸ö±íµÄÊı¾İ*/
+/*æ’å…¥æ¥è‡ªå¦ä¸€ä¸ªè¡¨çš„æ•°æ®*/
 
 UPDATE table
 SET column1 = value1,column2 = value2 ,...
 WHERE condition;
-/*¸ü¸Ä±íÖĞÁĞµÄÖµ*/
+/*æ›´æ”¹è¡¨ä¸­åˆ—çš„å€¼*/
 UPDATE A
 SET A.c1 = expresion FROM B WHERE A.c2 = B.c2;
-/*¸ù¾İÁíÒ»¸ö±íÖĞµÄÖµ¸üĞÂ±íµÄÊı¾İ*/
+/*æ ¹æ®å¦ä¸€ä¸ªè¡¨ä¸­çš„å€¼æ›´æ–°è¡¨çš„æ•°æ®*/
 
 DELETE FROM table
 WHERE condition;
-/*´Ó±íÖĞÉ¾³ıÊı¾İ*/
+/*ä»è¡¨ä¸­åˆ é™¤æ•°æ®*/
 DELETE FROM table
 WHERE table.id = (SELECT id FROM another_table);
-/*¼ì²éÒıÓÃÁíÒ»¸ö±íÖĞµÄÒ»¸ö»ò¶à¸öÁĞµÄÌõ¼şÀ´É¾³ıÊı¾İ*/
+/*æ£€æŸ¥å¼•ç”¨å¦ä¸€ä¸ªè¡¨ä¸­çš„ä¸€ä¸ªæˆ–å¤šä¸ªåˆ—çš„æ¡ä»¶æ¥åˆ é™¤æ•°æ®*/
 
 
--- *************µÚ°Ë²¿·Ö ¹ÜÀí±í*************
+-- *************ç¬¬å…«éƒ¨åˆ† ç®¡ç†è¡¨*************
 CREATE TABLE role(
  role_id serial PRIMARY KEY,
  role_name VARCHAR (255) UNIQUE NOT NULL
 );
-/*´´½¨±í*/
+/*åˆ›å»ºè¡¨*/
 
 SELECT film_id,title,rental_rate
 INTO TABLE film_r
 FROM film
 WHERE rating = 'R' AND rental_duration = 5
 ORDER BY title;
-/*ÔÚfilmµÄ»ù´¡ÉÏ´´½¨Ò»¸öÃûÎªµÄĞÂ±ífilm_r£¬ÆäÖĞ°üº¬R¾àÀëfilm±í¸ñ5ÌìµÄÆÀ¼¶ºÍ×âÆÚµÄËùÓĞµçÓ°*/
+/*åœ¨filmçš„åŸºç¡€ä¸Šåˆ›å»ºä¸€ä¸ªåä¸ºçš„æ–°è¡¨film_rï¼Œå…¶ä¸­åŒ…å«Rè·ç¦»filmè¡¨æ ¼5å¤©çš„è¯„çº§å’Œç§ŸæœŸçš„æ‰€æœ‰ç”µå½±*/
 SELECT * FROM film_r;
-/*ÑéÖ¤±í*/
+/*éªŒè¯è¡¨*/
 
 ALTER TABLE table_name ADD COLUMN new_column_name TYPE;
-/*Ïò±íÖĞÌí¼ÓĞÂÁĞ*/
+/*å‘è¡¨ä¸­æ·»åŠ æ–°åˆ—*/
 ALTER TABLE table_name DROP COLUMN column_name;
-/*É¾³ıÏÖÓĞÁĞ*/
+/*åˆ é™¤ç°æœ‰åˆ—*/
 ALTER TABLE table_name RENAME COLUMN column_name TO new_column_name;
-/*ÖØÃüÃûÏÖÓĞÁĞ*/
+/*é‡å‘½åç°æœ‰åˆ—*/
 ALTER TABLE assets ALTER COLUMN name TYPE VARCHAR;
-/*½«assets±íÖĞnameÁĞµÄÊı¾İÀàĞÍ¸ü¸ÄÎªVARCHAR*/
+/*å°†assetsè¡¨ä¸­nameåˆ—çš„æ•°æ®ç±»å‹æ›´æ”¹ä¸ºVARCHAR*/
 ALTER TABLE table_name RENAME TO new_table_name;
-/*ÖØÃüÃû±í*/
+/*é‡å‘½åè¡¨*/
 DROP TABLE IF EXISTS table_name;
-/*É¾³ı±í*/
+/*åˆ é™¤è¡¨*/
 CREATE TEMP TABLE temp_table(
    ...
 );
-/*´´½¨ÁÙÊ±±í*/
+/*åˆ›å»ºä¸´æ—¶è¡¨*/
 TRUNCATE TABLE table_name;
-/*É¾³ı±íÖĞËùÓĞÊı¾İ*/
+/*åˆ é™¤è¡¨ä¸­æ‰€æœ‰æ•°æ®*/
 
 
--- *************µÚ¾Å²¿·Ö Ô¼Êø*************
+-- *************ç¬¬ä¹éƒ¨åˆ† çº¦æŸ*************
 CREATE TABLE TABLE (
  column_1 data_type PRIMARY KEY,
  column_2 data_type,
- ¡­
+ â€¦
 );
-/*Ö÷¼üÔ¼Êø·½Ê½Ò»£º´´½¨±íÊ±¶¨ÒåÖ÷¼ü*/
+/*ä¸»é”®çº¦æŸæ–¹å¼ä¸€ï¼šåˆ›å»ºè¡¨æ—¶å®šä¹‰ä¸»é”®*/
 CREATE TABLE TABLE (
  column_1 data_type,
  column_2 data_type,
- ¡­ 
+ â€¦ 
 PRIMARY KEY (column_1, column_2)
 );
-/*Ö÷¼üÔ¼Êø·½Ê½¶ş£ºÈç¹ûÖ÷¼üÓÉÁ½ÁĞ»ò¸ü¶àÁĞ×é³É*/
+/*ä¸»é”®çº¦æŸæ–¹å¼äºŒï¼šå¦‚æœä¸»é”®ç”±ä¸¤åˆ—æˆ–æ›´å¤šåˆ—ç»„æˆ*/
 ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);
-/*Ö÷¼üÔ¼Êø·½Ê½Èı£º¸ü¸ÄÏÖÓĞ±í½á¹¹Ê±¶¨ÒåÖ÷¼ü*/
+/*ä¸»é”®çº¦æŸæ–¹å¼ä¸‰ï¼šæ›´æ”¹ç°æœ‰è¡¨ç»“æ„æ—¶å®šä¹‰ä¸»é”®*/
 ALTER TABLE table_name DROP CONSTRAINT primary_key_constraint;
-/*É¾³ıÖ÷¼ü*/
+/*åˆ é™¤ä¸»é”®*/
 
 CREATE TABLE person (
  id serial PRIMARY KEY,
@@ -233,14 +233,14 @@ CREATE TABLE person (
  last_name VARCHAR (50),
  email VARCHAR (50) UNIQUE
 );
-/*UNIQUEÔ¼Êø·½Ê½Ò»£ºÌí¼ÓUNIQUEÔ¼Êø£¬È·±£´æ´¢ÔÚÁĞ»òÁĞ×éÖĞµÄÖµÔÚÕû¸ö±íÖĞÊÇÎ¨Ò»*/
+/*UNIQUEçº¦æŸæ–¹å¼ä¸€ï¼šæ·»åŠ UNIQUEçº¦æŸï¼Œç¡®ä¿å­˜å‚¨åœ¨åˆ—æˆ–åˆ—ç»„ä¸­çš„å€¼åœ¨æ•´ä¸ªè¡¨ä¸­æ˜¯å”¯ä¸€*/
 CREATE TABLE table (
     c1 data_type,
     c2 data_type,
     c3 data_type,
     UNIQUE (c2, c3)
 );
-/*UNIQUEÔ¼Êø·½Ê½¶ş£ºÁĞc2ºÍc3ÖĞµÄÖµ×éºÏÔÚÕû¸ö±íÖĞÊÇÎ¨Ò»µÄ¡£ÁĞc2»òc3µÄÖµ²»±ØÊÇÎ¨Ò»µÄ*/
+/*UNIQUEçº¦æŸæ–¹å¼äºŒï¼šåˆ—c2å’Œc3ä¸­çš„å€¼ç»„åˆåœ¨æ•´ä¸ªè¡¨ä¸­æ˜¯å”¯ä¸€çš„ã€‚åˆ—c2æˆ–c3çš„å€¼ä¸å¿…æ˜¯å”¯ä¸€çš„*/
 
 CREATE TABLE invoice(
   id serial PRIMARY KEY,
@@ -248,10 +248,10 @@ CREATE TABLE invoice(
   qty numeric NOT NULL CHECK(qty > 0),
   net_price numeric CHECK(net_price > 0) 
 );
-/*NOT NULLÔ¼Êø·½Ê½Ò»£ºÔÚ´´½¨ĞÂ±íÊ±£¬½«PostgreSQL·Ç¿ÕÔ¼ÊøÌí¼Óµ½ÁĞ*/
+/*NOT NULLçº¦æŸæ–¹å¼ä¸€ï¼šåœ¨åˆ›å»ºæ–°è¡¨æ—¶ï¼Œå°†PostgreSQLéç©ºçº¦æŸæ·»åŠ åˆ°åˆ—*/
 ALTER  TABLE table_name
 ALTER COLUMN column_name SET NOT NULL;
-/*NOT NULLÔ¼Êø·½Ê½¶ş£º½«PostgreSQL·Ç¿ÕÔ¼ÊøÌí¼Óµ½ÏÖÓĞ±íµÄÁĞ*/
+/*NOT NULLçº¦æŸæ–¹å¼äºŒï¼šå°†PostgreSQLéç©ºçº¦æŸæ·»åŠ åˆ°ç°æœ‰è¡¨çš„åˆ—*/
 
 CREATE TABLE employees (
  id serial PRIMARY KEY,
@@ -261,33 +261,33 @@ CREATE TABLE employees (
  joined_date DATE CHECK (joined_date > birth_date),
  salary numeric CHECK(salary > 0)
 );
-/*CHECKÔ¼Êø£¬¸ÃÔ¼Êø¸ù¾İ²¼¶û±í´ïÊ½Ô¼Êø±íÖĞÁĞµÄÖµ
-Ò»¸öCHECKÔ¼ÊøÊÇÒ»ÖÖÔ¼Êø£¬Ê¹Äú¿ÉÒÔÖ¸¶¨ÊÇ·ñÔÚÁĞÖĞµÄÖµ±ØĞëÂú×ãÌØ¶¨µÄÒªÇó¡£µÄCHECKÔ¼ÊøÊ¹ÓÃ²¼¶û±í´ïÊ½²åÈë»ò¸üĞÂµ½ÁĞÖ®Ç°ÆÀ¹ÀÖµ¡£Èç¹ûÖµÍ¨¹ı¼ì²é£¬PostgreSQL½«ÔÚÁĞÖĞ²åÈë»ò¸üĞÂÕâĞ©Öµ¡£
-Ê×ÏÈ£¬birth_dateÔ±¹¤µÄ³öÉúÈÕÆÚ£¨£©±ØĞë´óÓÚ01/01/1900¡£Èç¹ûÄúÖ®Ç°³¢ÊÔ²åÈë³öÉúÈÕÆÚ01/01/1900£¬Äú½«ÊÕµ½Ò»Ìõ´íÎóÏûÏ¢¡£
-Æä´Î£¬ÁªºÏÈÕÆÚ£¨joined_date£©±ØĞë´óÓÚ³öÉúÈÕÆÚ£¨birth_date£©¡£´Ë¼ì²é½«×èÖ¹¸ù¾İÆäÓïÒåº¬Òå¸üĞÂÎŞĞ§ÈÕÆÚ¡£
-µÚÈı£¬Ğ½Ë®±ØĞë´óÓÚÁã*/
+/*CHECKçº¦æŸï¼Œè¯¥çº¦æŸæ ¹æ®å¸ƒå°”è¡¨è¾¾å¼çº¦æŸè¡¨ä¸­åˆ—çš„å€¼
+ä¸€ä¸ªCHECKçº¦æŸæ˜¯ä¸€ç§çº¦æŸï¼Œä½¿æ‚¨å¯ä»¥æŒ‡å®šæ˜¯å¦åœ¨åˆ—ä¸­çš„å€¼å¿…é¡»æ»¡è¶³ç‰¹å®šçš„è¦æ±‚ã€‚çš„CHECKçº¦æŸä½¿ç”¨å¸ƒå°”è¡¨è¾¾å¼æ’å…¥æˆ–æ›´æ–°åˆ°åˆ—ä¹‹å‰è¯„ä¼°å€¼ã€‚å¦‚æœå€¼é€šè¿‡æ£€æŸ¥ï¼ŒPostgreSQLå°†åœ¨åˆ—ä¸­æ’å…¥æˆ–æ›´æ–°è¿™äº›å€¼ã€‚
+é¦–å…ˆï¼Œbirth_dateå‘˜å·¥çš„å‡ºç”Ÿæ—¥æœŸï¼ˆï¼‰å¿…é¡»å¤§äº01/01/1900ã€‚å¦‚æœæ‚¨ä¹‹å‰å°è¯•æ’å…¥å‡ºç”Ÿæ—¥æœŸ01/01/1900ï¼Œæ‚¨å°†æ”¶åˆ°ä¸€æ¡é”™è¯¯æ¶ˆæ¯ã€‚
+å…¶æ¬¡ï¼Œè”åˆæ—¥æœŸï¼ˆjoined_dateï¼‰å¿…é¡»å¤§äºå‡ºç”Ÿæ—¥æœŸï¼ˆbirth_dateï¼‰ã€‚æ­¤æ£€æŸ¥å°†é˜»æ­¢æ ¹æ®å…¶è¯­ä¹‰å«ä¹‰æ›´æ–°æ— æ•ˆæ—¥æœŸã€‚
+ç¬¬ä¸‰ï¼Œè–ªæ°´å¿…é¡»å¤§äºé›¶*/
 
 
--- *************µÚÊ®²¿·Ö Ìõ¼ş±í´ïÊ½ºÍÔËËã·û*************
+-- *************ç¬¬åéƒ¨åˆ† æ¡ä»¶è¡¨è¾¾å¼å’Œè¿ç®—ç¬¦*************
 SELECT SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END ) AS "Mass",
  SUM ( CASE WHEN rental_rate = 2.99 THEN 1 ELSE 0 END ) AS "Economic",
  SUM ( CASE WHEN rental_rate = 4.99 THEN 1 ELSE 0 END ) AS "Luxury"
 FROM film;
-/*ÎªµçÓ°·ÖÅä¼Û¸ñ¶Î£ºÈç¹û×â½ğÂÊÎª0.99£¬ÔòÎªÆÕÍ¨£»Èç¹û×â½ğÂÊÊÇ1.99£¬ÔòÎª¾­¼Ã£»Èç¹û³ö×âÂÊÊÇ4.99£¬ÔòÎªºÀ»ª*/
+/*ä¸ºç”µå½±åˆ†é…ä»·æ ¼æ®µï¼šå¦‚æœç§Ÿé‡‘ç‡ä¸º0.99ï¼Œåˆ™ä¸ºæ™®é€šï¼›å¦‚æœç§Ÿé‡‘ç‡æ˜¯1.99ï¼Œåˆ™ä¸ºç»æµï¼›å¦‚æœå‡ºç§Ÿç‡æ˜¯4.99ï¼Œåˆ™ä¸ºè±ªå*/
 
 SELECT COALESCE (NULL, 2 , 1);
-/*´Ó×óµ½ÓÒ¼ÆËã²ÎÊı£¬Ö±µ½ÕÒµ½µÚÒ»¸ö·Çnull²ÎÊı*/
+/*ä»å·¦åˆ°å³è®¡ç®—å‚æ•°ï¼Œç›´åˆ°æ‰¾åˆ°ç¬¬ä¸€ä¸ªénullå‚æ•°*/
 
 SELECT CAST ('100' AS INTEGER);
-/*½«×Ö·û´®³£Á¿×ª»»ÎªÕûÊı*/
+/*å°†å­—ç¬¦ä¸²å¸¸é‡è½¬æ¢ä¸ºæ•´æ•°*/
 
 
--- *************µÚÊ®Ò»²¿·Ö Ï°Ìâ*************
-/*1.½«ĞÕÖĞº¬ÓĞ¡°oo¡±µÄÑİÔ±²ÎÑİµÄµçÓ°µÄ×âÁŞÆÚÔö¼ÓÈıÌì
-Al Garland²ÎÑİµÄµçÓ°µÄ×âÁŞÆÚÔö¼ÓÒ»Ìì£¬
-ÆäËûĞÕ¡°Garland¡±µÄÑİÔ±²ÎÑİµÄµçÓ°µÄ×âÁŞÆÚ¼õÁ½Ìì£¬
-Õ¹Ê¾ËùÓĞÑİÔ±µÄÃû×Ö£¬¹ıÈ¥µÄ×âÁŞÆÚºÍµ±Ç°×îĞÂµÄ×âÁŞÆÚ
-ÎÊÌâ³öÔÚ°ÑĞÂµÄ×âÁŞÆÚ²»ÖªµÀÍùSELECTÀïÃæ·Å*/
+-- *************ç¬¬åä¸€éƒ¨åˆ† ä¹ é¢˜*************
+/*1.å°†å§“ä¸­å«æœ‰â€œooâ€çš„æ¼”å‘˜å‚æ¼”çš„ç”µå½±çš„ç§ŸèµæœŸå¢åŠ ä¸‰å¤©
+Al Garlandå‚æ¼”çš„ç”µå½±çš„ç§ŸèµæœŸå¢åŠ ä¸€å¤©ï¼Œ
+å…¶ä»–å§“â€œGarlandâ€çš„æ¼”å‘˜å‚æ¼”çš„ç”µå½±çš„ç§ŸèµæœŸå‡ä¸¤å¤©ï¼Œ
+å±•ç¤ºæ‰€æœ‰æ¼”å‘˜çš„åå­—ï¼Œè¿‡å»çš„ç§ŸèµæœŸå’Œå½“å‰æœ€æ–°çš„ç§ŸèµæœŸ
+é—®é¢˜å‡ºåœ¨æŠŠæ–°çš„ç§ŸèµæœŸä¸çŸ¥é“å¾€SELECTé‡Œé¢æ”¾*/
 SELECT c.last_name,b.rental_duration AS old_rental_duration,
 (CASE WHEN last_name LIKE '%oo%' THEN b.rental_duration+3
      WHEN last_name = 'AI' AND first_name ='Garland' THEN b.rental_duration+1
@@ -298,31 +298,31 @@ FROM film_actor a INNER JOIN film b ON a.film_id=b.film_id
                   INNER JOIN actor c ON a.actor_id=c.actor_id 
 WHERE c.last_name like '%oo%' or c.last_name='Garland';
 
-/*2.Õ¹Ê¾²¥·ÅÊ±³¤Îª115·ÖÖÓµ½125·ÖÖÓµÄµçÓ°Ãû³Æ¼°Ê±³¤,
-²¢°´²¥·ÅÊ±³¤ÅÅĞò,ÏàÍ¬Ê±³¤µÄµçÓ°°´Ãû×ÖÅÅĞò£¬µ«A¿ªÍ·
-ºÍÃû×ÖÖĞº¬ÓĞc£¨ÁíÒ»¸ö×ÖÄ¸£©rµÄµçÓ°±ØĞë×îºóÅÅÁĞ£¬¼´
-¸ÃÌõ¼şÎªµÚÒ»Âú×ãµÄÌõ¼ş£¬¼´µÚÒ»ÅÅĞò*/
+/*2.å±•ç¤ºæ’­æ”¾æ—¶é•¿ä¸º115åˆ†é’Ÿåˆ°125åˆ†é’Ÿçš„ç”µå½±åç§°åŠæ—¶é•¿,
+å¹¶æŒ‰æ’­æ”¾æ—¶é•¿æ’åº,ç›¸åŒæ—¶é•¿çš„ç”µå½±æŒ‰åå­—æ’åºï¼Œä½†Aå¼€å¤´
+å’Œåå­—ä¸­å«æœ‰cï¼ˆå¦ä¸€ä¸ªå­—æ¯ï¼‰rçš„ç”µå½±å¿…é¡»æœ€åæ’åˆ—ï¼Œå³
+è¯¥æ¡ä»¶ä¸ºç¬¬ä¸€æ»¡è¶³çš„æ¡ä»¶ï¼Œå³ç¬¬ä¸€æ’åº*/
 SELECT title,length FROM film
 WHERE length BETWEEN 115 AND 125
 /*ORDER BY CASE WHEN title LIKE 'A%' OR '%c_r%' THEN 1 ELSE 0 asc,length,title;
-CASE WHEN Ò»°ãÓÃÓÚSELECT*/
+CASE WHEN ä¸€èˆ¬ç”¨äºSELECT*/
 /*ORDER BY title IN(SELECT title FROM film WHERE title LIKE 'A%' OR '%c_r%'),length,title;
-Á½¸öLIKE²»¿ÉÖ±½ÓÓÃORÁ¬½Ó*/
+ä¸¤ä¸ªLIKEä¸å¯ç›´æ¥ç”¨ORè¿æ¥*/
 ORDER BY title IN(SELECT title FROM film WHERE title LIKE 'A%' OR title LIKE '%c_r%'),length,title;
 
-/*3.Õ¹Ê¾²»Í¬ÓïÑÔÖÖÀàµÄµçÓ°ÊıÁ¿£¬²¢°´´ÓĞ¡µ½´óµÄË³ĞòÅÅÁĞ*/
+/*3.å±•ç¤ºä¸åŒè¯­è¨€ç§ç±»çš„ç”µå½±æ•°é‡ï¼Œå¹¶æŒ‰ä»å°åˆ°å¤§çš„é¡ºåºæ’åˆ—*/
 SELECT language_id,COUNT(film_id)
 FROM film
 GROUP BY language_id
 ORDER BY COUNT(film_id) asc;
 
-/*4.Õ¹Ê¾Ó¢ÓïÀàµçÓ°µÄµçÓ°ÀàĞÍ¼°ÏàÓ¦ÊıÄ¿*/
+/*4.å±•ç¤ºè‹±è¯­ç±»ç”µå½±çš„ç”µå½±ç±»å‹åŠç›¸åº”æ•°ç›®*/
 SELECT language_id,COUNT(film_id)
 FROM film
 WHERE film.language_id='1'
 GROUP BY language_id;
 
-/*5.Õ¹Ê¾ÓĞÖ§¸¶ĞĞÎªµÄÃ¿¸ö³ÇÊĞµÄÖ§¸¶±ÊÊı*/
+/*5.å±•ç¤ºæœ‰æ”¯ä»˜è¡Œä¸ºçš„æ¯ä¸ªåŸå¸‚çš„æ”¯ä»˜ç¬”æ•°*/
 SELECT SUM(CASE WHEN a.amount>0 THEN 1 ELSE 0 END),d.city,e.country
 FROM payment a JOIN staff b ON a.staff_id=b.staff_id
 JOIN address c ON b.address_id=c.address_id
@@ -330,12 +330,12 @@ JOIN city d ON c.city_id=d.city_id
 JOIN country e ON d.country_id=e.country_id
 GROUP BY e.country,d.city;
 
-/*6.ÕÒ³öÃ¿¸ö¹ú¼Ò°´×ÖÄ¸ÅÅĞòÊÇÅÅÄ©Î»µÄ³ÇÊĞÖĞ×î¸ßµÄÖ§¸¶½ğ¶î*/
+/*6.æ‰¾å‡ºæ¯ä¸ªå›½å®¶æŒ‰å­—æ¯æ’åºæ˜¯æ’æœ«ä½çš„åŸå¸‚ä¸­æœ€é«˜çš„æ”¯ä»˜é‡‘é¢*/
 SELECT MAX(a.amount),d.city,e.country
 FROM payment a JOIN staff b ON a.staff_id=b.staff_id
 JOIN address c ON b.address_id=c.address_id
 JOIN city d ON c.city_id=d.city_id
 JOIN country e ON d.country_id=e.country_id
 WHERE city<=ALL(SELECT city FROM country f WHERE e.country=f.country)
-/*e.country=f.countryÎªÁËÈ·±£ÔÚÍ¬Ò»¹ú¼ÒÄÚ±È½Ï*/
+/*e.country=f.countryä¸ºäº†ç¡®ä¿åœ¨åŒä¸€å›½å®¶å†…æ¯”è¾ƒ*/
 GROUP BY e.country,d.city;

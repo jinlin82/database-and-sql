@@ -458,3 +458,344 @@ $R\div S$
     + a4的象集为 {(b6，c6)}
 - S在(B，C)上的投影为{(b1，c2)，(b2，c1)，(b2，c3) }
 - 只有a1的象集包含了S在(B，C)属性组上的投影$R\div S ={a1}$
+
+## 关系演算
+### 元组关系演算语言ALPHA
+#### 检所操作
+ALPHA语言主要有GET,PUT,HOLD,UPDATE,DELETE,DROP6条语句，语句的基本格式是
+操作语句 工作空间名（表达式）：操作条件
+1. 检索操作（GET语句）
+1.1 简单检索
+GET 工作空间名 （表达式1）
+例[1] 查询所有被选修的课程号码。
+```{sql, eval=F}
+GET W (SC.Cno)
+```
+例[2] 查询所有学生的数据。
+```{sql, eval=F}
+GET  W  (Student) 
+```
+
+1.2 限定的检索
+格式：GET　工作空间名（表达式1）：操作条件
+例[3] 查询信息系(IS)中年龄小于20岁的学生的学号和年龄
+```{sql, eval=F}
+GET W (Student.Sno,Student.Sage)
+:Student.Sdept='IS'^Student.Sage<20
+```
+
+1.3 带排序的检索
+格式 GET　工作空间名（表达式1）[：操作条件] DOWN/UP 表达式2
+例[4] 查询计算机科学系(CS)学生的学号、年龄，结果按年龄降序排序
+```{sql, eval=F}
+GET W (Student.Sno,Student.Sage)
+:Student.Sdept='CS' DOWN Student.Sage
+```
+
+1.4 带定额的检索
+格式 工作空间名 （定额） （表达式1）
+[: 操作条件] [DOWN/UP 表达式2]
+
+例[5] 取出一个信息系学生的学号
+```{sql, eval=F}
+GET W(1) (Student.Sno)
+:Student.Sdept='IS'
+```
+例[6] 查询信息系年龄最大的三个学生的学号及其年龄，结果按年龄降序排序
+```{sql, eval=F}
+GET W(3) (Student.Sno，Student.Sage)
+: Student.Sdept='IS' DOWN Student.Sage
+```
+
+1.5 用元组变量的检索
+  * 元组变量的含义
+  表示可以在某一关系范围内变化
+  * 元组变量的用途
+    + 简化关系名：设一个较短名字的元组变量来代替较长的关系名。
+    + 操作条件中使用量词时必须用元组变量。
+  * 定义元组变量
+    + 格式：RANGE 关系名 变量名
+    + 一个关系可以设多个元组变量
+例[7] 查询信息系学生的名字
+```{sql, eval=F}
+RANGE Student X
+Get W(X.Sname) : X.Sdept = ‘IS’
+```
+1.6 全称量词
+在语句中含有短语“所有”、“每一个”、“任何一个”、“任意一个”“一切”等都是在指定范围内，表示整体或全部的含义，这样的词叫作全称**量词**。
+含有全称量词的命题叫作全称**命题**。全称量词的否定是存在量词。
+全称命题：其公式为“所有S是P”。
+“对所有的”、“对任意一个”等词在逻辑中被称为全称量词，记作“∀”，含有全称量词的命题叫做**全称命题**。
+对M中任意的x，有p(x)成立，记作:∀x∈M，p(x)。
+否定：对于含有一个量词的全称命题p：∀x∈M，p(x)的否定┐p是：∃x∈M，┐p(x)。
+
+1.7 存在量词
+  * 定义：:短语“有些”、“至少有一个”、“有一个”、“存在”等都有表示个别或一部分的含义，这样的词叫作存在量词，记作“∃” 。含有存在量词的命题叫作特称命题。特称命题 :其公式为“有的S是P”。
+
+1.8 用存在量词的检索
+  * 操作条件中使用量词时必须用元组变量 
+
+例[8] 查询选修2号课程的学生名字。
+```{sql, eval=F}
+RANGE SC X
+Get W(Student.Sname) : ∃ X(X.Sno = Student.Sno∧X.Cno='2')
+```
+
+[例9] 查询选修了这样课程的学生学号，其直接先行课是6号课程。
+```{sql, eval=F}
+RANGE Course  CX
+GET W (SC.Sno) 
+    : ∃CX (CX.Cno=SC.Cno ∧ CX.Pcno='6')
+```
+
+[例10] 查询至少选修一门其先行课为6号课程的学生名字
+```{sql, eval=F}
+RANGE Course CX
+       SC     SCX
+GET W (Student.Sname): ∃SCX (SCX.Sno=Student.Sno ∧ ∃CX (CX.Cno=SCX.Cno∧CX.Pcno='6')) 
+
+```
+前束范式形式： 
+```{sql, eval=F}
+GET W (Student.Sname)
+    : ∃SCX∃CX (SCX.Sno=Student.Sno ∧ CX.Cno=SCX.Cno ∧ CX.Pcno='6')
+```
+
+1.9 带有多个关系的表达式的检索
+
+[例11]  查询成绩为90分以上的学生名字与课程名字。
+```{sql, eval=F}
+RANGE SC SCX
+GET W(Student.Sname，Course.Cname) :       
+    ∃SCX (SCX.Grade≥90 ∧ 
+          SCX.Sno=Student.Sno ∧
+          Course.Cno=SCX.Cno)
+```
+
+1.10 用全称量词的检索
+
+[例12]  查询不选1号课程的学生名字
+```{sql, eval=F}
+RANGE SC SCX
+GET W (Student.Sname)
+    :∀SCX (SCX.Sno≠Student.Sno∨SCX.Cno≠'1')
+```
+用存在量词表示:
+```{sql, eval=F}
+RANGE SC SCX
+GET W (Student.Sname) 
+   : ∃SCX (SCX.Sno=Student.Sno∧SCX.Cno='1')
+```
+
+1.11 用两种量词的检索
+
+[例13]  查询选修了全部课程的学生姓名。
+```{sql, eval=F}
+RANGE Course CX
+      SC     SCX
+GET W (Student.Sname)
+      : ∀CX ∃SCX (SCX.Sno=Student.Sno∧
+                  SCX.Cno=CX.Cno)
+```
+1.12 用蕴函（Implication）的检索
+
+[例14] 查询最少选修了200215122学生所选课程的学生学号
+```{sql, eval=F}
+RANGE Course CX
+      SC     SCX
+      SC     SCY
+GET W (Student.Sno)
+      : ∀CX(∃SCX (SCX.Sno==‘200215122'∧SCX.Cno=CX.Cno)
+      /*或者推出*/∃SCY(SCY.Sno=Student.Sno ∧ SCY.Cno= CX.Cno))
+```
+
+1.13 聚集函数
+常用聚集函数（Aggregation function）或内置函数（Build-in function）
+|  函数名  |    功能    |
+|  -----  | -----------|
+|  COUNT  |    对元组计数    |
+|  TOTAL  |    求总和    |
+|  MAX  |    求最大值    |
+|  MIN  |    求最小值    |
+|  AVG  |   求平均值    |
+
+
+[例15]  查询学生所在系的数目。
+```{sql, eval=F}
+GET W ( COUNT(Student.Sdept) )
+```
+[例16]  查询信息系学生的平均年龄
+```{sql, eval=F}
+GET W (AVG(Student.Sage): Student.dept='IS’  )
+
+```
+
+#### 更新操作
+1. 修改操作
+  * 用HOLD语句将要修改的元组从数据库中读到工作空间中
+HOLD 工作空间名（表达式1）[：操作条件 ]
+HOLD语句是带上并发控制的GET语句
+  * 用宿主语言修改工作空间中元组的属性
+  * 用UPDATE语句将修改后的元组送回数据库中
+	  UPDATE 工作空间名
+
+[例17]  把200215121学生从计算机科学系转到信息系。 
+```{sql, eval=F}
+HOLD W (Student.Sno，Student.Sdetp):
+         Student.Sno=‘200215121'
+MOVE 'IS' TO W.Sdept     
+UPDATE W                
+```
+
+2. 插入操作
+  * 用宿主语言在工作空间中建立新元组
+  * 用PUT语句把该元组存入指定关系中
+	   PUT 工作空间名 （关系名）
+     PUT语句只对一个关系操作，关系演算中的聚集函数 
+
+[例18]  学校新开设了一门2学分的课程“计算机组织与结构”，其课程号为8，直接先行课为6号课程。插入该课程元组
+```{sql, eval=F}
+MOVE '8' TO W.Cno
+MOVE '计算机组织与结构' TO  W.Cname
+MOVE '6' TO  W.Cpno
+MOVE  '2' TO W.Ccredit
+PUT  W  (Course)       
+```
+
+3. 删除操作
+   * 用HOLD语句把要删除的元组从数据库中读到工作空间中
+   * 用DELETE语句删除该元组
+  		DELETE  工作空间名
+
+[例19]  200215125学生因故退学，删除该学生元组
+```{sql, eval=F}
+HOLD W (Student) : Student.Sno=‘200215125'
+DELETE  W 
+```
+
+[例20]  将学号200215121改为200215126
+```{sql, eval=F}
+HOLD W (Student): Student.Sno=‘200215121'
+DELETE W
+MOVE '200215126' TO  W.Sno
+MOVE '李勇' TO  W.Sname
+MOVE '男'  TO  W.Ssex
+MOVE '20'  TO  W.Sage
+MOVE 'CS'  TO  W.Sdept
+PUT W (Student) 
+```
+
+[例21]  删除全部学生
+```{sql, eval=F}
+HOLD  W  (Student)
+DELETE  W
+```
+为保证参照完整性 ，删除Student中元组时相应地要删除SC中的元组 
+```{sql, eval=F}
+HOLD  W  (SC)
+DELETE  W          
+```
+
+### 域关系演算语言QBE
+  * QBE：Query By Example
+    + 基于屏幕表格的查询语言
+    + 查询要求：以填写表格的方式构造查询
+    + 用示例元素(域变量)来表示查询结果可能的情况
+    + 查询结果：以表格形式显示
+
+#### 检索操作
+1. 简单查询
+[例1]求信息系全体学生的姓名
+```{r fig27,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup', cache=F}
+knitr::include_graphics("./results/1.png")
+```
+```{r fig27,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup', cache=F}
+knitr::include_graphics("./results/2.png")
+```
+
+2. 条件查询
+[例] 求计算机科学系年龄大于19岁的学生的学号。
+方法(1)：把两个条件写在同一行上
+
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|         | P.95001 | | | >19 | |
+
+方法(2)：把两个条件写在不同行上，但使用相同的示例元素值
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|         | P.200215121 | | |  | CS |
+|         | P.200215121 | | | >19 |  |
+
+3. 聚集函数
+常用聚集函数：
+
+|  函数名  |    功能    |
+|  -----  | -----------|
+|  COUNT  |    对元组计数    |
+|  TOTAL  |    求总和    |
+|  MAX  |    求最大值    |
+|  MIN  |    求最小值    |
+|  AVG  |   求平均值    |
+
+[例]  查询信息系学生的平均年龄。 
+
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|         |  | | | P.AVG.ALL | IS |
+
+4. 对查询结果排序
+   [例]  查全体男生的姓名，要求查询结果按所在系升序排序，对相同系的学生按年龄降
+   序排序。
+
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|         |  | P.李勇 | 男 | DO(2) | AO(1) |
+
+#### 更新操作
+1. 修改操作
+[例]  把200215121学生的年龄改为18岁。
+方法(1) ：将操作符“U.”放在值上
+
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|         | 200215121 |  |  | U.18 |  |
+方法(2)： 将操作符“U.”放在关系上
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|   U.      | 200215121 |  |  | 18 |  |
+
+2. 插入操作
+[例]  把信息系女生200215701，姓名张三，年龄17岁存入数据库中。
+
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|   I.      | 200215701 | 张三 | 女 | 17 | IS |
+[例17]  删除学生200215089
+| Student | Sno | Sname | Ssex | Sage | Sdept |
+|  -----  | --------- |------- | ---- | ---- | ---- |
+|   D.      | 200215701 |  |  |  |  |
+
+## 小结
+1. 关系数据库系统是目前使用最广泛的数据库系统 
+2. 关系数据库系统与非关系数据库系统的区别：
+  * 关系系统只有“表”这一种数据结构；
+  * 非关系数据库系统还有其他数据结构，以及对这些数据结构的操作 
+3. 关系数据结构
+  * 关系
+  * 关系模式
+  * 关系数据库
+4. 关系操作
+  * 查询
+    + 选择、投影、连接、除、并、交、差
+  * 数据更新
+    * 插入、删除、修改
+5. 关系的完整性约束
+  * 实体完整性
+  * 参照完整性
+  * 用户定义的完整性
+6. 关系数据语言
+  * 关系代数语言
+  * 关系演算语言
+    + 元组关系演算语言  ALPHA
+    + 域关系演算语言      QBE

@@ -2,28 +2,6 @@
 title: "数据库基础知识"
 author: ""
 date: "2020-03"
-output:
-  bookdown::html_document2:
-    number_sections: true
-    seq_numbering: true
-    fig_caption: true
-    highlight: haddock
-    theme: null
-    md_extensions: +east_asian_line_breaks
-    keep_md: true
-    toc: true
-    pandoc_args: ["--filter", "pandoc-crossref", "-M", "eqnPrefix="]
-  bookdown::word_document2:
-    fig_caption: true
-    reference_docx: ./style/word-styles-02.docx
-    md_extensions: +east_asian_line_breaks
-    pandoc_args: ["--filter", "pandoc-crossref"]
-  bookdown::pdf_document2:
-    keep_tex: yes
-    toc: true
-    latex_engine: xelatex
-    md_extensions: +east_asian_line_breaks
-    pandoc_args: ["--listing", "--filter", "pandoc-crossref"]
 css: ./style/markdown.css
 autoEqnLabels: true
 eqnPrefixTemplate: ($$i$$)
@@ -706,10 +684,10 @@ DELETE  W 
 #### 检索操作
 1. 简单查询
 [例1]求信息系全体学生的姓名
-```{r fig27,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup', cache=F}
+```{r fig27,eval=T,echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/1.png")
 ```
-```{r fig27,eval=T,redsults = 'hide',echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup', cache=F}
+```{r fig28,eval=T,echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/2.png")
 ```
 

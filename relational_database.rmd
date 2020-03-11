@@ -1,0 +1,104 @@
+---
+title: "数据库基础知识"
+author: ""
+date: "2020-03"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    seq_numbering: true
+    fig_caption: true
+    highlight: haddock
+    theme: null
+    md_extensions: +east_asian_line_breaks
+    keep_md: true
+    toc: true
+    pandoc_args: ["--filter", "pandoc-crossref", "-M", "eqnPrefix="]
+  bookdown::word_document2:
+    fig_caption: true
+    reference_docx: ./style/word-styles-02.docx
+    md_extensions: +east_asian_line_breaks
+    pandoc_args: ["--filter", "pandoc-crossref"]
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: true
+    latex_engine: xelatex
+    md_extensions: +east_asian_line_breaks
+    pandoc_args: ["--listing", "--filter", "pandoc-crossref"]
+css: ./style/markdown.css
+autoEqnLabels: true
+eqnPrefixTemplate: ($$i$$)
+linkReferences: true
+bibliography: Bibfile.bib
+csl: ./style/chinese-gb7714-2005-numeric.csl
+link-citations: true
+---
+
+```{r setup, echo=F, purl=F}
+knitr::opts_knit$set(root.dir = getwd())
+knitr::opts_chunk$set(echo = TRUE, results = 'hide')
+knitr::opts_chunk$set(warning = FALSE, message=FALSE)
+knitr::opts_chunk$set(fig.align="center"
+                      ## ,out.width="0.9\\textwidth" # latex
+                      ,out.width="60%" # for both latex and html
+                      ,fig.width=5, fig.height=3
+                      )
+```
+
+```{r prepare, echo=F, purl=F}
+rm(list=ls())
+options(digits=4)
+options(scipen=100)
+graphics.off()
+Sys.setlocale("LC_ALL", "Chinese")
+```
+
+# 关系数据库
+## 关系数据结构及形式化定义
+### 关系
+
+1. 域
+   
+   **域**是一组具有相同数据类型的值得集合。例如整数、实数、长度小于25字节的字符
+   串集合、{0， 1}等。
+
+2. 笛卡尔积
+   
+   给定一组域$D_1$,$D_2$,$D_3$,...,$D_n$,这些域中可以是相同的域。$D_1$,$D_2$,$D_3$,...,$D_n$的**笛卡尔积**为：
+   $$D_{1}\times D_{2}\times \cdots \times D_{n}=\left \{  \right (d_1,d_2,\cdots, d_n)|d_j\in D_j, i=1, 2, \cdots,n\}$$
+   其中每一个元素叫做一个**n元组**或简称**元组**。
+   元素中每一个值$d_i$叫做一个**分量**。
+   若$D_i(i=1,2,...,n)$为有限集，其基数为$m_i(i=1,2,...,n)$，则的基数M为：
+   $$M=\prod_{i=1}^{n}m_i$$
+   笛卡尔积可表示为一个二维表，表中的每行对应一个元组，表中的每列对于一个域.
+
+3. 关系
+   - 关系：$D_{1}\times D_{2}\times \cdots \times D_{n}$的子集叫做在域$D_1$,$D_2$,$D_3$,...,$D_n$上的关系，表示为$R(D_1,D_2,\cdots ,D_n)$。这里的R代表关系名，n是关系的**目或度**
+   - 元组： 关系中的每个元素是关系中的元组，通常用t表示。
+   - 单元关系与二元关系：当n=1时，称该关系为单元关系，当n=2时，称该关系为二元关系
+   - 属性：每列的名字，称为属性，n目关系必有n个属性
+   - 码：若关系中的某一属性组的值能唯一地标识一个元组，则称该属性组为候选码；若一个关系有多个候选码，则选定其中一个为主码
+
+### 关系模式
+
+1. 什么是关系模式
+   
+  关系模式是型，关系是值，关系模式是对关系的描述。
+
+2. 定义关系模式
+   
+  关系模式可以形式化的表示为：R（U, D, DOM, F)，其中R为关系名，U为组成该关系的属性名集合
+   D为属性组U中属性所来自的域，DOM为属性向域的映象集合，F为属性间的数据依赖关系
+   集合。
+  关系模式通常简记为R(U)
+
+3. 关系模式与关系
+   
+   关系模式是静态的、稳定的。关系是关系模式在某一时刻的状态或内容，是动态的、随时间不断变化的。
+
+### 关系数据库
+
+在一个给定的应用领域中，所有关系的集合构成一个关系数据库
+
+关系数据库的型：关系数据库模式，对关系数据库的描述。
+
+关系数据库的值: 关系模式在某一时刻对应的关系的集合，简称为关系数据库

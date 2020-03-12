@@ -684,14 +684,14 @@ DELETE  W 
 #### 检索操作
 1. 简单查询
 [例1]求信息系全体学生的姓名
-```{r fig27,eval=T,echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup',cache=F}
+```{r fig27,eval=T,echo=F,fig.cap="简单查询",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/1.png")
 ```
-```{r fig28,eval=T,echo=F,fig.cap="数据库系统的三位模式结构的一个实例",dev="png",results='markup',cache=F}
+```{r fig28,eval=T,echo=F,fig.cap="简单查询",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/2.png")
 ```
 
-2. 条件查询
+1. 条件查询
 [例] 求计算机科学系年龄大于19岁的学生的学号。
 方法(1)：把两个条件写在同一行上
 

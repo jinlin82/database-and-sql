@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hide')
 knitr::opts_chunk$set(warning = FALSE, message=FALSE)
 knitr::opts_chunk$set(fig.align="center"
                       ## ,out.width="0.9\\textwidth" # latex
-                      ,out.width="60%" # for both latex and html
+                      ,out.width="80%" # for both latex and html
                       ,fig.width=5, fig.height=3
                       )
 ```
@@ -683,76 +683,91 @@ DELETE  W 
 
 #### 检索操作
 1. 简单查询
+
 [例1]求信息系全体学生的姓名
+
 ```{r fig27,eval=T,echo=F,fig.cap="简单查询",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/1.png")
 ```
-```{r fig28,eval=T,echo=F,fig.cap="简单查询",dev="png",results='markup',cache=F}
+
+```{r fig28,eval=T,echo=F,fig.cap="简单查询2",dev="png",results='markup',cache=F}
 knitr::include_graphics("./results/2.png")
 ```
 
 1. 条件查询
+
 [例] 求计算机科学系年龄大于19岁的学生的学号。
+
 方法(1)：把两个条件写在同一行上
 
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|         | P.95001 | | | >19 | |
+| Student | Sno       | Sname   | Ssex | Sage | Sdept |
+| -----   | --------- | ------- | ---- | ---- | ----  |
+|         | P.95001   |         |      | >19  |       |
 
 方法(2)：把两个条件写在不同行上，但使用相同的示例元素值
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|         | P.200215121 | | |  | CS |
-|         | P.200215121 | | | >19 |  |
+
+| Student | Sno         | Sname   | Ssex | Sage | Sdept |
+| -----   | ---------   | ------- | ---- | ---- | ----  |
+|         | P.200215121 |         |      |      | CS    |
+|         | P.200215121 |         |      | >19  |       |
 
 3. 聚集函数
+
 常用聚集函数：
 
-|  函数名  |    功能    |
-|  -----  | -----------|
-|  COUNT  |    对元组计数    |
-|  TOTAL  |    求总和    |
-|  MAX  |    求最大值    |
-|  MIN  |    求最小值    |
-|  AVG  |   求平均值    |
+| 函数名 | 功能        |
+| -----  | ----------- |
+| COUNT  | 对元组计数  |
+| TOTAL  | 求总和      |
+| MAX    | 求最大值    |
+| MIN    | 求最小值    |
+| AVG    | 求平均值    |
 
 [例]  查询信息系学生的平均年龄。 
 
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|         |  | | | P.AVG.ALL | IS |
+| Student | Sno       | Sname   | Ssex | Sage      | Sdept |
+| -----   | --------- | ------- | ---- | ----      | ----  |
+|         |           |         |      | P.AVG.ALL | IS    |
 
 4. 对查询结果排序
+
    [例]  查全体男生的姓名，要求查询结果按所在系升序排序，对相同系的学生按年龄降
    序排序。
 
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|         |  | P.李勇 | 男 | DO(2) | AO(1) |
+| Student | Sno       | Sname   | Ssex | Sage  | Sdept |
+| -----   | --------- | ------- | ---- | ----  | ----  |
+|         |           | P.李勇  | 男   | DO(2) | AO(1) |
 
 #### 更新操作
 1. 修改操作
+
 [例]  把200215121学生的年龄改为18岁。
+
 方法(1) ：将操作符“U.”放在值上
 
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|         | 200215121 |  |  | U.18 |  |
+| Student | Sno       | Sname   | Ssex | Sage | Sdept |
+| -----   | --------- | ------- | ---- | ---- | ----  |
+|         | 200215121 |         |      | U.18 |       |
+
 方法(2)： 将操作符“U.”放在关系上
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|   U.      | 200215121 |  |  | 18 |  |
+
+| Student | Sno       | Sname   | Ssex | Sage | Sdept |
+| -----   | --------- | ------- | ---- | ---- | ----  |
+| U.      | 200215121 |         |      | 18   |       |
 
 2. 插入操作
+
 [例]  把信息系女生200215701，姓名张三，年龄17岁存入数据库中。
 
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|   I.      | 200215701 | 张三 | 女 | 17 | IS |
+| Student | Sno       | Sname   | Ssex | Sage | Sdept |
+| -----   | --------- | ------- | ---- | ---- | ----  |
+| I.      | 200215701 | 张三    | 女   | 17   | IS    |
+
 [例17]  删除学生200215089
-| Student | Sno | Sname | Ssex | Sage | Sdept |
-|  -----  | --------- |------- | ---- | ---- | ---- |
-|   D.      | 200215701 |  |  |  |  |
+
+| Student | Sno       | Sname   | Ssex | Sage | Sdept |
+| -----   | --------- | ------- | ---- | ---- | ----  |
+| D.      | 200215701 |         |      |      |       |
 
 ## 小结
 1. 关系数据库系统是目前使用最广泛的数据库系统 

@@ -1,4 +1,9 @@
 -- LINK: The_computer_store
+-- RDBMS: postgres
+
+create database db1;
+
+\c db1;
 
 CREATE TABLE Manufacturers (
   Code INTEGER,

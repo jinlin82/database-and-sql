@@ -137,6 +137,7 @@
 \RequirePackage{wrapfig}
 \RequirePackage{colortbl}
 \RequirePackage{pdflscape}
+\RequirePackage{pdfpages}
 \RequirePackage{tabu}
 \RequirePackage{threeparttable}
 \RequirePackage{threeparttablex}
@@ -198,14 +199,32 @@
   % \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
   % \setCJKsansfont{AdobeHeitiStd-Regular}
   % \setCJKmonofont{AdobeKaitiStd-Regular}
-  \setCJKmainfont[BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regular}]{AdobeSongStd-Light}
-  \setCJKfamilyfont{song}{AdobeSongStd-Light}
-  \setCJKfamilyfont{hei}[BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regular}]{AdobeHeitiStd-Regular}
+
+\IfFileExists{C:/Windows/Fonts/AdobeSongStd-Light.otf}{
+ \setCJKmainfont[BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regular}]{AdobeSongStd-Light}}
+{\setCJKmainfont[BoldFont=SimHei]{SimSun}}
+
+\IfFileExists{C:/Windows/Fonts/AdobeSongStd-Light.otf}{
+  \setCJKfamilyfont{song}{AdobeSongStd-Light}}{
+  \setCJKfamilyfont{song}{SimSun.ttc}}
+
+\IfFileExists{C:/Windows/Fonts/AdobeHeitiStd-Regular.otf}{
+  \setCJKfamilyfont{hei}[BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regular}]{AdobeHeitiStd-Regular}}{
+  \setCJKfamilyfont{hei}{SimHei.ttf}}
+
+\IfFileExists{C:/Windows/Fonts/AdobeKaitiStd-Regular.otf}{
   \setCJKfamilyfont{kai}{AdobeKaitiStd-Regular}
-  \setCJKfamilyfont{fs}{Sun Yat-sen Hsingshu}
-  % \setCJKfamilyfont{fs}{Sun Yat-sen Hsingshu}
-  \setCJKfamilyfont{li}{Adobe Kaiti Std}
-  \setCJKfamilyfont{you}{Adobe Kaiti Std}
+  \setCJKfamilyfont{li}{AdobeKaitiStd-Regular}
+  \setCJKfamilyfont{you}{AdobeKaitiStd-Regular}
+  }{
+  \setCJKfamilyfont{kai}{SimKai.ttf}}
+
+\IfFileExists{C:/Windows/Fonts/AdobeFangsongStd-Regular.otf}{
+  \setCJKfamilyfont{fs}{AdobeFangsongStd-Regular}}{
+  \setCJKfamilyfont{fs}{SimFang.ttf}}
+
+% \setCJKfamilyfont{fs}{Sun Yat-sen Hsingshu}
+
 }
 
 \ifisttf
@@ -322,12 +341,12 @@
         \ifistwoside
         {
           \ifodd \value{page} % 奇数页
-          {基于GAS模型的黄金期货市场风险测度研究}
+          {\@title}
           \else % 偶数页
           \chaptertitle \fi
         }
         \else
-        {基于GAS模型的黄金期货市场风险测度研究}\fi
+        {\@title}\fi
         \else %标题不作为页眉
         \chaptertitle\fi}
       \fi
@@ -351,7 +370,7 @@
         \ifistwoside
         {
           \ifodd \value{page} % 奇数页
-          基于GAS模型的黄金期货市场风险测度研究
+         \@title 
           \else % 偶数页
           %{第\thechapter 章\hspace{1em}\chaptertitle} \fi
 	   {第\CJKnumber{\thechapter}章\hspace{1em}\chaptertitle} \fi        % 学校格式要求
@@ -359,7 +378,8 @@
         \else
         {第\thechapter 章\hspace{1em}\chaptertitle}\fi
         \else %标题不作为页眉
-        基于GAS模型的黄金期货市场风险测度研究\fi}
+	\@title
+	\fi}
       \fi
     }
   }{}
@@ -381,14 +401,14 @@
         \ifistwoside
         {
           \ifodd \value{page} % 奇数页
-          基于GAS模型的黄金期货市场风险测度研究
+          \@title
           \else % 偶数页
           {附录\thechapter\hspace{1em}\chaptertitle}\fi
         }
         \else
         {附录\thechapter\hspace{1em}\chaptertitle}\fi
         \else %标题不作为页眉
-        基于GAS模型的黄金期货市场风险测度研究\fi}
+        \@title\fi}
       \fi
     }
   }{}
@@ -410,14 +430,14 @@
         \ifistwoside
         {
           \ifodd \value{page} % 奇数页
-          基于GAS模型的黄金期货市场风险测度研究
+          \@title
           \else % 偶数页
           {\chapterlabel}\fi
         }
         \else
         {\chapterlabel}\fi
         \else %标题不作为页眉
-        基于GAS模型的黄金期货市场风险测度研究\fi}
+        \@title\fi}
       \fi
     }
   }{}
@@ -480,7 +500,7 @@
     Dissertation for the Degree of Doctor of Philosophy
 
     \vskip 30pt
-    \kaishu \bfseries \yihao 基于GAS模型的黄金期货市场风险测度研究\\
+    \kaishu \bfseries \yihao \@title\\
     \rmfamily\bf \xiaoer Semiparametric Regression Model and \\[-1ex]
     Its Application
     \vskip 30pt

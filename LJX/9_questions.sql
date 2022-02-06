@@ -30,6 +30,8 @@ SELECT avg(length(package)) FROM (SELECT DISTINCT package FROM cran_logs) as b;
 -- and it's download count).
 SELECT package,count(1) FROM cran_logs GROUP BY package ORDER BY count(1) DESC;
 -- 9.11 Print the name of the package whose download count is bigger than 1000.
+SELECT package from cran_logs GROUP by package HAVING count(*) > 1000;
 -- 9.12 The field "r_os" is the operating system of the users.
     -- 	Here we would like to know what main system we have (ignore version number), the relevant counts, and the proportion (in percentage).
 
+SELECT substr(r_os,1,5) as os,count(*) as Download_Count,round(count(*)/((SELECT COUNT(*) FROM cran_logs)*1.0)*100) || '%' AS PROPORTION from cran_logs GROUP by substr(r_os,1,5);

@@ -112,11 +112,14 @@ SELECT film_id,title FROM film EXCEPT SELECT DISTINCT inventory.film_id,title FR
 -- *************第六部分 子查询*************
 
 /*查找租金率高于平均租金率的前3部电影*/
+SELECT film,title,rental_rate FROM film WHERE rental_rate > (SELECT AVG(rental_rate) FROM film) LIMIT 3;
 
+/*postgres中如何导出数据*/
 
+COPY (select * from customer) to 'D:/data.csv' (FORMAT 'csv', DELIMITER ',', HEADER true, NULL 'UNKOWN', ENCODING 'UTF8');
 /*查询按电影类别分组的所有电影的最大长度
 最小值为178*/
-
+SELECT MAX(length) FROM film INNER JOIN film_category USING(film_id) GROUP BY category_id;
 
 /*查询按电影评级分组的所有电影的平均长度
 最大值为120.44*/
@@ -269,25 +272,50 @@ Al Garland参演的电影的租赁期增加一天，
 其他姓“Garland”的演员参演的电影的租赁期减两天，
 展示所有演员的名字，过去的租赁期和当前最新的租赁期
 问题出在把新的租赁期不知道往SELECT里面放*/
-
+SELECT c.last_name,b.rental_duration AS old_rental_duration,
+(CASE WHEN last_name LIKE '%oo%' THEN b.rental_duration+3
+     WHEN last_name = 'AI' AND first_name ='Garland' THEN b.rental_duration+1
+     WHEN first_name ='Garland' AND last_name != 'AI' THEN b.rental_duration-2
+     ELSE b.rental_duration 
+     END ) AS new_rental_duration
+FROM film_actor a INNER JOIN film b ON a.film_id=b.film_id
+                  INNER JOIN actor c ON a.actor_id=c.actor_id 
+WHERE c.last_name like '%oo%' or c.last_name='Garland';
 
 /*2.展示播放时长为115分钟到125分钟的电影名称及时长,
 并按播放时长排序,相同时长的电影按名字排序，但A开头
 和名字中含有c（另一个字母）r的电影必须最后排列，即
 该条件为第一满足的条件，即第一排序*/
-
+SELECT title,length FROM film
+WHERE length BETWEEN 115 AND 125
 
 /*3.展示不同语言种类的电影数量，并按从小到大的顺序排列*/
-
+SELECT language_id,COUNT(film_id)
+FROM film
+GROUP BY language_id
+ORDER BY COUNT(film_id) asc;
 
 /*4.展示英语类电影的电影类型及相应数目*/
-
+SELECT language_id,COUNT(film_id)
+FROM film
+WHERE film.language_id='1'
+GROUP BY language_id;
 
 /*5.展示有支付行为的每个城市的支付笔数*/
-
+SELECT SUM(CASE WHEN a.amount>0 THEN 1 ELSE 0 END),d.city,e.country
+FROM payment a JOIN staff b ON a.staff_id=b.staff_id
+JOIN address c ON b.address_id=c.address_id
+JOIN city d ON c.city_id=d.city_id
+JOIN country e ON d.country_id=e.country_id
+GROUP BY e.country,d.city;
 
 /*6.找出每个国家按字母排序是排末位的城市中最高的支付金额*/
-
+SELECT MAX(a.amount),d.city,e.country
+FROM payment a JOIN staff b ON a.staff_id=b.staff_id
+JOIN address c ON b.address_id=c.address_id
+JOIN city d ON c.city_id=d.city_id
+JOIN country e ON d.country_id=e.country_id
+WHERE city<=ALL(SELECT city FROM country f WHERE e.country=f.country);
 /*补充练习题，表为film
 /*1.展示播放时长为115分钟到125分钟的电影名称及时长,
 并按播放时长排序,相同时长的电影按名字排序，但A开头

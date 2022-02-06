@@ -2,6 +2,10 @@
 -- lINK: The_warehouse
 --3.1 Select all warehouses.
 select * from warehouses;
+
+select count(*) from boxes;
+
+/dt
 --3.2 Select all boxes with a value larger than $150.
 SELECT * from boxes WHERE value > 150;
 --3.3 Select all distinct contents in all the boxes.
@@ -17,9 +21,11 @@ SELECT * FROM boxes;
 SELECT b.warehouse,avg(b.value) FROM warehouses a LEFT JOIN boxes b on a.code=b.warehouse GROUP BY b.warehouse HAVING avg(b.value)>150;
 --3.7 Select the code of each box, along with the name of the city the box is
 --located in.
-SELECT b.warehouse,avg(b.value) FROM warehouses a LEFT JOIN boxes b on a.code=b.warehouse GROUP BY b.warehouse HAVING avg(b.value)>150;
---3.8 Select the warehouse codes, along with the number of boxes in each warehouse. 
+
+SELECT a.code,b.location from boxes a LEFT JOIN warehouses b on a.warehouse=b.code;
+--3.8 Select the warehouse codes, along with the number of boxes in each warehouse.
     -- Optionally, take into account that some warehouses are empty (i.e., the box count should show up as zero, instead of omitting the warehouse from the result).
+select * from warehouses a LEFT JOIN boxes b on a.code=b.warehouse;
 --3.9 Select the codes of all warehouses that are saturated (a warehouse is saturated if the number of boxes in it is larger than the warehouse's capacity).
 
 

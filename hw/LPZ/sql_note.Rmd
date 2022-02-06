@@ -1,0 +1,354 @@
+---
+title: "数据库和SQL基础"
+author: ""
+date: "2022-01"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    seq_numbering: true
+    fig_caption: true
+    highlight: haddock
+    theme: null
+    md_extensions: +east_asian_line_breaks
+    keep_md: true
+    toc: false
+    pandoc_args: ["--filter", "pandoc-crossref", "-M", "eqnPrefix="]
+  bookdown::word_document2:
+    fig_caption: true
+    reference_docx: ./style/word-styles-02.docx
+    md_extensions: +east_asian_line_breaks
+    pandoc_args: ["--filter", "pandoc-crossref"]
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: false
+    latex_engine: xelatex
+    md_extensions: +east_asian_line_breaks
+    pandoc_args: ["--listing", "--filter", "pandoc-crossref"]
+css: ./style/markdown.css
+autoEqnLabels: true
+eqnPrefixTemplate: ($$i$$)
+linkReferences: true
+bibliography: Bibfile.bib
+csl: ./style/chinese-gb7714-2005-numeric.csl
+link-citations: true
+---
+
+# 数据库基本概念
+
+数据库：保存有组织的数据的容器，常常是保存在硬件设备上的一个文件或一组文件。
+
+数据库管理系统(DBMS)：也即数据库软件，我们通常并不直接访问数据库，而是使用DBMS，
+为我们访问数据库。
+
+表：某种特定类型数据的结构化清单。，每个表都有唯一一个名字。相同数据库中的表无同
+名，不同数据库中表可以同名。
+
+模式：关于数据库和表的布局及特性的信息，表的特性定义了数据在此表中的存储方式，存
+储内容等。
+
+列：表中的一个字段。所有表都是由一个或多个列组成的。
+
+数据类型：每个表列都有相应的数据类型，限制该列中存储的数据。
+
+行(记录)：表中数据按行存储；所保存的每个记录存储在自己的行内。
+
+主键：每一行都有可以唯一标识自己的一列，这一列或一组列称为主键。
+
+外键：
+
+# 检索数据
+
+## SELECT语句
+
+想选择什么；从什么地方选择
+
+## 检索单个列
+
+```
+SELECT pro_name FROM Products;
+```
+
+## 检索多个列
+
+```
+SELECT prod_id,prod_name,prod_price FROM Products;
+```
+
+## 检索所有列
+
+```
+SELECT * FROM Products;
+```
+
+# 排序检索数据
+
+## 按单个列排序
+
+子句：SQL语句由子句构成，一个子句通常由一个关键字加上所提供的数据组成。
+
+```
+SELECT prod_name 
+FROM Products 
+ORDER BY prod_name;
+```
+
+ORDER BY 子句位置：在指定一条子句时，保证其是SELECT语句中最后一条子句
+
+## 按多个列排序
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+ORDER BY prod_price,prod_name;
+```
+首先按价格排序，再按名称排序
+
+## 按列位置排序
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+ORDER BY 2,3;
+```
+2，3代表prod_price,prod_name
+
+## 指定排序方向
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+ORDER BY prod_price DESC;
+```
+按价格以降序排列
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+ORDER BY prod_price DESC,prod_name;
+```
+DESC关键字只应用到直接位于其前面的列名。如果相对多个列上进行降序排序，必须对每个
+列指定DESC关键字。
+
+# 过滤数据
+
+## 使用WHERE子句
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+WHERE prod_price = 3.49;
+[in PostgreSQL(WHERE prod_price = decimal'3.49')]
+```
+在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。
+
+## 不匹配检查
+
+```
+SELECT vend_id,prod_name
+FROME Products
+WHERE vend_id <>'DLL01';
+```
+<>与符号 != 相似
+
+## 范围检查
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+WHERE prod_price BETWEEN 5 AND 10;
+```
+检索价格在5-10美元之间的所有产品
+
+## 空值检查
+```
+SELECT prod_name
+FROME Products
+WHERE prod_price IS NULL;
+```
+返回没有价格的所有产品，由于表中没有这样的行，因此不返回数据
+
+# 高级数据过滤
+
+## 组合WHERE子句
+
+### AND操作符
+
+```
+SELECT prod_id,prod_price,prod_name
+FROME Products
+WHERE vend_id='DLL01' AND prod_price <= 4;
+```
+检索由供应商DLL01制造且价格小于等于4美元的所有产品和名称。
+
+### OR操作符
+
+```
+SELECT prod_price,prod_name
+FROME Products
+WHERE vend_id='DLL01' OR vend_id = 'BRS01';
+```
+检索由任意指定供应商制造的所有产品的产品名称和价格
+
+### 计算次序
+
+有限处理AND操作符，然后再处理OR操作符。
+```
+SELECT prod_price,prod_name
+FROME Products
+WHERE (vend_id='DLL01' OR vend_id = 'BRS01')
+    AND prod_price >=10;
+```
+列出价格为10美元以上且由DLL01或BRS01制造的所有产品
+
+## IN操作符
+
+IN 操作符用来指定条件范围，范围中每个条件都可以进行匹配，与OR功能相同
+
+```
+SELECT prod_price,prod_name
+FROME Products
+WHERE vend_id　IN（'DLL01','BRS01')
+ORDER BY prod_name;
+```
+
+## NOT操作符
+
+否定其之后所跟的任何条件，可以用在要过滤的列前，也可以在其后
+
+```
+SELECT prod_price,prod_name
+FROME Products
+WHERE NOT vend_id='DLL01'
+ORDER BY prod_name;
+```
+在与IN操作符联合使用时，NOT使找出与条件列表不匹配的行非常简单。
+
+# 用通配符进行过滤
+
+## LIKE操作符
+
+利用通配符可以创建比较特定数据的搜索模式，比如收缩名称包含‘bean bag’的所有产品
+
+通配符：用来匹配值的一部分的特殊字符
+
+### 百分号通配符
+
+%标识任何字符出现任意次数
+如为了找出所有以词Fish起头的产品，%告诉DBMS接受Fish之后的任意字符，不管有多少
+```
+SELECT prod_id,prod_name
+FROM Products
+WHERE prod_name LIKE 'Fish%';
+(搜索可以区分大小写)
+```
+
+搜索模式'%bean bag%'标识匹配任何位置包含文本bean bag 的值，不论其之前或之后出现什么字符
+```
+SELECT prod_id,prod_name
+FROM Products
+WHERE prod_name LIKE '%bean bag%';
+```
+
+找出以F起头y结尾的所有产品
+```
+SELECT prod_id,prod_name
+FROM Products
+WHERE prod_name LIKE 'F%y';
+```
+
+### 下划线通配符
+
+下划线通配符：与%用途一样，但是下划线只匹配单个字符而不是多个字符
+
+与%能匹配0个字符不同，_总是匹配一个字符，不能多也不能少。
+
+```
+SELECT peod_id,prod_name
+FROM Produucts
+WHERE prod_name LIKE'__inch teddy bear';
+```
+
+### 方括号通配符
+
+方括号通配符：用来指定一个字符集，必须匹配指定位置的一个字符
+
+此搜索模式使用了两个不同的通配符 [JM] 匹配任何以方括号中字母开头的联系人名，它也
+只能匹配单个字符，任何多于一个字符的名字都不匹配，[JM]之后的%通配符匹配第一个字
+符后任意数目的字符，返回所需结果。
+
+此通配符可以用脱字号'^'来否定
+
+```
+SELECT cust_contact
+FROM Customers
+WHERE cust_contact LIKE '[JM]%'
+ORDER BY cust_contact
+```
+
+## 使用通配符的技巧
+
+1. 不能过分使用通配符，如果其他操作符能达到一样的目的，应该使用其他操作符。
+2. 仔细注意通配符的位置，如果放错地方，可能不会返回想要的数据。
+3. 除非绝对有必要，否则不要把他们用在搜索模式的开始处。因为这样效率是最慢的。
+
+# 创建计算字段
+
+重新设置数据的格式
+
+## 拼接字段
+
+```
+SELECT vend_name +'('+vend_country+')'
+FROM Vendors
+ORDER BY vend_name;
+```
+
+```
+SELECT vend_name ||'('||vend_country||')'
+FROM Vendors
+ORDER BY vend_name;
+```
+两句都实现 vend_name       (vend_country)的格式输出
+MYSQL不知处+或||的拼接，使用CONCAT()函数把项表拼接起来
+
+```
+SELECT RIRIM(vend_name)+'('+RIRIM(vend_country)+')'
+FROM Vendors
+ORDER BY vend_name;
+```
+
+```
+SELECT RTRIM(vend_name)||'('||RTRIM(vend_country)||')'
+FROM Vendors
+ORDER BY vend_name;
+```
+两句都实现去掉值右边所有的空格，以下格式vend_name(vend_country)
+LTRIM()去掉串左边的空格,TRIM()去掉串左右两边的空格
+
+## 新列赋予别名
+
+```
+SELECT RTRIM(vend_name)||'('||RTRIM(vend_country)||')'
+AS vend_title
+FROM Vendors
+ORDER BY vend_name;
+```
+输出的列表名叫vend_title，之后使用可以引用
+
+## 执行算术计算
+
+```
+SELECT prod_id,
+quantity,
+item_price,
+quantity*item_ptice AS expanded_price
+FROM OrderItems
+WHERE order_num = 20008;
+```
+输出中显示的expanded_price列为一个计算字段，此计算为quantity*item_ptice
+
+# 使用数据处理函数
+
+
+
+## 文本处理函数

@@ -27,7 +27,7 @@ SELECT * from movies left JOIN movietheaters on movies.code = movietheaters.movi
 SELECT title from movies where code not in (SELECT movie from movietheaters where movie is not null);
 
 -- 4.8 Add the unrated movie "One, Two, Three".
-INSERT INTO Movies VALUES(10,'One, Two, Three',NULL);
+INSERT INTO Movies VALUES(9,'One, Two, Three',NULL);
 
 -- 4.9 Set the rating of all unrated movies to "G".
 UPDATE Movies SET Rating = 'G' WHERE Rating is NULL;

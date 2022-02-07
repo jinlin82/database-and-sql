@@ -73,6 +73,9 @@ LEFT JOIN (
           ) AS SubTable ON MainTable.warehouse = SubTable.warehouse) AS d ON c.code=d.warehouse WHERE c.capacity<d.totalnum);
 -- 3.16 Add Index for column "Warehouse" in table "boxes"
     -- !!!NOTE!!!: index should NOT be used on small tables in practice
+select * from warehouses;
+select * from boxes;
+
 -- 3.17 Print all the existing indexes
     -- !!!NOTE!!!: index should NOT be used on small tables in practice
 -- 3.18 Remove (drop) the index you added just

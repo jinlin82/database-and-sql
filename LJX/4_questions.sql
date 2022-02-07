@@ -30,6 +30,9 @@ SELECT * from movies AS a LEFT JOIN movietheaters AS b ON a.code=b.movie;
 -- 4.7 Show the titles of movies not currently being shown in any theaters.
 SELECT title FROM movies WHERE code NOT IN (SELECT movie from movietheaters WHERE movie is not NULL)
 -- 4.8 Add the unrated movie "One, Two, Three".
+INSERT INTO Movies VALUES(9,'One, Two, Three',NULL);
 
 -- 4.9 Set the rating of all unrated movies to "G".
+UPDATE Movies SET rating='G' WHERE rating is NULL;
 -- 4.10 Remove movie theaters projecting movies rated "NC-17".
+DELETE FROM movietheaters WHERE movie in (SELECT code FROM movies WHERE rating='NC-17');

@@ -124,6 +124,7 @@ SELECT MAX(length) FROM film INNER JOIN film_category USING(film_id) GROUP BY ca
 /*查询按电影评级分组的所有电影的平均长度
 最大值为120.44*/
 
+select rating,avg(length) from film GROUP BY rating;
 /*查询返回所有长度大于子查询返回的平均长度列表中最大值的影片
 ALL表示全部都满足才返回TRUE,即大于平均长度的最大值120.44才可*/
 
@@ -131,6 +132,8 @@ ALL表示全部都满足才返回TRUE,即大于平均长度的最大值120.44才
 /*查找至少有一笔金额大于11的付款的客户
 EXISTS运算符来测试子查询中是否存在行*/
 
+SELECT first_name,last_name from customer c
+WHERE EXISTS(SELECT 1 FROM payment p WHERE p.customer_id=c.customer_id AND amount>11);
 
 -- *************第七部分 修改数据*************
 INSERT INTO table (column1, column2, …)
@@ -271,17 +274,16 @@ SELECT CAST ('100' AS INTEGER);
 Al Garland参演的电影的租赁期增加一天，
 其他姓“Garland”的演员参演的电影的租赁期减两天，
 展示所有演员的名字，过去的租赁期和当前最新的租赁期
-问题出在把新的租赁期不知道往SELECT里面放*/
+问题出在把新的租赁期不知道往SELECT里面放 先将这几个表内连接然后在筛选所需要的行就行*/ 
+
+
 SELECT c.last_name,b.rental_duration AS old_rental_duration,
 (CASE WHEN last_name LIKE '%oo%' THEN b.rental_duration+3
-     WHEN last_name = 'AI' AND first_name ='Garland' THEN b.rental_duration+1
-     WHEN first_name ='Garland' AND last_name != 'AI' THEN b.rental_duration-2
-     ELSE b.rental_duration 
-     END ) AS new_rental_duration
-FROM film_actor a INNER JOIN film b ON a.film_id=b.film_id
-                  INNER JOIN actor c ON a.actor_id=c.actor_id 
-WHERE c.last_name like '%oo%' or c.last_name='Garland';
-
+WHEN last_name='AI' AND first_name='Garland' THEN b.rental_duration+1
+WHEN first_name ='Garland' AND last_name <> 'AI' THEN b.rental_duration-2
+ELSE b.rental_duration
+END) AS new_rental_duration from film_actor a INNER JOIN film b on a.film_id=b.film_id
+INNER JOIN actor c ON a.actor_id=c.actor_id WHERE c.last_name like '%oo%' or c.last_name='Garland';
 /*2.展示播放时长为115分钟到125分钟的电影名称及时长,
 并按播放时长排序,相同时长的电影按名字排序，但A开头
 和名字中含有c（另一个字母）r的电影必须最后排列，即
@@ -316,29 +318,6 @@ JOIN address c ON b.address_id=c.address_id
 JOIN city d ON c.city_id=d.city_id
 JOIN country e ON d.country_id=e.country_id
 WHERE city<=ALL(SELECT city FROM country f WHERE e.country=f.country);
-/*补充练习题，表为film
-/*1.展示播放时长为115分钟到125分钟的电影名称及时长,
-并按播放时长排序,相同时长的电影按名字排序，但A开头
-和名字中含有c（另一个字母）r的电影必须最后排列，即
-该条件为第一满足的条件*/
-
-
---2.展示不同语言种类的电影数量，并按从小到大的顺序排列
-
-
---3.展示英语类电影的电影类型及相应数目
-
-
---4.寻找姓“Garland”的演员
-
-
-/*5.将姓中含有“oo”的演员参演的电影的租赁期增加三天
-Al Garland参演的电影的租赁期增加一天，
-其他姓“Garland”的演员参演的电影的租赁期减两天，
-展示所有演员的名字，过去的租赁期和当前最新的租赁期*/
-
-/*6.找出每个国家按字母排序是排末位的城市中最高的支付金额，
-最后的展示格式为国家、城市、支付金额*/
 
 
 /*7.展示有支付的每个城市的支付的笔数*/

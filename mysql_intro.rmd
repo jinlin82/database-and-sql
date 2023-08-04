@@ -1,0 +1,71 @@
+# 简介
+
+# 安装和启动
+
+## 下载安装
+
+https://dev.mysql.com/downloads/mysql/
+
+ZIP Archive
+
+更改环境变量
+
+初始化并设置root 密码
+
+Initializing the Data Directory:
+
+mysqld --initialize-insecure --console
+
+or 
+
+mysql_configurator.exe
+
+## 启动和停止
+
+mysqld --console
+
+mysqladmin -u root shutdown
+
+mysql -uroot -proot
+
+# 示例数据库
+
+https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html
+
+https://dev.mysql.com/doc/index-other.html
+
+command line
+
+source sakila-schema.sql
+source sakila-data.sql
+
+
+
+# rmd中的SQL代码块
+
+- 在Rstudio和emacs中支持运行sql代码块
+- 在vscode中暂不支持运行sql代码块（可以切换模式运行）https://github.com/quarto-dev/quarto/issues/26
+
+```{r}
+library(DBI)
+con=dbConnect(RMySQL::MySQL(), user='root', password='root', host='localhost', port=3306,dbname='sakila')
+```
+
+```{sql, connection=con, output.var='res1'}
+SELECT * FROM film;
+```
+
+```{r}
+res1
+```
+
+# MySQL 函数
+
+## String Functions
+
+## Numeric Functions
+
+## Date Functions
+
+## Advanced Functions
+

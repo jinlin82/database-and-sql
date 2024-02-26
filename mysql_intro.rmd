@@ -24,7 +24,7 @@ mysql_configurator.exe
 
 mysqld --console
 
-mysqladmin -u root shutdown
+mysqladmin -uroot -proot shutdown
 
 mysql -uroot -proot
 
@@ -37,9 +37,13 @@ https://dev.mysql.com/doc/index-other.html
 command line
 
 source sakila-schema.sql
+
 source sakila-data.sql
 
+# Vscode 中运行 mysql 代码
 
+- SQLTools 插件
+- SQL Notebook
 
 # rmd中的SQL代码块
 
